@@ -1,71 +1,85 @@
 import Link from 'next/link'
+import { getAllPosts, getFeaturedPosts, BlogPost } from '@/lib/sanity-queries'
 
-export default function BlogPage() {
-  const blogPosts = [
+export default async function BlogPage() {
+  // Sanityからデータを取得、エラーの場合はフォールバックデータを使用
+  let sanityFeaturedPosts: BlogPost[] = []
+  let sanityAllPosts: BlogPost[] = []
+
+  try {
+    sanityFeaturedPosts = await getFeaturedPosts()
+    sanityAllPosts = await getAllPosts()
+  } catch (error) {
+    console.error('Failed to fetch posts from Sanity:', error)
+  }
+
+  // フォールバックデータ（Sanityにデータがない場合）
+  const fallbackPosts = [
     {
-      id: 1,
+      _id: '1',
       title: 'Streamlining Your Workflow: Essential Tools for Freelancers',
+      slug: { current: 'streamlining-workflow-tools-freelancers' },
       excerpt: 'Discover the top software and apps that can help you manage your projects, clients, and finances more efficiently.',
       publishedAt: '2024-01-15',
       category: 'Productivity',
       tags: ['Tools', 'Freelancing', 'Efficiency'],
-      slug: 'streamlining-workflow-tools-freelancers',
       readTime: '5 min read'
     },
     {
-      id: 2,
+      _id: '2',
       title: 'Mastering Time Management: Techniques for Increased Productivity',
+      slug: { current: 'mastering-time-management-techniques' },
       excerpt: 'Learn proven strategies to prioritize tasks, eliminate distractions, and make the most of your working hours.',
       publishedAt: '2024-01-10',
       category: 'Time Management',
       tags: ['Productivity', 'Time Management', 'Focus'],
-      slug: 'mastering-time-management-techniques',
       readTime: '7 min read'
     },
     {
-      id: 3,
+      _id: '3',
       title: 'Building a Strong Online Presence: Tips for Personal Branding',
+      slug: { current: 'building-strong-online-presence-personal-branding' },
       excerpt: 'Explore effective ways to showcase your skills, connect with potential clients, and establish yourself as an expert in your field.',
       publishedAt: '2024-01-05',
       category: 'Branding',
       tags: ['Personal Branding', 'Marketing', 'Online Presence'],
-      slug: 'building-strong-online-presence-personal-branding',
       readTime: '6 min read'
     },
     {
-      id: 4,
+      _id: '4',
       title: 'Effective Communication Strategies for Teams',
+      slug: { current: 'effective-communication-strategies-teams' },
       excerpt: 'Improve team collaboration and communication with these proven strategies.',
       publishedAt: '2023-12-28',
       category: 'Communication',
       tags: ['Team Management', 'Communication', 'Collaboration'],
-      slug: 'effective-communication-strategies-teams',
       readTime: '4 min read'
     },
     {
-      id: 5,
+      _id: '5',
       title: 'The Art of Delegation: Empowering Your Team',
+      slug: { current: 'art-of-delegation-empowering-team' },
       excerpt: 'Learn how to delegate tasks effectively and empower your team members.',
       publishedAt: '2023-12-20',
       category: 'Leadership',
       tags: ['Leadership', 'Delegation', 'Team Management'],
-      slug: 'art-of-delegation-empowering-team',
       readTime: '5 min read'
     },
     {
-      id: 6,
+      _id: '6',
       title: 'Optimizing Your Workspace for Productivity',
+      slug: { current: 'optimizing-workspace-productivity' },
       excerpt: 'Create a workspace that promotes focus and efficiency with these tips.',
       publishedAt: '2023-12-15',
       category: 'Workspace',
       tags: ['Productivity', 'Workspace', 'Environment'],
-      slug: 'optimizing-workspace-productivity',
       readTime: '3 min read'
     }
   ]
 
-  const featuredPosts = blogPosts.slice(0, 3)
-  const allPosts = blogPosts
+  // Sanityからデータが取得できた場合はそれを使用、そうでなければフォールバックデータを使用
+  const featuredPosts = sanityFeaturedPosts.length > 0 ? sanityFeaturedPosts : fallbackPosts.slice(0, 3)
+  const allPosts = sanityAllPosts.length > 0 ? sanityAllPosts : fallbackPosts
 
   return (
     <div className="bg-white min-h-screen">
@@ -88,7 +102,7 @@ export default function BlogPage() {
           
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {featuredPosts.map((post) => (
-              <article key={post.id} className="card hover:shadow-lg transition-shadow">
+              <article key={post._id} className="card hover:shadow-lg transition-shadow">
                 {/* Featured Image */}
                 <div className="h-48 bg-gradient-to-br from-primary-100 to-primary-200 relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 to-primary-600/10"></div>
@@ -115,7 +129,7 @@ export default function BlogPage() {
                   </div>
                   
                   <h3 className="text-xl font-bold text-gray-900 mb-3 hover:text-primary-600 transition-colors">
-                    <Link href={`/blog/${post.slug}`}>
+                    <Link href={`/blog/${post.slug.current}`}>
                       {post.title}
                     </Link>
                   </h3>
@@ -126,7 +140,7 @@ export default function BlogPage() {
                   
                   <div className="flex items-center justify-between">
                     <Link 
-                      href={`/blog/${post.slug}`}
+                      href={`/blog/${post.slug.current}`}
                       className="text-primary-600 font-medium hover:text-primary-700 transition-colors"
                     >
                       Read More →
@@ -153,7 +167,7 @@ export default function BlogPage() {
           
           <div className="space-y-8">
             {allPosts.map((post) => (
-              <article key={post.id} className="card p-8 hover:shadow-lg transition-shadow">
+              <article key={post._id} className="card p-8 hover:shadow-lg transition-shadow">
                 <div className="flex flex-col lg:flex-row lg:items-center gap-6">
                   {/* Article Image */}
                   <div className="lg:w-64 h-48 lg:h-32 bg-gradient-to-br from-primary-100 to-primary-200 rounded-lg flex-shrink-0 relative overflow-hidden">
@@ -182,7 +196,7 @@ export default function BlogPage() {
                     </div>
                     
                     <h3 className="text-2xl font-bold text-gray-900 mb-3 hover:text-primary-600 transition-colors">
-                      <Link href={`/blog/${post.slug}`}>
+                      <Link href={`/blog/${post.slug.current}`}>
                         {post.title}
                       </Link>
                     </h3>
@@ -193,7 +207,7 @@ export default function BlogPage() {
                     
                     <div className="flex items-center justify-between">
                       <Link 
-                        href={`/blog/${post.slug}`}
+                        href={`/blog/${post.slug.current}`}
                         className="text-primary-600 font-medium hover:text-primary-700 transition-colors"
                       >
                         Read More →

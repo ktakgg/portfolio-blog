@@ -1,62 +1,70 @@
 import Link from 'next/link'
+import { getAllPortfolioProjects, PortfolioProject } from '@/lib/sanity-queries'
 
-export default function PortfolioPage() {
-  const portfolioItems = [
+export default async function PortfolioPage() {
+  // Sanityからデータを取得、エラーの場合はフォールバックデータを使用
+  let sanityProjects: PortfolioProject[] = []
+
+  try {
+    sanityProjects = await getAllPortfolioProjects()
+  } catch (error) {
+    console.error('Failed to fetch portfolio projects from Sanity:', error)
+  }
+
+  // フォールバックデータ（Sanityにデータがない場合）
+  const fallbackProjects = [
     {
-      id: 1,
+      _id: '1',
       title: 'Workflow Automation for Retail',
+      slug: { current: 'workflow-automation-retail' },
       description: 'Automated order processing and inventory updates for a retail business.',
-      image: '/portfolio.png',
       technologies: ['Next.js', 'Node.js', 'MongoDB'],
-      category: 'Automation',
-      slug: 'workflow-automation-retail'
+      category: 'automation'
     },
     {
-      id: 2,
+      _id: '2',
       title: 'Inventory Management System',
+      slug: { current: 'inventory-management-system' },
       description: 'Developed a system to track and manage inventory levels in real-time.',
-      image: '/portfolio.png',
       technologies: ['React', 'Express', 'PostgreSQL'],
-      category: 'Management',
-      slug: 'inventory-management-system'
+      category: 'management'
     },
     {
-      id: 3,
+      _id: '3',
       title: 'Customer Relationship Management Tool',
+      slug: { current: 'customer-relationship-management' },
       description: 'Customized a CRM tool to streamline customer interactions and support.',
-      image: '/portfolio.png',
       technologies: ['Vue.js', 'Laravel', 'MySQL'],
-      category: 'CRM',
-      slug: 'customer-relationship-management'
+      category: 'crm'
     },
     {
-      id: 4,
+      _id: '4',
       title: 'Sales Forecasting Dashboard',
+      slug: { current: 'sales-forecasting-dashboard' },
       description: 'Created a dashboard to visualize sales trends and forecast future performance.',
-      image: '/portfolio.png',
       technologies: ['React', 'D3.js', 'Python'],
-      category: 'Analytics',
-      slug: 'sales-forecasting-dashboard'
+      category: 'analytics'
     },
     {
-      id: 5,
+      _id: '5',
       title: 'Project Management Platform',
+      slug: { current: 'project-management-platform' },
       description: 'Implemented a platform to manage project timelines, tasks, and resources.',
-      image: '/portfolio.png',
       technologies: ['Angular', 'Spring Boot', 'PostgreSQL'],
-      category: 'Management',
-      slug: 'project-management-platform'
+      category: 'management'
     },
     {
-      id: 6,
+      _id: '6',
       title: 'Data Analysis and Reporting',
+      slug: { current: 'data-analysis-reporting' },
       description: 'Analyzed business data to identify inefficiencies and provide actionable insights.',
-      image: '/portfolio.png',
       technologies: ['Python', 'Pandas', 'Tableau'],
-      category: 'Analytics',
-      slug: 'data-analysis-reporting'
+      category: 'analytics'
     }
   ]
+
+  // Sanityからデータが取得できた場合はそれを使用、そうでなければフォールバックデータを使用
+  const portfolioItems = sanityProjects.length > 0 ? sanityProjects : fallbackProjects
 
   return (
     <div className="bg-white min-h-screen">
@@ -81,7 +89,7 @@ export default function PortfolioPage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {portfolioItems.map((item) => (
-              <div key={item.id} className="group">
+              <div key={item._id} className="group">
                 <div className="card overflow-hidden hover:shadow-xl transition-all duration-300">
                   {/* Project Image */}
                   <div className="relative h-64 bg-gradient-to-br from-primary-100 to-primary-200 overflow-hidden">
@@ -128,7 +136,7 @@ export default function PortfolioPage() {
 
                     {/* View Details Button */}
                     <Link
-                      href={`/portfolio/${item.slug}`}
+                      href={`/portfolio/${item.slug.current}`}
                       className="inline-flex items-center text-primary-600 font-medium hover:text-primary-700 transition-colors"
                     >
                       View Details
