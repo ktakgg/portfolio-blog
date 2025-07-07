@@ -5,12 +5,12 @@ export interface BlogPost {
   _id: string
   title: string
   slug: { current: string }
-  excerpt: string
-  content?: any[]
-  category: string
-  tags: string[]
+  excerpt?: string
+  body?: any[] // ★★★ contentからbodyに変更 ★★★
+  category?: string
+  tags?: string[]
   publishedAt: string
-  readTime: string
+  readTime?: string
   featuredImage?: string
 }
 
@@ -38,8 +38,8 @@ export async function getAllPosts(): Promise<BlogPost[]> {
         title,
         slug,
         excerpt,
-        category,
-        tags,
+        "category": category->title,
+        "tags": tags[]->title,
         publishedAt,
         readTime,
         "featuredImage": featuredImage.asset->url
@@ -60,8 +60,8 @@ export async function getFeaturedPosts(): Promise<BlogPost[]> {
         title,
         slug,
         excerpt,
-        category,
-        tags,
+        "category": category->title,
+        "tags": tags[]->title,
         publishedAt,
         readTime,
         "featuredImage": featuredImage.asset->url
@@ -73,21 +73,18 @@ export async function getFeaturedPosts(): Promise<BlogPost[]> {
   }
 }
 
-// 特定のブログ記事を取得
-export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
+// 特定のブログ記事を取得するための、唯一の正しい関数
+export async function getBlogPost(slug: string): Promise<BlogPost | null> {
   try {
     return await client.fetch(`
       *[_type == "post" && slug.current == $slug][0] {
         _id,
         title,
         slug,
-        excerpt,
-        content,
-        category,
-        tags,
+        body, // ★★★ Bodyからbody(小文字)に変更 ★★★
         publishedAt,
-        readTime,
-        "featuredImage": featuredImage.asset->url
+        "category": category->title,
+        "tags": tags[]->title
       }
     `, { slug })
   } catch (error) {
@@ -95,6 +92,9 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
     return null
   }
 }
+
+
+// (ここから下のポートフォリオや他の関数は、元のままでOKです)
 
 // 全ポートフォリオプロジェクトを取得
 export async function getAllPortfolioProjects(): Promise<PortfolioProject[]> {
@@ -185,19 +185,4 @@ export async function getLatestPosts(limit: number = 3): Promise<BlogPost[]> {
     console.error('Error fetching latest posts:', error)
     return []
   }
-}
-// 【▼▼▼ この関数を追記 ▼▼▼】
-export async function getBlogPost(slug: string) {
-  // client.fetchの第2引数で、GROQクエリに$slugの値を渡す
-  return client.fetch(`
-    *[_type == "post" && slug.current == $slug][0] {
-      _id,
-      title,
-      slug,
-      Body, // 本文(Portable Text)を取得
-      publishedAt,
-      "category": category->title,
-      "tags": tags[]->title
-    }
-  `, { slug }) // { slug: slug } のショートハンド
 }

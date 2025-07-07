@@ -13,23 +13,19 @@ type Props = {
 export async function generateStaticParams() {
   const posts = await getAllPosts()
 
-  // postsが取得できなかったり、空の場合は空の配列を返す
   if (!posts) {
     return []
   }
 
   return posts.map((post) => ({
-    // Next.jsが要求する形式 { slug: '記事のスラッグ' } に変換する
     slug: post.slug.current,
   }))
 }
 
 // 各ページの本体
 export default async function BlogPostPage({ params }: Props) {
-  // URLのslugを使って、Sanityから特定の1記事のデータを取得する
   const post = await getBlogPost(params.slug)
 
-  // 記事が見つからなかった場合は、404ページを表示する
   if (!post) {
     notFound()
   }
@@ -50,8 +46,9 @@ export default async function BlogPostPage({ params }: Props) {
 
           {/* 本文 (SanityのPortable Textをレンダリング) */}
           <div className="prose lg:prose-xl max-w-none">
+            {/* ★★★ ここを 'post.body' に統一 ★★★ */}
             {post.body ? (
-              <PortableText value={post.content} />
+              <PortableText value={post.body} />
             ) : (
               <p>この記事には本文がありません。</p>
             )}
