@@ -186,3 +186,18 @@ export async function getLatestPosts(limit: number = 3): Promise<BlogPost[]> {
     return []
   }
 }
+// 【▼▼▼ この関数を追記 ▼▼▼】
+export async function getBlogPost(slug: string) {
+  // client.fetchの第2引数で、GROQクエリに$slugの値を渡す
+  return client.fetch(`
+    *[_type == "post" && slug.current == $slug][0] {
+      _id,
+      title,
+      slug,
+      Body, // 本文(Portable Text)を取得
+      publishedAt,
+      "category": category->title,
+      "tags": tags[]->title
+    }
+  `, { slug }) // { slug: slug } のショートハンド
+}
