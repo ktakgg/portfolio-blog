@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { getAllPosts, getFeaturedPosts, BlogPost } from '@/lib/sanity-queries'
 
 export default async function BlogPage() {
-  // Sanityからデータを取得、エラーの場合はフォールバックデータを使用
+  // Sanityからデータを取得
   let sanityFeaturedPosts: BlogPost[] = []
   let sanityAllPosts: BlogPost[] = []
 
@@ -10,11 +10,13 @@ export default async function BlogPage() {
     sanityFeaturedPosts = await getFeaturedPosts()
     sanityAllPosts = await getAllPosts()
   } catch (error) {
+    // Vercelのビルド時などにここでエラーが起きることが多い（環境変数が原因）
     console.error('Failed to fetch posts from Sanity:', error)
+    // エラーが起きても、変数は空の配列[]のままなので、この後フォールバックデータが使われる
   }
 
-  // フォールバックデータ（Sanityにデータがない場合）
-  const fallbackPosts = [
+  // フォールバックデータ（Sanityにデータがない、または接続に失敗した場合）
+  const fallbackPosts: BlogPost[] = [
     {
       _id: '1',
       title: 'Streamlining Your Workflow: Essential Tools for Freelancers',
@@ -77,9 +79,17 @@ export default async function BlogPage() {
     }
   ]
 
-  // Sanityからデータが取得できた場合はそれを使用、そうでなければフォールバックデータを使用
-  const featuredPosts = sanityFeaturedPosts.length > 0 ? sanityFeaturedPosts : fallbackPosts.slice(0, 3)
-  const allPosts = sanityAllPosts.length > 0 ? sanityAllPosts : fallbackPosts
+  // === ▼▼▼ ここからが修正箇所 ▼▼▼ ===
+
+  // 1. Sanityからのデータがnullやundefinedでないか確認し、配列内のnull要素も除去する
+  const validFeaturedPosts = (sanityFeaturedPosts || []).filter(Boolean);
+  const validAllPosts = (sanityAllPosts || []).filter(Boolean);
+
+  // 2. 有効なデータがある場合のみSanityのデータを使い、なければフォールバックデータを使う
+  const featuredPosts = validFeaturedPosts.length > 0 ? validFeaturedPosts : fallbackPosts.slice(0, 3)
+  const allPosts = validAllPosts.length > 0 ? validAllPosts : fallbackPosts
+
+  // === ▲▲▲ ここまでが修正箇所 ▲▲▲ ===
 
   return (
     <div className="bg-white min-h-screen">
@@ -146,7 +156,8 @@ export default async function BlogPage() {
                       Read More →
                     </Link>
                     <div className="flex flex-wrap gap-1">
-                      {post.tags?.slice(0, 2).map((tag, index) => (
+                      {/* ▼▼▼ 修正箇所: post.tagsがnullでもエラーにならないようにする ▼▼▼ */}
+                      {(post.tags || []).slice(0, 2).map((tag, index) => (
                         <span key={index} className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
                           {tag}
                         </span>
@@ -213,7 +224,8 @@ export default async function BlogPage() {
                         Read More →
                       </Link>
                       <div className="flex flex-wrap gap-1">
-                        {post.tags?.map((tag, index) => (
+                        {/* ▼▼▼ 修正箇所: post.tagsがnullでもエラーにならないようにする ▼▼▼ */}
+                        {(post.tags || []).map((tag, index) => (
                           <span key={index} className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
                             {tag}
                           </span>
