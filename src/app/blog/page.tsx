@@ -146,7 +146,7 @@ export default async function BlogPage() {
                       Read More →
                     </Link>
                     <div className="flex flex-wrap gap-1">
-                      {post.tags.slice(0, 2).map((tag, index) => (
+                      {post.tags?.slice(0, 2).map((tag, index) => (
                         <span key={index} className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
                           {tag}
                         </span>
@@ -213,7 +213,7 @@ export default async function BlogPage() {
                         Read More →
                       </Link>
                       <div className="flex flex-wrap gap-1">
-                        {post.tags.map((tag, index) => (
+                        {post.tags?.map((tag, index) => (
                           <span key={index} className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
                             {tag}
                           </span>
