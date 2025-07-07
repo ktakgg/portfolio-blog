@@ -50,7 +50,7 @@ export default async function BlogPostPage({ params }: Props) {
 
           {/* 本文 (SanityのPortable Textをレンダリング) */}
           <div className="prose lg:prose-xl max-w-none">
-            {post.content ? (
+            {post.body ? (
               <PortableText value={post.content} />
             ) : (
               <p>この記事には本文がありません。</p>
