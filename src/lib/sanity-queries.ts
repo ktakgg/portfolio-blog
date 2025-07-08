@@ -82,9 +82,11 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
         title,
         slug,
         body, // ★★★ Bodyからbody(小文字)に変更 ★★★
+        excerpt,
         publishedAt,
         "category": category->title,
-        "tags": tags[]->title
+        "tags": tags[]->title,
+        "featuredImage": featuredImage.asset->url
       }
     `, { slug })
   } catch (error) {

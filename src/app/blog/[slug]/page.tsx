@@ -146,11 +146,22 @@ export default async function BlogPostPage({ params }: Props) {
               {/* ヘッダー情報 */}
               <header className="mb-12">
                 <h1 className="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-4">{post.title}</h1>
-                <div className="text-gray-500 text-sm">
+                <div className="text-gray-500 text-sm mb-8">
                   <span>{new Date(post.publishedAt).toLocaleDateString('ja-JP')}</span>
                   <span className="mx-2">•</span>
                   <span>{post.category}</span>
                 </div>
+                
+                {/* アイキャッチ画像 */}
+                {post.featuredImage && (
+                  <div className="mb-8">
+                    <img 
+                      src={post.featuredImage} 
+                      alt={post.title}
+                      className="w-full h-64 lg:h-96 object-cover rounded-lg shadow-lg"
+                    />
+                  </div>
+                )}
               </header>
 
               {/* 本文 (SanityのPortable Textをレンダリング) */}

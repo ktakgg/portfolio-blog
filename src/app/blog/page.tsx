@@ -129,7 +129,7 @@ export default async function BlogPage() {
                   </div>
                   <div
                     className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex-1"
-                    style={{backgroundImage: `url("${featuredImages[index % featuredImages.length]}")`}}
+                    style={{backgroundImage: `url("${post.featuredImage || featuredImages[index % featuredImages.length]}")`}}
                   ></div>
                 </div>
               </div>
@@ -155,7 +155,7 @@ export default async function BlogPage() {
                   </div>
                   <div
                     className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex-1"
-                    style={{backgroundImage: `url("${allPostImages[index % allPostImages.length]}")`}}
+                    style={{backgroundImage: `url("${post.featuredImage || allPostImages[index % allPostImages.length]}")`}}
                   ></div>
                 </div>
               </div>
