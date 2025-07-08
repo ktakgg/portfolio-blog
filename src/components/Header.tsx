@@ -16,8 +16,8 @@ export default function Header() {
 
   const getLinkClassName = (path: string) => {
     return isActive(path)
-      ? "flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#535353] text-neutral-50 text-sm font-bold leading-normal tracking-[0.015em]"
-      : "text-[#141414] text-sm font-medium leading-normal"
+      ? "text-blue-600 text-sm font-bold leading-normal"
+      : "text-[#141414] text-sm font-medium leading-normal hover:text-blue-600 transition-colors"
   }
 
   return (
@@ -62,21 +62,21 @@ export default function Header() {
           <nav className="flex flex-col space-y-4 px-10">
             <Link 
               href="/" 
-              className={`${isActive('/') ? 'bg-[#535353] text-neutral-50 px-4 py-2 rounded-lg font-bold' : 'text-[#141414]'} text-sm font-medium leading-normal`}
+              className={`${isActive('/') ? 'text-blue-600 font-bold' : 'text-[#141414]'} text-sm font-medium leading-normal`}
               onClick={() => setIsMenuOpen(false)}
             >
               Home
             </Link>
             <Link 
               href="/portfolio" 
-              className={`${isActive('/portfolio') ? 'bg-[#535353] text-neutral-50 px-4 py-2 rounded-lg font-bold' : 'text-[#141414]'} text-sm font-medium leading-normal`}
+              className={`${isActive('/portfolio') ? 'text-blue-600 font-bold' : 'text-[#141414]'} text-sm font-medium leading-normal`}
               onClick={() => setIsMenuOpen(false)}
             >
               Portfolio
             </Link>
             <Link 
               href="/blog" 
-              className={`${isActive('/blog') ? 'bg-[#535353] text-neutral-50 px-4 py-2 rounded-lg font-bold' : 'text-[#141414]'} text-sm font-medium leading-normal`}
+              className={`${isActive('/blog') ? 'text-blue-600 font-bold' : 'text-[#141414]'} text-sm font-medium leading-normal`}
               onClick={() => setIsMenuOpen(false)}
             >
               Blog

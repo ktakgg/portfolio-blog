@@ -31,7 +31,8 @@ export default function HomePage() {
             })} - ${post.excerpt || 'Read the latest insights and tips'}`,
             color: color,
             date: new Date(post.publishedAt),
-            link: `/blog/${post.slug.current}`
+            link: `/blog/${post.slug.current}`,
+            featuredImage: post.featuredImage || post.mainImage
           }
         })
         
@@ -178,17 +179,24 @@ export default function HomePage() {
                   {newsItems.map((item, index) => (
                     <Link key={index} href={item.link || '/blog'} className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-200 block">
                       <div className="flex gap-4">
-                        <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                          {item.type === 'blog' ? (
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256" className="text-blue-600">
-                              <path d="M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM192,192H64V64H192Z"></path>
-                            </svg>
-                          ) : (
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256" className="text-green-600">
-                              <path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40ZM40,56H216V88H40ZM40,200V104H216v96Z"></path>
-                            </svg>
-                          )}
-                        </div>
+                        {item.type === 'blog' && item.featuredImage ? (
+                          <div 
+                            className="w-16 h-16 bg-center bg-no-repeat bg-cover rounded-lg flex-shrink-0"
+                            style={{backgroundImage: `url("${item.featuredImage}")`}}
+                          ></div>
+                        ) : (
+                          <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            {item.type === 'blog' ? (
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256" className="text-blue-600">
+                                <path d="M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM192,192H64V64H192Z"></path>
+                              </svg>
+                            ) : (
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256" className="text-green-600">
+                                <path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40ZM40,56H216V88H40ZM40,200V104H216v96Z"></path>
+                              </svg>
+                            )}
+                          </div>
+                        )}
                         <div className="flex-1 min-w-0">
                           <div className="flex items-start justify-between mb-2">
                             <h3 className="text-sm font-semibold text-gray-900 line-clamp-2 group-hover:text-blue-600 transition-colors">{item.title}</h3>
