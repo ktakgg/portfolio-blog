@@ -120,9 +120,12 @@ export default async function BlogPage() {
                       <p className="text-[#141414] text-base font-bold leading-tight">{post.title}</p>
                       <p className="text-neutral-500 text-sm font-normal leading-normal">{post.excerpt}</p>
                     </div>
-                    <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-8 px-4 flex-row-reverse bg-[#ededed] text-[#141414] text-sm font-medium leading-normal w-fit">
+                    <Link 
+                      href={`/blog/${post.slug.current}`}
+                      className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-8 px-4 flex-row-reverse bg-[#ededed] text-[#141414] text-sm font-medium leading-normal w-fit"
+                    >
                       <span className="truncate">Read More</span>
-                    </button>
+                    </Link>
                   </div>
                   <div
                     className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex-1"
@@ -143,9 +146,12 @@ export default async function BlogPage() {
                       <p className="text-[#141414] text-base font-bold leading-tight">{post.title}</p>
                       <p className="text-neutral-500 text-sm font-normal leading-normal">{post.excerpt}</p>
                     </div>
-                    <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-8 px-4 flex-row-reverse bg-[#ededed] text-[#141414] text-sm font-medium leading-normal w-fit">
+                    <Link 
+                      href={`/blog/${post.slug.current}`}
+                      className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-8 px-4 flex-row-reverse bg-[#ededed] text-[#141414] text-sm font-medium leading-normal w-fit"
+                    >
                       <span className="truncate">Read More</span>
-                    </button>
+                    </Link>
                   </div>
                   <div
                     className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex-1"
