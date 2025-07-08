@@ -42,7 +42,7 @@ export async function getAllPosts(): Promise<BlogPost[]> {
         "tags": tags[]->title,
         publishedAt,
         readTime,
-        "featuredImage": featuredImage.asset->url
+        "featuredImage": mainImage.asset->url
       }
     `)
   } catch (error) {
@@ -64,7 +64,7 @@ export async function getFeaturedPosts(): Promise<BlogPost[]> {
         "tags": tags[]->title,
         publishedAt,
         readTime,
-        "featuredImage": featuredImage.asset->url
+        "featuredImage": mainImage.asset->url
       }
     `)
   } catch (error) {
@@ -86,7 +86,7 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
         publishedAt,
         "category": category->title,
         "tags": tags[]->title,
-        "featuredImage": featuredImage.asset->url
+        "featuredImage": mainImage.asset->url
       }
     `, { slug })
   } catch (error) {
@@ -158,7 +158,7 @@ export async function getPostsByCategory(category: string): Promise<BlogPost[]> 
         tags,
         publishedAt,
         readTime,
-        "featuredImage": featuredImage.asset->url
+        "featuredImage": mainImage.asset->url
       }
     `, { category })
   } catch (error) {
@@ -180,7 +180,7 @@ export async function getLatestPosts(limit: number = 3): Promise<BlogPost[]> {
         tags,
         publishedAt,
         readTime,
-        "featuredImage": featuredImage.asset->url
+        "featuredImage": mainImage.asset->url
       }
     `)
   } catch (error) {
@@ -200,7 +200,7 @@ export async function getRecentPosts(limit: number = 3): Promise<BlogPost[]> {
         excerpt,
         "category": category->title,
         publishedAt,
-        "featuredImage": featuredImage.asset->url
+        "featuredImage": mainImage.asset->url
       }
     `)
   } catch (error) {
@@ -221,7 +221,7 @@ export async function getPostsByCategories(): Promise<{ category: string; posts:
           slug,
           excerpt,
           publishedAt,
-          "featuredImage": featuredImage.asset->url
+          "featuredImage": mainImage.asset->url
         }
       }
     `)
@@ -248,7 +248,7 @@ export async function getPopularPosts(limit: number = 3): Promise<BlogPost[]> {
         excerpt,
         "category": category->title,
         publishedAt,
-        "featuredImage": featuredImage.asset->url
+        "featuredImage": mainImage.asset->url
       }
     `)
   } catch (error) {
