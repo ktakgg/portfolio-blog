@@ -1211,6 +1211,9 @@ video {
 .w-12 {
   width: 3rem;
 }
+.w-60 {
+  width: 15rem;
+}
 .min-w-0 {
   min-width: 0px;
 }
@@ -1225,6 +1228,10 @@ video {
 }
 .min-w-\[84px\] {
   min-width: 84px;
+}
+.min-w-max {
+  min-width: -moz-max-content;
+  min-width: max-content;
 }
 .max-w-7xl {
   max-width: 80rem;
@@ -1371,6 +1378,9 @@ video {
 }
 .overflow-hidden {
   overflow: hidden;
+}
+.overflow-x-auto {
+  overflow-x: auto;
 }
 .overflow-y-auto {
   overflow-y: auto;
@@ -2212,6 +2222,10 @@ html {
 
   .lg\:w-80 {
     width: 20rem;
+  }
+
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .lg\:flex-row {

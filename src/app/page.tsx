@@ -157,8 +157,8 @@ export default function HomePage() {
   }, [])
 
   return (
-    <div className="px-4 md:px-40 flex flex-1 justify-center py-5">
-      <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
+    <div className="px-4 md:px-40 flex flex-1 justify-center py-5 overflow-x-hidden">
+      <div className="layout-content-container flex flex-col max-w-[960px] flex-1 min-w-0">
             {/* News Section */}
             <div className="animate-on-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out">
               <div className="mb-8">
@@ -263,7 +263,7 @@ export default function HomePage() {
                   and help you achieve your business goals.
                 </p>
               </div>
-              <div className="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-0">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 p-0">
                 <div className="flex flex-1 gap-3 rounded-lg border border-[#dbdbdb] bg-neutral-50 p-4 flex-col">
                   <div className="text-[#141414]" data-icon="Clock" data-size="24px" data-weight="regular">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
@@ -304,9 +304,9 @@ export default function HomePage() {
             {/* Success Stories */}
             <div className="animate-on-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out">
               <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Success Stories</h2>
-              <div className="flex overflow-y-auto [-ms-scrollbar-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              <div className="flex items-stretch p-4 gap-3">
-                <div className="flex h-full flex-1 flex-col gap-4 rounded-lg min-w-60">
+              <div className="overflow-x-auto [-ms-scrollbar-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              <div className="flex items-stretch p-4 gap-3 min-w-max">
+                <div className="flex h-full flex-col gap-4 rounded-lg min-w-60 w-60">
                   <div
                     className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex flex-col"
                     style={{backgroundImage: 'url("https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")'}}
@@ -333,7 +333,7 @@ export default function HomePage() {
             {/* Latest Blog Posts */}
             <div className="animate-on-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out">
               <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Latest Blog Posts</h2>
-              <div className="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 p-4">
                 {featuredPosts.map((post, index) => (
                   <Link key={index} href={`/blog/${post.slug?.current || post.slug}`} className="flex flex-col gap-3 pb-3 hover:transform hover:scale-105 transition-transform duration-200">
                     <div
