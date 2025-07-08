@@ -95,12 +95,25 @@ export default async function BlogPostPage({ params }: Props) {
                       <div className="space-y-3">
                         {categoryGroup.posts.slice(0, 3).map((categoryPost) => (
                           <Link key={categoryPost._id} href={`/blog/${categoryPost.slug.current}`} className="block group">
-                            <h5 className="text-sm text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2">
-                              {categoryPost.title}
-                            </h5>
-                            <p className="text-xs text-gray-500 mt-1">
-                              {new Date(categoryPost.publishedAt).toLocaleDateString('ja-JP')}
-                            </p>
+                            <div className="flex gap-3">
+                              {categoryPost.featuredImage && (
+                                <div className="w-12 h-12 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
+                                  <img 
+                                    src={categoryPost.featuredImage} 
+                                    alt={categoryPost.title}
+                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+                                  />
+                                </div>
+                              )}
+                              <div className="flex-1 min-w-0">
+                                <h5 className="text-sm text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2">
+                                  {categoryPost.title}
+                                </h5>
+                                <p className="text-xs text-gray-500 mt-1">
+                                  {new Date(categoryPost.publishedAt).toLocaleDateString('ja-JP')}
+                                </p>
+                              </div>
+                            </div>
                           </Link>
                         ))}
                       </div>
@@ -121,8 +134,23 @@ export default async function BlogPostPage({ params }: Props) {
                   {popularPosts.map((popularPost, index) => (
                     <Link key={popularPost._id} href={`/blog/${popularPost.slug.current}`} className="block group">
                       <div className="flex gap-3">
-                        <div className="w-6 h-6 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
-                          {index + 1}
+                        <div className="relative">
+                          {popularPost.featuredImage ? (
+                            <div className="w-12 h-12 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
+                              <img 
+                                src={popularPost.featuredImage} 
+                                alt={popularPost.title}
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+                              />
+                              <div className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center text-xs font-bold">
+                                {index + 1}
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="w-6 h-6 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
+                              {index + 1}
+                            </div>
+                          )}
                         </div>
                         <div className="flex-1 min-w-0">
                           <h4 className="text-sm font-medium text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2">

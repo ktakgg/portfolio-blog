@@ -30,7 +30,8 @@ export default function HomePage() {
               day: 'numeric' 
             })} - ${post.excerpt || 'Read the latest insights and tips'}`,
             color: color,
-            date: new Date(post.publishedAt)
+            date: new Date(post.publishedAt),
+            link: `/blog/${post.slug.current}`
           }
         })
         
@@ -175,7 +176,7 @@ export default function HomePage() {
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {newsItems.map((item, index) => (
-                    <div key={index} className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-200">
+                    <Link key={index} href={item.link || '/blog'} className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-200 block">
                       <div className="flex gap-4">
                         <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
                           {item.type === 'blog' ? (
@@ -190,7 +191,7 @@ export default function HomePage() {
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-start justify-between mb-2">
-                            <h3 className="text-sm font-semibold text-gray-900 line-clamp-2">{item.title}</h3>
+                            <h3 className="text-sm font-semibold text-gray-900 line-clamp-2 group-hover:text-blue-600 transition-colors">{item.title}</h3>
                             <div className={`w-2 h-2 bg-${item.color}-500 rounded-full mt-1 flex-shrink-0 ml-2`}></div>
                           </div>
                           <p className="text-xs text-gray-600 line-clamp-2">{item.description}</p>
@@ -201,7 +202,7 @@ export default function HomePage() {
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   ))}
                 </div>
                 
@@ -334,10 +335,10 @@ export default function HomePage() {
               <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Latest Blog Posts</h2>
               <div className="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
                 {featuredPosts.map((post, index) => (
-                  <Link key={index} href={`/blog/${post.slug}`} className="flex flex-col gap-3 pb-3 hover:transform hover:scale-105 transition-transform duration-200">
+                  <Link key={index} href={`/blog/${post.slug?.current || post.slug}`} className="flex flex-col gap-3 pb-3 hover:transform hover:scale-105 transition-transform duration-200">
                     <div
                       className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg"
-                      style={{backgroundImage: `url("${post.mainImage || 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2339&q=80'}")`}}
+                      style={{backgroundImage: `url("${post.featuredImage || post.mainImage || 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2339&q=80'}")`}}
                     ></div>
                     <div>
                       <p className="text-[#141414] text-base font-medium leading-normal hover:text-blue-600 transition-colors">{post.title}</p>
