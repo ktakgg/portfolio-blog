@@ -186,3 +186,71 @@ export async function getLatestPosts(limit: number = 3): Promise<BlogPost[]> {
     return []
   }
 }
+
+// サイドバー用：日付順の記事を取得
+export async function getRecentPosts(limit: number = 3): Promise<BlogPost[]> {
+  try {
+    return await client.fetch(`
+      *[_type == "post"] | order(publishedAt desc)[0...${limit}] {
+        _id,
+        title,
+        slug,
+        excerpt,
+        "category": category->title,
+        publishedAt,
+        "featuredImage": featuredImage.asset->url
+      }
+    `)
+  } catch (error) {
+    console.error('Error fetching recent posts:', error)
+    return []
+  }
+}
+
+// サイドバー用：カテゴリ別の記事を取得
+export async function getPostsByCategories(): Promise<{ category: string; posts: BlogPost[] }[]> {
+  try {
+    const categories = await client.fetch(`
+      *[_type == "category"] {
+        title,
+        "posts": *[_type == "post" && references(^._id)] | order(publishedAt desc)[0...3] {
+          _id,
+          title,
+          slug,
+          excerpt,
+          publishedAt,
+          "featuredImage": featuredImage.asset->url
+        }
+      }
+    `)
+    
+    return categories.map((cat: any) => ({
+      category: cat.title,
+      posts: cat.posts || []
+    }))
+  } catch (error) {
+    console.error('Error fetching posts by categories:', error)
+    return []
+  }
+}
+
+// サイドバー用：人気記事を取得（ビュー数がない場合は最新記事で代用）
+export async function getPopularPosts(limit: number = 3): Promise<BlogPost[]> {
+  try {
+    // 実際のビュー数フィールドがない場合は、最新記事で代用
+    return await client.fetch(`
+      *[_type == "post"] | order(publishedAt desc)[0...${limit}] {
+        _id,
+        title,
+        slug,
+        excerpt,
+        "category": category->title,
+        publishedAt,
+        "featuredImage": featuredImage.asset->url
+      }
+    `)
+  } catch (error) {
+    console.error('Error fetching popular posts:', error)
+    return []
+  }
+}

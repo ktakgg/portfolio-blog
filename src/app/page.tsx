@@ -2,12 +2,129 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { getFeaturedPosts, getAllPosts } from '@/lib/sanity-queries'
 
 export default function HomePage() {
+  const [newsItems, setNewsItems] = useState<any[]>([])
+  const [featuredPosts, setFeaturedPosts] = useState<any[]>([])
   const observerRef = useRef<IntersectionObserver | null>(null)
 
   useEffect(() => {
+    // ニュースデータを取得
+    const fetchNewsData = async () => {
+      try {
+        const posts = await getAllPosts()
+        const recentPosts = posts.slice(0, 4) // 最新4件を取得
+        
+        const newsData = recentPosts.map((post: any, index: number) => {
+          const colors = ['blue', 'green', 'purple', 'orange']
+          const color = colors[index % colors.length]
+          
+          return {
+            type: 'blog',
+            title: `New Blog Post: "${post.title}"`,
+            description: `Published on ${new Date(post.publishedAt).toLocaleDateString('en-US', { 
+              year: 'numeric', 
+              month: 'long', 
+              day: 'numeric' 
+            })} - ${post.excerpt || 'Read the latest insights and tips'}`,
+            color: color,
+            date: new Date(post.publishedAt)
+          }
+        })
+        
+        // ポートフォリオ更新情報も追加（静的データとして）
+        const portfolioUpdates = [
+          {
+            type: 'portfolio',
+            title: 'Portfolio Update: Added Customer Relationship Management Tool',
+            description: 'December 28, 2023 - New project showcasing CRM customization',
+            color: 'green',
+            date: new Date('2023-12-28')
+          },
+          {
+            type: 'portfolio', 
+            title: 'Portfolio Update: Sales Forecasting Dashboard completed',
+            description: 'December 15, 2023 - New dashboard for sales trend visualization',
+            color: 'orange',
+            date: new Date('2023-12-15')
+          }
+        ]
+        
+        // ブログとポートフォリオを合わせて日付順にソート
+        const allNews = [...newsData, ...portfolioUpdates]
+          .sort((a, b) => b.date.getTime() - a.date.getTime())
+          .slice(0, 4)
+        
+        setNewsItems(allNews)
+      } catch (error) {
+        console.error('Error fetching news data:', error)
+        // エラー時はフォールバック用の静的データを使用
+        setNewsItems([
+          {
+            type: 'blog',
+            title: 'New Blog Post: "Automating for Success: Tools and Techniques"',
+            description: 'Published on January 5, 2024 - Learn about automation tools that can save time',
+            color: 'blue'
+          },
+          {
+            type: 'portfolio',
+            title: 'Portfolio Update: Added Customer Relationship Management Tool',
+            description: 'December 28, 2023 - New project showcasing CRM customization',
+            color: 'green'
+          },
+          {
+            type: 'blog',
+            title: 'Blog Post: "The Power of Prioritization: Mastering Time Management"',
+            description: 'December 20, 2023 - Effective strategies for task prioritization',
+            color: 'purple'
+          },
+          {
+            type: 'portfolio',
+            title: 'Portfolio Update: Sales Forecasting Dashboard completed',
+            description: 'December 15, 2023 - New dashboard for sales trend visualization',
+            color: 'orange'
+          }
+        ])
+      }
+    }
+
+    fetchNewsData()
+
+    // ブログ記事データを取得
+    const fetchBlogPosts = async () => {
+      try {
+        const posts = await getFeaturedPosts()
+        setFeaturedPosts(posts.slice(0, 3)) // 最新3件を取得
+      } catch (error) {
+        console.error('Error fetching blog posts:', error)
+        // エラー時はフォールバック用の静的データを使用
+        setFeaturedPosts([
+          {
+            title: 'Streamlining Your Workflow',
+            excerpt: 'Discover the top software and apps that can help you manage your projects, clients, and finances more efficiently.',
+            slug: 'streamlining-workflow',
+            mainImage: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2339&q=80'
+          },
+          {
+            title: 'Mastering Time Management',
+            excerpt: 'Learn proven strategies to prioritize tasks, eliminate distractions, and make the most of your working hours.',
+            slug: 'mastering-time-management',
+            mainImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80'
+          },
+          {
+            title: 'Building a Strong Online Presence',
+            excerpt: 'Explore effective ways to showcase your skills, connect with potential clients, and establish yourself as an expert in your field.',
+            slug: 'building-online-presence',
+            mainImage: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80'
+          }
+        ])
+      }
+    }
+
+    fetchBlogPosts()
+
     // スクロールアニメーションの設定
     observerRef.current = new IntersectionObserver(
       (entries) => {
@@ -56,34 +173,15 @@ export default function HomePage() {
                   </div>
                 </div>
                 <div className="space-y-3">
-                  <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                    <div>
-                      <p className="text-[#141414] text-sm font-medium">New Blog Post: "Automating for Success: Tools and Techniques"</p>
-                      <p className="text-neutral-600 text-xs">Published on January 5, 2024 - Learn about automation tools that can save time</p>
+                  {newsItems.map((item, index) => (
+                    <div key={index} className="flex items-start gap-3">
+                      <div className={`w-2 h-2 bg-${item.color}-500 rounded-full mt-2 flex-shrink-0`}></div>
+                      <div>
+                        <p className="text-[#141414] text-sm font-medium">{item.title}</p>
+                        <p className="text-neutral-600 text-xs">{item.description}</p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
-                    <div>
-                      <p className="text-[#141414] text-sm font-medium">Portfolio Update: Added Customer Relationship Management Tool</p>
-                      <p className="text-neutral-600 text-xs">December 28, 2023 - New project showcasing CRM customization</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
-                    <div>
-                      <p className="text-[#141414] text-sm font-medium">Blog Post: "The Power of Prioritization: Mastering Time Management"</p>
-                      <p className="text-neutral-600 text-xs">December 20, 2023 - Effective strategies for task prioritization</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
-                    <div>
-                      <p className="text-[#141414] text-sm font-medium">Portfolio Update: Sales Forecasting Dashboard completed</p>
-                      <p className="text-neutral-600 text-xs">December 15, 2023 - New dashboard for sales trend visualization</p>
-                    </div>
-                  </div>
+                  ))}
                 </div>
                 <div className="mt-4 pt-4 border-t border-blue-200">
                   <div className="flex justify-between items-center">
@@ -213,36 +311,18 @@ export default function HomePage() {
             <div className="animate-on-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out">
               <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Latest Blog Posts</h2>
               <div className="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
-              <div className="flex flex-col gap-3 pb-3">
-                <div
-                  className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg"
-                  style={{backgroundImage: 'url("https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2339&q=80")'}}
-                ></div>
-                <div>
-                  <p className="text-[#141414] text-base font-medium leading-normal">Streamlining Your Workflow</p>
-                  <p className="text-neutral-500 text-sm font-normal leading-normal">Discover the top software and apps that can help you manage your projects, clients, and finances more efficiently.</p>
-                </div>
-              </div>
-              <div className="flex flex-col gap-3 pb-3">
-                <div
-                  className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg"
-                  style={{backgroundImage: 'url("https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80")'}}
-                ></div>
-                <div>
-                  <p className="text-[#141414] text-base font-medium leading-normal">Mastering Time Management</p>
-                  <p className="text-neutral-500 text-sm font-normal leading-normal">Learn proven strategies to prioritize tasks, eliminate distractions, and make the most of your working hours.</p>
-                </div>
-              </div>
-              <div className="flex flex-col gap-3 pb-3">
-                <div
-                  className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg"
-                  style={{backgroundImage: 'url("https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80")'}}
-                ></div>
-                <div>
-                  <p className="text-[#141414] text-base font-medium leading-normal">Building a Strong Online Presence</p>
-                  <p className="text-neutral-500 text-sm font-normal leading-normal">Explore effective ways to showcase your skills, connect with potential clients, and establish yourself as an expert in your field.</p>
-                </div>
-              </div>
+                {featuredPosts.map((post, index) => (
+                  <Link key={index} href={`/blog/${post.slug}`} className="flex flex-col gap-3 pb-3 hover:transform hover:scale-105 transition-transform duration-200">
+                    <div
+                      className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg"
+                      style={{backgroundImage: `url("${post.mainImage || 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2339&q=80'}")`}}
+                    ></div>
+                    <div>
+                      <p className="text-[#141414] text-base font-medium leading-normal hover:text-blue-600 transition-colors">{post.title}</p>
+                      <p className="text-neutral-500 text-sm font-normal leading-normal">{post.excerpt}</p>
+                    </div>
+                  </Link>
+                ))}
               </div>
             </div>
 
