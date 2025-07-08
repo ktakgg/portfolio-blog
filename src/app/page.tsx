@@ -1,12 +1,106 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
+import { useEffect, useRef } from 'react'
 
 export default function HomePage() {
+  const observerRef = useRef<IntersectionObserver | null>(null)
+
+  useEffect(() => {
+    // スクロールアニメーションの設定
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in-up')
+          }
+        })
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    )
+
+    // アニメーション対象の要素を監視
+    const animateElements = document.querySelectorAll('.animate-on-scroll')
+    animateElements.forEach((el) => {
+      if (observerRef.current) {
+        observerRef.current.observe(el)
+      }
+    })
+
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect()
+      }
+    }
+  }, [])
+
   return (
     <div className="px-40 flex flex-1 justify-center py-5">
       <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
+            {/* News Section */}
+            <div className="animate-on-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out">
+              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-6 mb-8 shadow-sm">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="bg-blue-500 text-white p-2 rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                      <path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40ZM40,56H216V88H40ZM40,200V104H216v96Z"></path>
+                    </svg>
+                  </div>
+                  <h2 className="text-[#141414] text-xl font-bold leading-tight">Latest News & Updates</h2>
+                  <div className="ml-auto">
+                    <span className="bg-blue-500 text-white text-xs font-semibold px-2 py-1 rounded-full">NEW</span>
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-[#141414] text-sm font-medium">New Blog Post: "Automating for Success: Tools and Techniques"</p>
+                      <p className="text-neutral-600 text-xs">Published on January 5, 2024 - Learn about automation tools that can save time</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-[#141414] text-sm font-medium">Portfolio Update: Added Customer Relationship Management Tool</p>
+                      <p className="text-neutral-600 text-xs">December 28, 2023 - New project showcasing CRM customization</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-[#141414] text-sm font-medium">Blog Post: "The Power of Prioritization: Mastering Time Management"</p>
+                      <p className="text-neutral-600 text-xs">December 20, 2023 - Effective strategies for task prioritization</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-[#141414] text-sm font-medium">Portfolio Update: Sales Forecasting Dashboard completed</p>
+                      <p className="text-neutral-600 text-xs">December 15, 2023 - New dashboard for sales trend visualization</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-4 pt-4 border-t border-blue-200">
+                  <div className="flex justify-between items-center">
+                    <Link href="/blog" className="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors">
+                      View All Blog Posts →
+                    </Link>
+                    <Link href="/portfolio" className="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors">
+                      View Portfolio →
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {/* Hero Section */}
-            <div className="@container">
+            <div className="animate-on-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out">
+              <div className="@container">
               <div className="@[480px]:p-4">
                 <div
                   className="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-lg items-start justify-end px-4 pb-10 @[480px]:px-10"
@@ -31,11 +125,13 @@ export default function HomePage() {
                   </Link>
                 </div>
               </div>
+              </div>
             </div>
 
             {/* Services Section */}
-            <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Our Services</h2>
-            <div className="flex flex-col gap-10 px-4 py-10 @container">
+            <div className="animate-on-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out">
+              <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Our Services</h2>
+              <div className="flex flex-col gap-10 px-4 py-10 @container">
               <div className="flex flex-col gap-4">
                 <h1
                   className="text-[#141414] tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px]"
@@ -81,11 +177,13 @@ export default function HomePage() {
                   </div>
                 </div>
               </div>
+              </div>
             </div>
 
             {/* Success Stories */}
-            <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Success Stories</h2>
-            <div className="flex overflow-y-auto [-ms-scrollbar-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <div className="animate-on-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out">
+              <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Success Stories</h2>
+              <div className="flex overflow-y-auto [-ms-scrollbar-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               <div className="flex items-stretch p-4 gap-3">
                 <div className="flex h-full flex-1 flex-col gap-4 rounded-lg min-w-60">
                   <div
@@ -108,11 +206,13 @@ export default function HomePage() {
                   </div>
                 </div>
               </div>
+              </div>
             </div>
 
             {/* Latest Blog Posts */}
-            <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Latest Blog Posts</h2>
-            <div className="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
+            <div className="animate-on-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out">
+              <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Latest Blog Posts</h2>
+              <div className="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
               <div className="flex flex-col gap-3 pb-3">
                 <div
                   className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg"
@@ -143,10 +243,12 @@ export default function HomePage() {
                   <p className="text-neutral-500 text-sm font-normal leading-normal">Explore effective ways to showcase your skills, connect with potential clients, and establish yourself as an expert in your field.</p>
                 </div>
               </div>
+              </div>
             </div>
 
             {/* CTA Section */}
-            <div className="@container">
+            <div className="animate-on-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out">
+              <div className="@container">
               <div className="flex flex-col justify-end gap-6 px-4 py-10 @[480px]:gap-8 @[480px]:px-10 @[480px]:py-20">
                 <div className="flex flex-col gap-2 text-center">
                   <h1
@@ -161,6 +263,7 @@ export default function HomePage() {
                     <span className="truncate">Get Started Today</span>
                   </Link>
                 </div>
+              </div>
               </div>
             </div>
       </div>
