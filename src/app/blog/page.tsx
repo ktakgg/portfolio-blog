@@ -101,7 +101,9 @@ export default async function BlogPage() {
     <div className="relative flex size-full min-h-screen flex-col bg-neutral-50 group/design-root overflow-x-hidden" style={{fontFamily: 'Inter, "Noto Sans", sans-serif'}}>
       <div className="layout-container flex h-full grow flex-col">
         <div className="px-40 flex flex-1 justify-center py-5">
-          <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
+          <div className="layout-content-container flex flex-row max-w-[1200px] flex-1 gap-8">
+            {/* Main Content */}
+            <div className="flex flex-col flex-1">
             <div className="flex flex-wrap justify-between gap-3 p-4">
               <p className="text-[#141414] tracking-light text-[32px] font-bold leading-tight min-w-72">Blog</p>
             </div>
@@ -112,54 +114,54 @@ export default async function BlogPage() {
             <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Featured Articles</h2>
             
             {/* Featured Articles */}
-            {featuredPosts.map((post, index) => (
-              <div key={post._id} className="p-4">
-                <div className="flex items-stretch justify-between gap-4 rounded-lg">
-                  <div className="flex flex-[2_2_0px] flex-col gap-4">
-                    <div className="flex flex-col gap-1">
-                      <p className="text-[#141414] text-base font-bold leading-tight">{post.title}</p>
-                      <p className="text-neutral-500 text-sm font-normal leading-normal">{post.excerpt}</p>
-                    </div>
-                    <Link 
-                      href={`/blog/${post.slug.current}`}
-                      className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-8 px-4 flex-row-reverse bg-[#ededed] text-[#141414] text-sm font-medium leading-normal w-fit"
-                    >
-                      <span className="truncate">Read More</span>
-                    </Link>
-                  </div>
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 p-4">
+              {featuredPosts.map((post, index) => (
+                <div key={post._id} className="flex flex-col gap-3 pb-3">
                   <div
-                    className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex-1"
+                    className="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg"
                     style={{backgroundImage: `url("${post.featuredImage || featuredImages[index % featuredImages.length]}")`}}
                   ></div>
+                  <div>
+                    <p className="text-[#141414] text-base font-medium leading-normal">{post.title}</p>
+                    <p className="text-neutral-500 text-sm font-normal leading-normal">{post.excerpt}</p>
+                    <div className="mt-3">
+                      <Link 
+                        href={`/blog/${post.slug.current}`}
+                        className="inline-flex items-center justify-center overflow-hidden rounded-lg h-8 px-4 bg-[#ededed] text-[#141414] text-sm font-medium leading-normal hover:bg-gray-300 transition-colors"
+                      >
+                        <span className="truncate">Read More</span>
+                      </Link>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
 
             <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">All Articles</h2>
             
             {/* All Articles */}
-            {allPosts.map((post, index) => (
-              <div key={post._id} className="p-4">
-                <div className="flex items-stretch justify-between gap-4 rounded-lg">
-                  <div className="flex flex-[2_2_0px] flex-col gap-4">
-                    <div className="flex flex-col gap-1">
-                      <p className="text-[#141414] text-base font-bold leading-tight">{post.title}</p>
-                      <p className="text-neutral-500 text-sm font-normal leading-normal">{post.excerpt}</p>
-                    </div>
-                    <Link 
-                      href={`/blog/${post.slug.current}`}
-                      className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-8 px-4 flex-row-reverse bg-[#ededed] text-[#141414] text-sm font-medium leading-normal w-fit"
-                    >
-                      <span className="truncate">Read More</span>
-                    </Link>
-                  </div>
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 p-4">
+              {allPosts.map((post, index) => (
+                <div key={post._id} className="flex flex-col gap-3 pb-3">
                   <div
-                    className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex-1"
+                    className="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg"
                     style={{backgroundImage: `url("${post.featuredImage || allPostImages[index % allPostImages.length]}")`}}
                   ></div>
+                  <div>
+                    <p className="text-[#141414] text-base font-medium leading-normal">{post.title}</p>
+                    <p className="text-neutral-500 text-sm font-normal leading-normal">{post.excerpt}</p>
+                    <div className="mt-3">
+                      <Link 
+                        href={`/blog/${post.slug.current}`}
+                        className="inline-flex items-center justify-center overflow-hidden rounded-lg h-8 px-4 bg-[#ededed] text-[#141414] text-sm font-medium leading-normal hover:bg-gray-300 transition-colors"
+                      >
+                        <span className="truncate">Read More</span>
+                      </Link>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
 
             {/* Pagination */}
             <div className="flex items-center justify-center p-4">
@@ -182,6 +184,60 @@ export default async function BlogPage() {
                   </svg>
                 </div>
               </a>
+            </div>
+            </div>
+            
+            {/* Sidebar */}
+            <div className="w-80 flex-shrink-0">
+              <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-4">Recent Posts</h3>
+                <div className="space-y-4">
+                  {featuredPosts.slice(0, 3).map((post, index) => (
+                    <Link key={post._id} href={`/blog/${post.slug.current}`} className="flex gap-3 group">
+                      <div
+                        className="w-16 h-16 bg-center bg-no-repeat bg-cover rounded-lg flex-shrink-0"
+                        style={{backgroundImage: `url("${post.featuredImage || featuredImages[index % featuredImages.length]}")`}}
+                      ></div>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="text-sm font-medium text-gray-900 line-clamp-2 group-hover:text-blue-600 transition-colors">
+                          {post.title}
+                        </h4>
+                        <p className="text-xs text-gray-500 mt-1">
+                          {new Date(post.publishedAt).toLocaleDateString('en-US', { 
+                            month: 'short', 
+                            day: 'numeric' 
+                          })}
+                        </p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-4">Categories</h3>
+                <div className="space-y-2">
+                  {['Productivity', 'Time Management', 'Automation', 'Communication', 'Leadership', 'Workspace'].map((category) => (
+                    <Link key={category} href={`/blog/category/${category.toLowerCase().replace(' ', '-')}`} className="flex items-center justify-between text-sm text-gray-600 hover:text-blue-600 transition-colors">
+                      <span>{category}</span>
+                      <span className="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded-full">
+                        {Math.floor(Math.random() * 5) + 1}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-white rounded-lg border border-gray-200 p-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-4">Popular Tags</h3>
+                <div className="flex flex-wrap gap-2">
+                  {['Efficiency', 'Tools', 'Freelancing', 'Focus', 'Team Management', 'Collaboration', 'Environment'].map((tag) => (
+                    <Link key={tag} href={`/blog/tag/${tag.toLowerCase()}`} className="inline-block bg-gray-100 hover:bg-blue-100 text-gray-700 hover:text-blue-700 text-xs px-3 py-1 rounded-full transition-colors">
+                      #{tag}
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
