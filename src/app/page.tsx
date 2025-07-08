@@ -157,7 +157,7 @@ export default function HomePage() {
   }, [])
 
   return (
-    <div className="px-40 flex flex-1 justify-center py-5">
+    <div className="px-4 md:px-40 flex flex-1 justify-center py-5">
       <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
             {/* News Section */}
             <div className="animate-on-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out">

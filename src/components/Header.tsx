@@ -57,15 +57,27 @@ export default function Header() {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="absolute top-full left-0 right-0 md:hidden py-4 border-t bg-neutral-50 z-50">
+        <div className="absolute top-full left-0 right-0 md:hidden py-4 border-t bg-neutral-50 z-50 shadow-lg">
           <nav className="flex flex-col space-y-4 px-10">
-            <Link href="/" className={`${isActive('/') ? 'bg-[#535353] text-neutral-50 px-4 py-2 rounded-lg font-bold' : 'text-[#141414]'} text-sm font-medium leading-normal`}>
+            <Link 
+              href="/" 
+              className={`${isActive('/') ? 'bg-[#535353] text-neutral-50 px-4 py-2 rounded-lg font-bold' : 'text-[#141414]'} text-sm font-medium leading-normal`}
+              onClick={() => setIsMenuOpen(false)}
+            >
               Home
             </Link>
-            <Link href="/portfolio" className={`${isActive('/portfolio') ? 'bg-[#535353] text-neutral-50 px-4 py-2 rounded-lg font-bold' : 'text-[#141414]'} text-sm font-medium leading-normal`}>
+            <Link 
+              href="/portfolio" 
+              className={`${isActive('/portfolio') ? 'bg-[#535353] text-neutral-50 px-4 py-2 rounded-lg font-bold' : 'text-[#141414]'} text-sm font-medium leading-normal`}
+              onClick={() => setIsMenuOpen(false)}
+            >
               Portfolio
             </Link>
-            <Link href="/blog" className={`${isActive('/blog') ? 'bg-[#535353] text-neutral-50 px-4 py-2 rounded-lg font-bold' : 'text-[#141414]'} text-sm font-medium leading-normal`}>
+            <Link 
+              href="/blog" 
+              className={`${isActive('/blog') ? 'bg-[#535353] text-neutral-50 px-4 py-2 rounded-lg font-bold' : 'text-[#141414]'} text-sm font-medium leading-normal`}
+              onClick={() => setIsMenuOpen(false)}
+            >
               Blog
             </Link>
           </nav>

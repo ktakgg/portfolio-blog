@@ -40,10 +40,10 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <div className="bg-white py-20">
-      <div className="container-custom max-w-7xl mx-auto">
+      <div className="container-custom max-w-7xl mx-auto px-4 md:px-8">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* サイドバー */}
-          <aside className="lg:w-80 flex-shrink-0 order-2 lg:order-1">
+          <aside className="w-full lg:w-80 flex-shrink-0 order-2 lg:order-1">
             <div className="sticky top-8 space-y-8">
               {/* 最新記事 */}
               <div className="bg-gray-50 rounded-lg p-6">

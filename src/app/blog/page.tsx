@@ -100,10 +100,10 @@ export default async function BlogPage() {
   return (
     <div className="relative flex size-full min-h-screen flex-col bg-neutral-50 group/design-root overflow-x-hidden" style={{fontFamily: 'Inter, "Noto Sans", sans-serif'}}>
       <div className="layout-container flex h-full grow flex-col">
-        <div className="px-40 flex flex-1 justify-center py-5">
-          <div className="layout-content-container flex flex-row max-w-[1200px] flex-1 gap-8">
+        <div className="px-4 md:px-40 flex flex-1 justify-center py-5">
+          <div className="layout-content-container flex flex-col lg:flex-row max-w-[1200px] flex-1 gap-8">
             {/* Main Content */}
-            <div className="flex flex-col flex-1">
+            <div className="flex flex-col flex-1 order-1">
             <div className="flex flex-wrap justify-between gap-3 p-4">
               <p className="text-[#141414] tracking-light text-[32px] font-bold leading-tight min-w-72">Blog</p>
             </div>
@@ -188,7 +188,7 @@ export default async function BlogPage() {
             </div>
             
             {/* Sidebar */}
-            <div className="w-80 flex-shrink-0">
+            <div className="w-full lg:w-80 flex-shrink-0 order-2">
               <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
                 <h3 className="text-lg font-bold text-gray-900 mb-4">Recent Posts</h3>
                 <div className="space-y-4">
