@@ -21,7 +21,7 @@ export default function Header() {
   }
 
   return (
-    <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#ededed] px-10 py-3 bg-neutral-50">
+    <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#ededed] px-4 md:px-10 py-3 bg-neutral-50 relative">
       <Link href="/" className="flex items-center gap-4 text-[#141414] hover:opacity-80 transition-opacity">
         <div className="size-4">
           <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -46,10 +46,11 @@ export default function Header() {
         
         {/* Mobile menu button */}
         <button
-          className="md:hidden p-2"
+          className="md:hidden p-3 -mr-3 z-50 relative bg-neutral-50 rounded-lg hover:bg-gray-100 transition-colors"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Toggle menu"
         >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-6 h-6 text-[#141414]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>

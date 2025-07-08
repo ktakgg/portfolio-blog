@@ -174,7 +174,7 @@ export default function HomePage() {
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {newsItems.map((item, index) => (
                     <Link key={index} href={item.link || '/blog'} className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-200 block">
                       <div className="flex gap-4">
