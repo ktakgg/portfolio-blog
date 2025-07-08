@@ -10,18 +10,16 @@ export default async function BlogPage() {
     sanityFeaturedPosts = await getFeaturedPosts()
     sanityAllPosts = await getAllPosts()
   } catch (error) {
-    // Vercelのビルド時などにここでエラーが起きることが多い（環境変数が原因）
     console.error('Failed to fetch posts from Sanity:', error)
-    // エラーが起きても、変数は空の配列[]のままなので、この後フォールバックデータが使われる
   }
 
   // フォールバックデータ（Sanityにデータがない、または接続に失敗した場合）
   const fallbackPosts: BlogPost[] = [
     {
       _id: '1',
-      title: 'Streamlining Your Workflow: Essential Tools for Freelancers',
-      slug: { current: 'streamlining-workflow-tools-freelancers' },
-      excerpt: 'Discover the top software and apps that can help you manage your projects, clients, and finances more efficiently.',
+      title: 'Streamlining Your Workflow: A Guide to Efficiency',
+      slug: { current: 'streamlining-workflow-guide-efficiency' },
+      excerpt: 'Learn how to optimize your daily tasks and projects for maximum productivity.',
       publishedAt: '2024-01-15',
       category: 'Productivity',
       tags: ['Tools', 'Freelancing', 'Efficiency'],
@@ -29,9 +27,9 @@ export default async function BlogPage() {
     },
     {
       _id: '2',
-      title: 'Mastering Time Management: Techniques for Increased Productivity',
-      slug: { current: 'mastering-time-management-techniques' },
-      excerpt: 'Learn proven strategies to prioritize tasks, eliminate distractions, and make the most of your working hours.',
+      title: 'The Power of Prioritization: Mastering Time Management',
+      slug: { current: 'power-prioritization-mastering-time-management' },
+      excerpt: 'Discover effective strategies for prioritizing tasks and managing your time efficiently.',
       publishedAt: '2024-01-10',
       category: 'Time Management',
       tags: ['Productivity', 'Time Management', 'Focus'],
@@ -39,12 +37,12 @@ export default async function BlogPage() {
     },
     {
       _id: '3',
-      title: 'Building a Strong Online Presence: Tips for Personal Branding',
-      slug: { current: 'building-strong-online-presence-personal-branding' },
-      excerpt: 'Explore effective ways to showcase your skills, connect with potential clients, and establish yourself as an expert in your field.',
+      title: 'Automating for Success: Tools and Techniques',
+      slug: { current: 'automating-success-tools-techniques' },
+      excerpt: 'Explore automation tools and techniques that can save you time and reduce manual effort.',
       publishedAt: '2024-01-05',
-      category: 'Branding',
-      tags: ['Personal Branding', 'Marketing', 'Online Presence'],
+      category: 'Automation',
+      tags: ['Automation', 'Tools', 'Efficiency'],
       readTime: '6 min read'
     },
     {
@@ -60,7 +58,7 @@ export default async function BlogPage() {
     {
       _id: '5',
       title: 'The Art of Delegation: Empowering Your Team',
-      slug: { current: 'art-of-delegation-empowering-team' },
+      slug: { current: 'art-delegation-empowering-team' },
       excerpt: 'Learn how to delegate tasks effectively and empower your team members.',
       publishedAt: '2023-12-20',
       category: 'Leadership',
@@ -79,209 +77,109 @@ export default async function BlogPage() {
     }
   ]
 
-  // === ▼▼▼ ここからが修正箇所 ▼▼▼ ===
-
-  // 1. Sanityからのデータがnullやundefinedでないか確認し、配列内のnull要素も除去する
+  // 有効なデータがある場合のみSanityのデータを使い、なければフォールバックデータを使う
   const validFeaturedPosts = (sanityFeaturedPosts || []).filter(Boolean);
   const validAllPosts = (sanityAllPosts || []).filter(Boolean);
 
-  // 2. 有効なデータがある場合のみSanityのデータを使い、なければフォールバックデータを使う
   const featuredPosts = validFeaturedPosts.length > 0 ? validFeaturedPosts : fallbackPosts.slice(0, 3)
-  const allPosts = validAllPosts.length > 0 ? validAllPosts : fallbackPosts
+  const allPosts = validAllPosts.length > 0 ? validAllPosts : fallbackPosts.slice(3)
 
-  // === ▲▲▲ ここまでが修正箇所 ▲▲▲ ===
+  // ブログ記事画像のマッピング
+  const featuredImages = [
+    "https://lh3.googleusercontent.com/aida-public/AB6AXuA_H-4gozJlEeyGCivUv2M_kuqww_etwdm4rA5y0u1yk8p01yzZlJs81AbHTZW3Bam4virlG6rlZkCRpd26h0skdWu89ogwtsGHSxGf7mbgpikaeXV70QWOfmKKDg536T4O9Aiu_rlxiSZ8ReDenm84WEDPP2K-ZQKb-3LGjEVCtjVAa9ZyI2J1eh_CJxXZO05RBjQvc_skAMGOH84iHv1PXRJ3r44ykKQ5p1bPDV1iUlgHQ8nj2hOrHw7XIedjIcvMiLKiMTIyGQw",
+    "https://lh3.googleusercontent.com/aida-public/AB6AXuA1Ojr92JMeK68_GLBrjyCwVW_HyhGdt8ZhHEwRZf7s5eBaaXvyRA5HbjA_xZOm2FpGRjk-0Kih-GSycovEIeROhAgUqykh68mA-owg5zmRCJ7uHLoUOh1bsjxUfYvdj0AcIy1KaY8z5dgw659x5jPy7qJ-5Zn9vRf5STxTF0Te48bhKlFOuWLP1noU4X0OTx4W6sh2d2wJBdHwheOyTuUH_pc9uBGgGTD7ClCeNdacSDflkzEHuo8y5lljcX-GPYG3cum5GOCW2bo",
+    "https://lh3.googleusercontent.com/aida-public/AB6AXuCiZMnD4udaDTALUhwd8apwgXrth2d5X-fFWA7msyRl73QU8kMiiRzo-OlKxkdQuKD4I06CtuaM8_CWj_kpasFc8hWBbA4Nytnryqg095RYIFBWfddZr3UyBVuvEz1ZEDDxjxYmYDIxbeMCEy2QIhxWOlOsDkrtLEF__Wl25S4X4wpavXVFjoNuEn7Yfr14auufhwOAwfafchJYo3OCxhb_Tcvsi4V6grAXER8UGJSU84NFm07DO6gaR1pi5ip91NfOXCRD9T__B2c"
+  ]
+
+  const allPostImages = [
+    "https://lh3.googleusercontent.com/aida-public/AB6AXuD2_d7UbWp-VUqNkLEcr-9xCfKl1AHkqViJjN0xGsdF9JI1AguVSGj13NKR7C5q3pGHAQPHFAcc1cgu-OqUiu3dqDMjk3Gv7CRttp0lofGTTjh3em5wbJ-9OXGhVfR3sWgcW1_CZ-kpuCU8dIf9ApKhzHv1galiSKDyj3nJ6rSahGOTNJf095_UDdRxIGxyLJVOYNoxUxw7px6iqrz6pY2KxSy_cBO7fjWDiYIrRq5MzOCpbtUzDiBLXwBlmrJ2wVkmcF0MBNDm4Ls",
+    "https://lh3.googleusercontent.com/aida-public/AB6AXuCsLDNiy75tCNu3a5EN2N9YKPiO5RaGgtd2WDIYW8V9LKW5V337CixdsHB1Gt68ZnERQu2ncYiJPNVtwzTyGIWGpKqHDJG1jqipbpnASFd7w9R4nh9DKxf1-MBjghm_9_XJ9WEIiA70UmrwONbKom5DhB9tCCoZ4OUpKOPmT1U4NMgHy-SrVstjnkoFqkgKAcd-aIZxqztzqsXWlC19MTmpUhnWVYodf4lPrtmrR3IMFUmpmQpHFW_nbhBNypo3KCgPpfjZrTCZu-w",
+    "https://lh3.googleusercontent.com/aida-public/AB6AXuAzamF3qQ8-bLubtWc7p-zzrfSiqOvw_e12hxrMdfROqmDwA1FiM_KnuhzS9j-IQXA1N6BLCKbr7MbvtesWoZ5_IYcRATnchQQnFOB7J6zSDU2zvbEWY5uSx8mcbPzUsOyU3B5eLwrzQSqxrcpxFI_BtSMtBc_-dR9OVovF-SaWSLqP471gifsVD3Xo8SwzUjoWlyKzKAlqNCYMGNJAK2LQAZ1TqFsqUvn-IU7827yav_ejVDInGFlt091ZTdX3GhD4eOeX9PIWHeM"
+  ]
 
   return (
-    <div className="bg-white min-h-screen">
-      {/* Header Section */}
-      <section className="bg-gray-50 py-16">
-        <div className="container-custom">
-          <div className="text-center">
-            <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Blog</h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Welcome to my blog, where I share insights and tips on enhancing business efficiency. Explore articles on various topics, from time management to process optimization, all aimed at helping you achieve greater productivity and success.
+    <div className="relative flex size-full min-h-screen flex-col bg-neutral-50 group/design-root overflow-x-hidden" style={{fontFamily: 'Inter, "Noto Sans", sans-serif'}}>
+      <div className="layout-container flex h-full grow flex-col">
+        <div className="px-40 flex flex-1 justify-center py-5">
+          <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <div className="flex flex-wrap justify-between gap-3 p-4">
+              <p className="text-[#141414] tracking-light text-[32px] font-bold leading-tight min-w-72">Blog</p>
+            </div>
+            <p className="text-[#141414] text-base font-normal leading-normal pb-3 pt-1 px-4">
+              Welcome to my blog, where I share insights and tips on enhancing business efficiency. Explore articles on various topics, from time management to process
+              optimization, all aimed at helping you achieve greater productivity and success.
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Articles */}
-      <section className="py-20">
-        <div className="container-custom">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12">Featured Articles</h2>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {featuredPosts.map((post) => (
-              <article key={post._id} className="card hover:shadow-lg transition-shadow">
-                {/* Featured Image */}
-                <div className="h-48 bg-gradient-to-br from-primary-100 to-primary-200 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 to-primary-600/10"></div>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center text-primary-700">
-                      <div className="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center mx-auto mb-4">
-                        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>
-                      </div>
-                      <span className="text-sm font-medium">{post.category}</span>
+            <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Featured Articles</h2>
+            
+            {/* Featured Articles */}
+            {featuredPosts.map((post, index) => (
+              <div key={post._id} className="p-4">
+                <div className="flex items-stretch justify-between gap-4 rounded-lg">
+                  <div className="flex flex-[2_2_0px] flex-col gap-4">
+                    <div className="flex flex-col gap-1">
+                      <p className="text-[#141414] text-base font-bold leading-tight">{post.title}</p>
+                      <p className="text-neutral-500 text-sm font-normal leading-normal">{post.excerpt}</p>
                     </div>
+                    <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-8 px-4 flex-row-reverse bg-[#ededed] text-[#141414] text-sm font-medium leading-normal w-fit">
+                      <span className="truncate">Read More</span>
+                    </button>
                   </div>
+                  <div
+                    className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex-1"
+                    style={{backgroundImage: `url("${featuredImages[index % featuredImages.length]}")`}}
+                  ></div>
                 </div>
-
-                <div className="p-6">
-                  <div className="flex items-center text-sm text-gray-500 mb-3">
-                    <span className="bg-primary-100 text-primary-600 px-2 py-1 rounded-full text-xs font-medium mr-3">
-                      {post.category}
-                    </span>
-                    <span>{new Date(post.publishedAt).toLocaleDateString('ja-JP')}</span>
-                    <span className="mx-2">•</span>
-                    <span>{post.readTime}</span>
-                  </div>
-                  
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 hover:text-primary-600 transition-colors">
-                    <Link href={`/blog/${post.slug.current}`}>
-                      {post.title}
-                    </Link>
-                  </h3>
-                  
-                  <p className="text-gray-600 mb-4 leading-relaxed">
-                    {post.excerpt}
-                  </p>
-                  
-                  <div className="flex items-center justify-between">
-                    <Link 
-                      href={`/blog/${post.slug.current}`}
-                      className="text-primary-600 font-medium hover:text-primary-700 transition-colors"
-                    >
-                      Read More →
-                    </Link>
-                    <div className="flex flex-wrap gap-1">
-                      {/* ▼▼▼ 修正箇所: post.tagsがnullでもエラーにならないようにする ▼▼▼ */}
-                      {(post.tags || []).slice(0, 2).map((tag, index) => (
-                        <span key={index} className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </article>
+              </div>
             ))}
-          </div>
-        </div>
-      </section>
 
-      {/* All Articles */}
-      <section className="py-20 bg-gray-50">
-        <div className="container-custom">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12">All Articles</h2>
-          
-          <div className="space-y-8">
-            {allPosts.map((post) => (
-              <article key={post._id} className="card p-8 hover:shadow-lg transition-shadow">
-                <div className="flex flex-col lg:flex-row lg:items-center gap-6">
-                  {/* Article Image */}
-                  <div className="lg:w-64 h-48 lg:h-32 bg-gradient-to-br from-primary-100 to-primary-200 rounded-lg flex-shrink-0 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 to-primary-600/10"></div>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-center text-primary-700">
-                        <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mx-auto mb-2">
-                          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                          </svg>
-                        </div>
-                        <span className="text-xs font-medium">{post.category}</span>
-                      </div>
+            <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">All Articles</h2>
+            
+            {/* All Articles */}
+            {allPosts.map((post, index) => (
+              <div key={post._id} className="p-4">
+                <div className="flex items-stretch justify-between gap-4 rounded-lg">
+                  <div className="flex flex-[2_2_0px] flex-col gap-4">
+                    <div className="flex flex-col gap-1">
+                      <p className="text-[#141414] text-base font-bold leading-tight">{post.title}</p>
+                      <p className="text-neutral-500 text-sm font-normal leading-normal">{post.excerpt}</p>
                     </div>
+                    <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-8 px-4 flex-row-reverse bg-[#ededed] text-[#141414] text-sm font-medium leading-normal w-fit">
+                      <span className="truncate">Read More</span>
+                    </button>
                   </div>
-
-                  {/* Article Content */}
-                  <div className="flex-1">
-                    <div className="flex items-center text-sm text-gray-500 mb-3">
-                      <span className="bg-primary-100 text-primary-600 px-2 py-1 rounded-full text-xs font-medium mr-3">
-                        {post.category}
-                      </span>
-                      <span>{new Date(post.publishedAt).toLocaleDateString('ja-JP')}</span>
-                      <span className="mx-2">•</span>
-                      <span>{post.readTime}</span>
-                    </div>
-                    
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3 hover:text-primary-600 transition-colors">
-                      <Link href={`/blog/${post.slug.current}`}>
-                        {post.title}
-                      </Link>
-                    </h3>
-                    
-                    <p className="text-gray-600 mb-4 leading-relaxed">
-                      {post.excerpt}
-                    </p>
-                    
-                    <div className="flex items-center justify-between">
-                      <Link 
-                        href={`/blog/${post.slug.current}`}
-                        className="text-primary-600 font-medium hover:text-primary-700 transition-colors"
-                      >
-                        Read More →
-                      </Link>
-                      <div className="flex flex-wrap gap-1">
-                        {/* ▼▼▼ 修正箇所: post.tagsがnullでもエラーにならないようにする ▼▼▼ */}
-                        {(post.tags || []).map((tag, index) => (
-                          <span key={index} className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
+                  <div
+                    className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex-1"
+                    style={{backgroundImage: `url("${allPostImages[index % allPostImages.length]}")`}}
+                  ></div>
                 </div>
-              </article>
+              </div>
             ))}
-          </div>
 
-          {/* Pagination */}
-          <div className="flex justify-center mt-12">
-            <nav className="flex items-center space-x-2">
-              <button className="px-3 py-2 text-gray-500 hover:text-primary-600 transition-colors">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
-              <button className="px-3 py-2 bg-primary-600 text-white rounded">1</button>
-              <button className="px-3 py-2 text-gray-700 hover:text-primary-600 transition-colors">2</button>
-              <button className="px-3 py-2 text-gray-700 hover:text-primary-600 transition-colors">3</button>
-              <span className="px-3 py-2 text-gray-500">...</span>
-              <button className="px-3 py-2 text-gray-700 hover:text-primary-600 transition-colors">10</button>
-              <button className="px-3 py-2 text-gray-500 hover:text-primary-600 transition-colors">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-            </nav>
+            {/* Pagination */}
+            <div className="flex items-center justify-center p-4">
+              <a href="#" className="flex size-10 items-center justify-center">
+                <div className="text-[#141414]" data-icon="CaretLeft" data-size="18px" data-weight="regular">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" fill="currentColor" viewBox="0 0 256 256">
+                    <path d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"></path>
+                  </svg>
+                </div>
+              </a>
+              <a className="text-sm font-bold leading-normal tracking-[0.015em] flex size-10 items-center justify-center text-[#141414] rounded-full bg-[#ededed]" href="#">1</a>
+              <a className="text-sm font-normal leading-normal flex size-10 items-center justify-center text-[#141414] rounded-full" href="#">2</a>
+              <a className="text-sm font-normal leading-normal flex size-10 items-center justify-center text-[#141414] rounded-full" href="#">3</a>
+              <span className="text-sm font-normal leading-normal flex size-10 items-center justify-center text-[#141414] rounded-full">...</span>
+              <a className="text-sm font-normal leading-normal flex size-10 items-center justify-center text-[#141414] rounded-full" href="#">10</a>
+              <a href="#" className="flex size-10 items-center justify-center">
+                <div className="text-[#141414]" data-icon="CaretRight" data-size="18px" data-weight="regular">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" fill="currentColor" viewBox="0 0 256 256">
+                    <path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"></path>
+                  </svg>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
-      </section>
-
-      {/* Newsletter Signup */}
-      <section className="py-20 bg-primary-600">
-        <div className="container-custom text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
-            Stay Updated with Latest Tips
-          </h2>
-          <p className="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
-            Subscribe to our newsletter and get the latest productivity tips and business insights delivered to your inbox.
-          </p>
-          <div className="max-w-md mx-auto flex gap-4">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1 px-4 py-3 rounded-lg border-0 focus:ring-2 focus:ring-primary-300 focus:outline-none"
-            />
-            <button className="bg-white text-primary-600 hover:bg-gray-100 font-medium px-6 py-3 rounded-lg transition-colors">
-              Subscribe
-            </button>
-          </div>
-        </div>
-      </section>
+      </div>
     </div>
   )
 }
