@@ -109,33 +109,6 @@ export default async function WorksPage() {
               Welcome to my works showcase, where I share insights and tips on enhancing business efficiency. Explore articles on various topics, from time management to process
               optimization, all aimed at helping you achieve greater productivity and success.
             </p>
-            <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Featured Articles</h2>
-            
-            {/* Featured Articles */}
-            <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 p-4">
-              {featuredPosts.map((post, index) => (
-                <div key={post._id} className="flex flex-col gap-3 pb-3 group hover:transform hover:scale-105 transition-all duration-300 ease-out">
-                  <div
-                    className="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg group-hover:shadow-lg transition-shadow duration-300"
-                    style={{backgroundImage: `url("${post.featuredImage || featuredImages[index % featuredImages.length]}")`}}
-                  ></div>
-                  <div>
-                    <p className="text-[#141414] text-base font-medium leading-normal group-hover:text-blue-600 transition-colors duration-300">{post.title}</p>
-                    <p className="text-neutral-500 text-sm font-normal leading-normal">{post.excerpt}</p>
-                    <div className="mt-3">
-                      <Link 
-                        href={`/works/${post.slug.current}`}
-                        className="inline-flex items-center justify-center overflow-hidden rounded-lg h-8 px-4 bg-[#ededed] text-[#141414] text-sm font-medium leading-normal hover:bg-blue-600 hover:text-white transition-all duration-300"
-                      >
-                        <span className="truncate">Read More</span>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">All Articles</h2>
             
             {/* All Articles */}
             <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 p-4">
