@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import emailjs from '@emailjs/browser'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -23,13 +24,48 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setSubmitStatus('idle')
     
-    // シミュレートされた送信処理
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000))
+      // EmailJSの設定値を取得
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+      
+      // 環境変数が設定されていない場合はフォールバック処理
+      if (!serviceId || !templateId || !publicKey || 
+          serviceId === 'your_service_id' || 
+          templateId === 'your_template_id' || 
+          publicKey === 'your_public_key') {
+        
+        // EmailJSが設定されていない場合は、mailtoリンクを開く
+        const subject = encodeURIComponent(formData.subject)
+        const body = encodeURIComponent(
+          `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+        )
+        const mailtoUrl = `mailto:ktakgg@gmail.com?subject=${subject}&body=${body}`
+        
+        window.open(mailtoUrl, '_blank')
+        setSubmitStatus('success')
+        setFormData({ name: '', email: '', subject: '', message: '' })
+        return
+      }
+      
+      // EmailJSでメール送信
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        to_email: 'ktakgg@gmail.com'
+      }
+      
+      await emailjs.send(serviceId, templateId, templateParams, publicKey)
       setSubmitStatus('success')
       setFormData({ name: '', email: '', subject: '', message: '' })
+      
     } catch (error) {
+      console.error('Email sending failed:', error)
       setSubmitStatus('error')
     } finally {
       setIsSubmitting(false)
@@ -153,7 +189,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h4 className="font-medium text-[#141414]">Email</h4>
-                    <p className="text-neutral-500 text-sm">hello@efficiencyboost.com</p>
+                    <p className="text-neutral-500 text-sm">ktakgg@gmail.com</p>
                   </div>
                 </div>
 

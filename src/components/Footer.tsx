@@ -49,11 +49,6 @@ export default function Footer() {
                   Works
                 </Link>
               </li>
-              <li>
-                <Link href="/contact" className="text-gray-600 hover:text-primary-600 transition-colors">
-                  Contact
-                </Link>
-              </li>
             </ul>
           </div>
 
@@ -67,8 +62,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="mailto:info@efficiencyboost.com" className="text-gray-600 hover:text-primary-600 transition-colors">
-                  info@efficiencyboost.com
+                <a href="mailto:ktakgg@gmail.com" className="text-gray-600 hover:text-primary-600 transition-colors">
+                  ktakgg@gmail.com
                 </a>
               </li>
             </ul>
