@@ -127,28 +127,39 @@ export default function HomePage() {
 
     fetchBlogPosts()
 
-    // スクロールアニメーションの設定
-    observerRef.current = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in-up')
+    // スクロールアニメーションの設定（パフォーマンス最適化）
+    if (typeof window !== 'undefined' && 'IntersectionObserver' in window) {
+      observerRef.current = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.remove('opacity-0', 'translate-y-8')
+              entry.target.classList.add('opacity-100', 'translate-y-0')
+              // 一度アニメーションしたら監視を停止してパフォーマンス向上
+              if (observerRef.current) {
+                observerRef.current.unobserve(entry.target)
+              }
+            }
+          })
+        },
+        {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px',
+          // パフォーマンス向上のためのオプション
+          root: null
+        }
+      )
+
+      // アニメーション対象の要素を監視（遅延実行でパフォーマンス向上）
+      setTimeout(() => {
+        const animateElements = document.querySelectorAll('.animate-on-scroll')
+        animateElements.forEach((el) => {
+          if (observerRef.current) {
+            observerRef.current.observe(el)
           }
         })
-      },
-      {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-      }
-    )
-
-    // アニメーション対象の要素を監視
-    const animateElements = document.querySelectorAll('.animate-on-scroll')
-    animateElements.forEach((el) => {
-      if (observerRef.current) {
-        observerRef.current.observe(el)
-      }
-    })
+      }, 100)
+    }
 
     return () => {
       if (observerRef.current) {

@@ -2,6 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+/* スマートフォンでのスクロール最適化 */
+html {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+body {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* iOS Safariでのスクロール問題対策 */
+* {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* アニメーション最適化 */
+.animate-on-scroll {
+  will-change: opacity, transform;
+}
+
+/* パフォーマンス向上のためのGPU加速 */
+.transition-all,
+.transition-transform,
+.transition-colors,
+.transition-shadow {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
 /* スクロールアニメーション用のCSSクラス */
 .animate-fade-in-up {
   opacity: 1 !important;
