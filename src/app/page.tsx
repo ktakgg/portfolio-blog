@@ -85,8 +85,32 @@ export default function HomePage() {
     // ブログ記事データを取得
     const fetchBlogPosts = async () => {
       try {
-        const posts = await getFeaturedPosts()
-        setFeaturedPosts(posts.slice(0, 3)) // 最新3件を取得
+        const posts = await getAllPosts()
+        if (posts && posts.length > 0) {
+          setFeaturedPosts(posts.slice(0, 3)) // 最新3件を取得
+        } else {
+          // データがない場合はフォールバック
+          setFeaturedPosts([
+            {
+              title: 'Streamlining Your Workflow',
+              excerpt: 'Discover the top software and apps that can help you manage your projects, clients, and finances more efficiently.',
+              slug: { current: 'streamlining-workflow' },
+              mainImage: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2339&q=80'
+            },
+            {
+              title: 'Mastering Time Management',
+              excerpt: 'Learn proven strategies to prioritize tasks, eliminate distractions, and make the most of your working hours.',
+              slug: { current: 'mastering-time-management' },
+              mainImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80'
+            },
+            {
+              title: 'Building a Strong Online Presence',
+              excerpt: 'Explore effective ways to showcase your skills, connect with potential clients, and establish yourself as an expert in your field.',
+              slug: { current: 'building-online-presence' },
+              mainImage: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80'
+            }
+          ])
+        }
       } catch (error) {
         console.error('Error fetching blog posts:', error)
         // エラー時はフォールバック用の静的データを使用
@@ -94,19 +118,19 @@ export default function HomePage() {
           {
             title: 'Streamlining Your Workflow',
             excerpt: 'Discover the top software and apps that can help you manage your projects, clients, and finances more efficiently.',
-            slug: 'streamlining-workflow',
+            slug: { current: 'streamlining-workflow' },
             mainImage: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2339&q=80'
           },
           {
             title: 'Mastering Time Management',
             excerpt: 'Learn proven strategies to prioritize tasks, eliminate distractions, and make the most of your working hours.',
-            slug: 'mastering-time-management',
+            slug: { current: 'mastering-time-management' },
             mainImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80'
           },
           {
             title: 'Building a Strong Online Presence',
             excerpt: 'Explore effective ways to showcase your skills, connect with potential clients, and establish yourself as an expert in your field.',
-            slug: 'building-online-presence',
+            slug: { current: 'building-online-presence' },
             mainImage: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80'
           }
         ])
