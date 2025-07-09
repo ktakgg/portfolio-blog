@@ -305,11 +305,6 @@ export default function HomePage() {
                             <div className={`w-2 h-2 bg-${item.color}-500 rounded-full mt-1 flex-shrink-0 ml-2`}></div>
                           </div>
                           <p className="text-xs text-gray-600 line-clamp-2">{item.description}</p>
-                          <div className="mt-2">
-                            <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-${item.color}-100 text-${item.color}-800`}>
-                              {item.type === 'blog' ? 'Blog Post' : 'Portfolio Update'}
-                            </span>
-                          </div>
                         </div>
                       </div>
                     </Link>
