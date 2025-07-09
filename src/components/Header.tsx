@@ -39,6 +39,9 @@ export default function Header() {
           <Link className={getLinkClassName('/works')} href="/works">
             {isActive('/works') ? <span className="truncate">Works</span> : 'Works'}
           </Link>
+          <Link className={getLinkClassName('/contact')} href="/contact">
+            {isActive('/contact') ? <span className="truncate">Contact</span> : 'Contact'}
+          </Link>
         </div>
         
         {/* Mobile menu button */}
@@ -70,6 +73,13 @@ export default function Header() {
               onClick={() => setIsMenuOpen(false)}
             >
               Works
+            </Link>
+            <Link 
+              href="/contact" 
+              className={`${isActive('/contact') ? 'text-blue-600 font-bold' : 'text-[#141414]'} text-sm font-medium leading-normal`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Contact
             </Link>
           </nav>
         </div>

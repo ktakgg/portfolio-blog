@@ -101,9 +101,7 @@ export default async function WorksPage() {
     <div className="relative flex size-full min-h-screen flex-col bg-neutral-50 group/design-root overflow-x-hidden" style={{fontFamily: 'Inter, "Noto Sans", sans-serif'}}>
       <div className="layout-container flex h-full grow flex-col">
         <div className="px-4 md:px-40 flex flex-1 justify-center py-5">
-          <div className="layout-content-container flex flex-col lg:flex-row max-w-[1200px] flex-1 gap-8">
-            {/* Main Content */}
-            <div className="flex flex-col flex-1 order-1">
+          <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
             <div className="flex flex-wrap justify-between gap-3 p-4">
               <p className="text-[#141414] tracking-light text-[32px] font-bold leading-tight min-w-72">Works</p>
             </div>
@@ -184,60 +182,6 @@ export default async function WorksPage() {
                   </svg>
                 </div>
               </a>
-            </div>
-            </div>
-            
-            {/* Sidebar */}
-            <div className="w-full lg:w-80 flex-shrink-0 order-2">
-              <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-4">Recent Posts</h3>
-                <div className="space-y-4">
-                  {featuredPosts.slice(0, 3).map((post, index) => (
-                    <Link key={post._id} href={`/works/${post.slug.current}`} className="flex gap-3 group">
-                      <div
-                        className="w-16 h-16 bg-center bg-no-repeat bg-cover rounded-lg flex-shrink-0"
-                        style={{backgroundImage: `url("${post.featuredImage || featuredImages[index % featuredImages.length]}")`}}
-                      ></div>
-                      <div className="flex-1 min-w-0">
-                        <h4 className="text-sm font-medium text-gray-900 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                          {post.title}
-                        </h4>
-                        <p className="text-xs text-gray-500 mt-1">
-                          {new Date(post.publishedAt).toLocaleDateString('en-US', { 
-                            month: 'short', 
-                            day: 'numeric' 
-                          })}
-                        </p>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-4">Categories</h3>
-                <div className="space-y-2">
-                  {['Productivity', 'Time Management', 'Automation', 'Communication', 'Leadership', 'Workspace'].map((category) => (
-                    <Link key={category} href={`/blog/category/${category.toLowerCase().replace(' ', '-')}`} className="flex items-center justify-between text-sm text-gray-600 hover:text-blue-600 transition-colors">
-                      <span>{category}</span>
-                      <span className="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded-full">
-                        {Math.floor(Math.random() * 5) + 1}
-                      </span>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              <div className="bg-white rounded-lg border border-gray-200 p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-4">Popular Tags</h3>
-                <div className="flex flex-wrap gap-2">
-                  {['Efficiency', 'Tools', 'Freelancing', 'Focus', 'Team Management', 'Collaboration', 'Environment'].map((tag) => (
-                    <Link key={tag} href={`/blog/tag/${tag.toLowerCase()}`} className="inline-block bg-gray-100 hover:bg-blue-100 text-gray-700 hover:text-blue-700 text-xs px-3 py-1 rounded-full transition-colors">
-                      #{tag}
-                    </Link>
-                  ))}
-                </div>
-              </div>
             </div>
           </div>
         </div>

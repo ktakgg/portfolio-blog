@@ -23,7 +23,7 @@ export default function HomePage() {
           
           return {
             type: 'blog',
-            title: `New Blog Post: "${post.title}"`,
+            title: post.title,
             description: `Published on ${new Date(post.publishedAt).toLocaleDateString('en-US', { 
               year: 'numeric', 
               month: 'long', 
@@ -57,7 +57,7 @@ export default function HomePage() {
         // ブログとポートフォリオを合わせて日付順にソート
         const allNews = [...newsData, ...portfolioUpdates]
           .sort((a, b) => b.date.getTime() - a.date.getTime())
-          .slice(0, 4)
+          .slice(0, 2)
         
         setNewsItems(allNews)
       } catch (error) {
@@ -66,7 +66,7 @@ export default function HomePage() {
         setNewsItems([
           {
             type: 'blog',
-            title: 'New Blog Post: "Automating for Success: Tools and Techniques"',
+            title: 'Automating for Success: Tools and Techniques',
             description: 'Published on January 5, 2024 - Learn about automation tools that can save time',
             color: 'blue'
           },
@@ -75,18 +75,6 @@ export default function HomePage() {
             title: 'Portfolio Update: Added Customer Relationship Management Tool',
             description: 'December 28, 2023 - New project showcasing CRM customization',
             color: 'green'
-          },
-          {
-            type: 'blog',
-            title: 'Blog Post: "The Power of Prioritization: Mastering Time Management"',
-            description: 'December 20, 2023 - Effective strategies for task prioritization',
-            color: 'purple'
-          },
-          {
-            type: 'portfolio',
-            title: 'Portfolio Update: Sales Forecasting Dashboard completed',
-            description: 'December 15, 2023 - New dashboard for sales trend visualization',
-            color: 'orange'
           }
         ])
       }
@@ -348,7 +336,7 @@ export default function HomePage() {
 
             {/* Latest Blog Posts */}
             <div className="animate-on-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out">
-              <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Latest Blog Posts</h2>
+              <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Works</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 p-4">
                 {featuredPosts.map((post, index) => (
                   <Link key={index} href={`/works/${post.slug?.current || post.slug}`} className="flex flex-col gap-3 pb-3 hover:transform hover:scale-105 transition-transform duration-200">
