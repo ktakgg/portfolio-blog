@@ -85,29 +85,34 @@ export default function HomePage() {
     // ブログ記事データを取得
     const fetchBlogPosts = async () => {
       try {
+        console.log('Fetching posts for Works section...')
         const posts = await getAllPosts()
+        console.log('Posts fetched:', posts)
+        
         if (posts && posts.length > 0) {
+          console.log('Using real posts data')
           setFeaturedPosts(posts.slice(0, 3)) // 最新3件を取得
         } else {
+          console.log('No posts found, using fallback data')
           // データがない場合はフォールバック
           setFeaturedPosts([
             {
               title: 'Streamlining Your Workflow',
               excerpt: 'Discover the top software and apps that can help you manage your projects, clients, and finances more efficiently.',
               slug: { current: 'streamlining-workflow' },
-              mainImage: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2339&q=80'
+              featuredImage: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2339&q=80'
             },
             {
               title: 'Mastering Time Management',
               excerpt: 'Learn proven strategies to prioritize tasks, eliminate distractions, and make the most of your working hours.',
               slug: { current: 'mastering-time-management' },
-              mainImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80'
+              featuredImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80'
             },
             {
               title: 'Building a Strong Online Presence',
               excerpt: 'Explore effective ways to showcase your skills, connect with potential clients, and establish yourself as an expert in your field.',
               slug: { current: 'building-online-presence' },
-              mainImage: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80'
+              featuredImage: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80'
             }
           ])
         }
@@ -119,19 +124,19 @@ export default function HomePage() {
             title: 'Streamlining Your Workflow',
             excerpt: 'Discover the top software and apps that can help you manage your projects, clients, and finances more efficiently.',
             slug: { current: 'streamlining-workflow' },
-            mainImage: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2339&q=80'
+            featuredImage: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2339&q=80'
           },
           {
             title: 'Mastering Time Management',
             excerpt: 'Learn proven strategies to prioritize tasks, eliminate distractions, and make the most of your working hours.',
             slug: { current: 'mastering-time-management' },
-            mainImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80'
+            featuredImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80'
           },
           {
             title: 'Building a Strong Online Presence',
             excerpt: 'Explore effective ways to showcase your skills, connect with potential clients, and establish yourself as an expert in your field.',
             slug: { current: 'building-online-presence' },
-            mainImage: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80'
+            featuredImage: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80'
           }
         ])
       }
@@ -200,7 +205,7 @@ export default function HomePage() {
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {newsItems.map((item, index) => (
-                    <Link key={index} href={item.link || '/blog'} className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-200 block">
+                    <Link key={index} href={item.link || '/works'} className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-200 block">
                       <div className="flex gap-4">
                         {item.type === 'blog' && item.featuredImage ? (
                           <div 
