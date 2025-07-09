@@ -36,11 +36,8 @@ export default function Header() {
           <Link className={getLinkClassName('/')} href="/">
             {isActive('/') ? <span className="truncate">Home</span> : 'Home'}
           </Link>
-          <Link className={getLinkClassName('/portfolio')} href="/portfolio">
-            {isActive('/portfolio') ? <span className="truncate">Portfolio</span> : 'Portfolio'}
-          </Link>
-          <Link className={getLinkClassName('/blog')} href="/blog">
-            {isActive('/blog') ? <span className="truncate">Blog</span> : 'Blog'}
+          <Link className={getLinkClassName('/works')} href="/works">
+            {isActive('/works') ? <span className="truncate">Works</span> : 'Works'}
           </Link>
         </div>
         
@@ -68,18 +65,11 @@ export default function Header() {
               Home
             </Link>
             <Link 
-              href="/portfolio" 
-              className={`${isActive('/portfolio') ? 'text-blue-600 font-bold' : 'text-[#141414]'} text-sm font-medium leading-normal`}
+              href="/works" 
+              className={`${isActive('/works') ? 'text-blue-600 font-bold' : 'text-[#141414]'} text-sm font-medium leading-normal`}
               onClick={() => setIsMenuOpen(false)}
             >
-              Portfolio
-            </Link>
-            <Link 
-              href="/blog" 
-              className={`${isActive('/blog') ? 'text-blue-600 font-bold' : 'text-[#141414]'} text-sm font-medium leading-normal`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Blog
+              Works
             </Link>
           </nav>
         </div>

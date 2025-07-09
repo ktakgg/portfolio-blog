@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { getAllPosts, getFeaturedPosts, BlogPost } from '@/lib/sanity-queries'
 
-export default async function BlogPage() {
+export default async function WorksPage() {
   // Sanityからデータを取得
   let sanityFeaturedPosts: BlogPost[] = []
   let sanityAllPosts: BlogPost[] = []
@@ -105,10 +105,10 @@ export default async function BlogPage() {
             {/* Main Content */}
             <div className="flex flex-col flex-1 order-1">
             <div className="flex flex-wrap justify-between gap-3 p-4">
-              <p className="text-[#141414] tracking-light text-[32px] font-bold leading-tight min-w-72">Blog</p>
+              <p className="text-[#141414] tracking-light text-[32px] font-bold leading-tight min-w-72">Works</p>
             </div>
             <p className="text-[#141414] text-base font-normal leading-normal pb-3 pt-1 px-4">
-              Welcome to my blog, where I share insights and tips on enhancing business efficiency. Explore articles on various topics, from time management to process
+              Welcome to my works showcase, where I share insights and tips on enhancing business efficiency. Explore articles on various topics, from time management to process
               optimization, all aimed at helping you achieve greater productivity and success.
             </p>
             <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Featured Articles</h2>
@@ -126,7 +126,7 @@ export default async function BlogPage() {
                     <p className="text-neutral-500 text-sm font-normal leading-normal">{post.excerpt}</p>
                     <div className="mt-3">
                       <Link 
-                        href={`/blog/${post.slug.current}`}
+                        href={`/works/${post.slug.current}`}
                         className="inline-flex items-center justify-center overflow-hidden rounded-lg h-8 px-4 bg-[#ededed] text-[#141414] text-sm font-medium leading-normal hover:bg-blue-600 hover:text-white transition-all duration-300"
                       >
                         <span className="truncate">Read More</span>
@@ -152,7 +152,7 @@ export default async function BlogPage() {
                     <p className="text-neutral-500 text-sm font-normal leading-normal">{post.excerpt}</p>
                     <div className="mt-3">
                       <Link 
-                        href={`/blog/${post.slug.current}`}
+                        href={`/works/${post.slug.current}`}
                         className="inline-flex items-center justify-center overflow-hidden rounded-lg h-8 px-4 bg-[#ededed] text-[#141414] text-sm font-medium leading-normal hover:bg-blue-600 hover:text-white transition-all duration-300"
                       >
                         <span className="truncate">Read More</span>
@@ -193,7 +193,7 @@ export default async function BlogPage() {
                 <h3 className="text-lg font-bold text-gray-900 mb-4">Recent Posts</h3>
                 <div className="space-y-4">
                   {featuredPosts.slice(0, 3).map((post, index) => (
-                    <Link key={post._id} href={`/blog/${post.slug.current}`} className="flex gap-3 group">
+                    <Link key={post._id} href={`/works/${post.slug.current}`} className="flex gap-3 group">
                       <div
                         className="w-16 h-16 bg-center bg-no-repeat bg-cover rounded-lg flex-shrink-0"
                         style={{backgroundImage: `url("${post.featuredImage || featuredImages[index % featuredImages.length]}")`}}
