@@ -351,15 +351,15 @@ export default function HomePage() {
                     <span>信頼して任せられる経理・秘書担当を探している…</span>
                   </li>
                 </ul>
-                <p className="mt-6 text-center text-lg font-semibold text-[#141414]">そのお悩み、すべて解決します。</p>
+                <p className="mt-6 text-center text-lg font-semibold text-[22px] text-[#141414]">そのお悩み、すべて解決します。</p>
               </div>
             </div>
 
             {/* Latest Blog Posts */}
             <div className="animate-on-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out">
               <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Works</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 p-4">
-                {featuredPosts.map((post, index) => (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4">
+                {featuredPosts.slice(0, 2).map((post, index) => (
                   <Link key={index} href={`/works/${post.slug?.current || post.slug}`} className="flex flex-col gap-3 pb-3 hover:transform hover:scale-105 transition-transform duration-200">
                     <div
                       className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg"
