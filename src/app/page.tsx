@@ -271,7 +271,7 @@ export default function HomePage() {
                       <path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40ZM40,56H216V88H40ZM40,200V104H216v96Z"></path>
                     </svg>
                   </div>
-                  <h2 className="text-[#141414] text-xl font-bold leading-tight">Latest News & Updates</h2>
+                  <h2 className="text-[#141414] text-xl font-bold leading-tight">Updates</h2>
                   <div className="ml-auto">
                     <span className="bg-blue-500 text-white text-xs font-semibold px-2 py-1 rounded-full">NEW</span>
                   </div>
@@ -333,18 +333,18 @@ export default function HomePage() {
                     <h1
                       className="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]"
                     >
-                      Boost Your Business
-                      <span className="block">Efficiency</span>
+                      ToDoCoWorks
+                       <span className="block">コア業務に集中できる環境を、オンラインで。</span>
                     </h1>
                     <h2 className="text-white text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
-                      Streamline your operations and maximize productivity with our tailored solutions for individual entrepreneurs.
+                    経営者・個人事業主の皆様が、本来の業務にもっと時間を注げるように。煩雑になりがちな経理や秘書業務をオンラインでまるごとサポートします。必要な時に、必要な分だけ。貴社のビジネスを黒子として支えるパートナーです。
                     </h2>
                   </div>
                   <Link
                     href="/contact"
                     className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#535353] text-neutral-50 text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]"
                   >
-                    <span className="truncate">Get Started</span>
+                    <span className="truncate">もっと詳しく</span>
                   </Link>
                 </div>
               </div>
@@ -353,7 +353,7 @@ export default function HomePage() {
 
             {/* Services Section */}
             <div className="animate-on-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out">
-              <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">サービス内容</h2>
+              <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Our Services</h2>
               <div className="flex flex-col gap-10 px-4 py-10 @container">
               <div className="flex flex-col gap-4">
                 <h1
@@ -445,13 +445,13 @@ export default function HomePage() {
                   <h1
                     className="text-[#141414] tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px]"
                   >
-                    Ready to Take Your Business to the Next Level?
+                    業務を円滑に進めるためのサポートをお手伝いします。
                   </h1>
-                  <p className="text-[#141414] text-base font-normal leading-normal max-w-[720px]">Join hundreds of entrepreneurs who have transformed their businesses with our efficiency solutions.</p>
+                  <p className="text-[#141414] text-base font-normal leading-normal max-w-[720px]">まずはご相談ください。</p>
                 </div>
                 <div className="flex flex-1 justify-center">
                   <Link href="/contact" className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#535353] text-neutral-50 text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]">
-                    <span className="truncate">Get Started Today</span>
+                    <span className="truncate">もっと詳しく</span>
                   </Link>
                 </div>
               </div>
