@@ -21,7 +21,7 @@ export default function Header() {
   }
 
   return (
-    <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#ededed] px-4 md:px-10 py-3 bg-neutral-50 relative">
+    <header className="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#ededed] px-4 md:px-10 py-3 bg-neutral-50 relative">
       <Link href="/" className="flex items-center gap-4 text-[#141414] hover:opacity-80 transition-opacity">
         <div className="size-4">
           <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
