@@ -269,7 +269,7 @@ export default function HomePage() {
               <div className="@container">
               <div className="@[480px]:p-4">
                 <div
-                  className="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-lg items-start justify-end px-4 pb-10 @[480px]:px-10"
+                  className="flex min-h-[384px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-lg items-start justify-end px-4 pb-10 @[480px]:px-10"
                   style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%), url("/home_new.png")'}}
                 >
                   <div className="flex flex-col gap-2 text-left">
@@ -283,12 +283,6 @@ export default function HomePage() {
                     オンライン経理・業務サポート
                     </h2>
                   </div>
-                  <Link
-                    href="/contact"
-                    className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#535353] text-neutral-50 text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]"
-                  >
-                    <span className="truncate">もっと詳しく</span>
-                  </Link>
                 </div>
               </div>
               </div>
@@ -299,11 +293,11 @@ export default function HomePage() {
               <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Our Services</h2>
               <div className="flex flex-col gap-10 px-4 py-10 @container">
               <div className="flex flex-col gap-4">
-                <h1
+                <h2
                   className="text-[#141414] tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px]"
                 >
                   コア業務に集中できる環境を、オンラインで。
-                </h1>
+                </h2>
                 <p className="text-[#141414] text-base font-normal leading-normal max-w-[720px]">
                 経営者・個人事業主の皆様が、本来の業務にもっと時間を注げるように。煩雑になりがちな経理や秘書業務をオンラインでまるごとサポートします。必要な時に、必要な分だけ。貴社のビジネスを黒子として支えるパートナーです。
                 </p>
@@ -392,11 +386,11 @@ export default function HomePage() {
               <div className="@container">
               <div className="flex flex-col justify-end gap-6 px-4 py-10 @[480px]:gap-8 @[480px]:px-10 @[480px]:py-20">
                 <div className="flex flex-col gap-2 text-center">
-                  <h1
+                  <h2
                     className="text-[#141414] tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px] mx-auto"
                   >
                     業務を効率化をサポートします。
-                  </h1>
+                  </h2>
                   <p className="text-[#141414] text-base font-normal leading-normal max-w-[720px] mx-auto">まずはご相談ください。</p>
                 </div>
                 <div className="flex flex-1 justify-center">
