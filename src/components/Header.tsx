@@ -2,12 +2,38 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname()
+
+  // Hide-then-show sticky header on scroll down with 0.3s delay
+  const [showHeader, setShowHeader] = useState(true)
+  const lastScrollY = useRef(0)
+  const showTimer = useRef<number | null>(null)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const y = window.scrollY || 0
+      const isDown = y > lastScrollY.current
+      if (isDown) {
+        setShowHeader(false)
+        if (showTimer.current) window.clearTimeout(showTimer.current)
+        showTimer.current = window.setTimeout(() => setShowHeader(true), 300)
+      } else {
+        setShowHeader(true)
+      }
+      lastScrollY.current = y
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      if (showTimer.current) window.clearTimeout(showTimer.current)
+    }
+  }, [])
 
   const isActive = (path: string) => {
     if (path === '/' && pathname === '/') return true
@@ -22,7 +48,7 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#ededed] px-4 md:px-10 py-3 bg-neutral-50 relative">
+    <header className={`sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#ededed] px-4 md:px-10 py-3 bg-neutral-50 relative transition-transform duration-300 will-change-transform ${showHeader ? 'translate-y-0' : '-translate-y-full'}`}>
       <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
         <Image
           src="/logo.png"
