@@ -9,53 +9,24 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname()
 
-  // Header scroll behavior: hide on scroll down, show on scroll up with delay
-  const [showHeader, setShowHeader] = useState(true)
-  const lastScrollY = useRef(0)
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
-  const isScrollingDown = useRef(false)
+  // Sticky header: toggle background/shadow when page is scrolled
+  const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY
-      
-      // Clear any existing timeout
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current)
-        timeoutRef.current = null
-      }
-      
-      // Determine scroll direction
-      const scrollingDown = currentScrollY > lastScrollY.current
-      
-      if (currentScrollY > 100) { // Only trigger after scrolling past 100px
-        if (scrollingDown && !isScrollingDown.current) {
-          // Started scrolling down - hide header immediately
-          isScrollingDown.current = true
-          setShowHeader(false)
-        } else if (!scrollingDown && isScrollingDown.current) {
-          // Started scrolling up - show header after 300ms delay
-          isScrollingDown.current = false
-          timeoutRef.current = setTimeout(() => {
-            setShowHeader(true)
-          }, 300)
-        }
-      } else {
-        // At top of page - always show header
-        setShowHeader(true)
-        isScrollingDown.current = false
-      }
-      
-      lastScrollY.current = currentScrollY
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current)
+    let ticking = false
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 10)
+          ticking = false
+        })
+        ticking = true
       }
     }
+    // initialize state on mount
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   const isActive = (path: string) => {
@@ -71,7 +42,7 @@ export default function Header() {
   }
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#ededed] px-4 md:px-10 py-3 bg-neutral-50 transition-transform duration-300 ease-in-out transform-gpu ${showHeader ? 'translate-y-0' : '-translate-y-full'}`}>
+    <header className={`sticky top-0 left-0 right-0 z-50 flex items-center justify-between whitespace-nowrap px-4 md:px-10 py-3 transition-[background-color,box-shadow,backdrop-filter] duration-300 ${scrolled ? 'bg-white/90 shadow-md backdrop-blur-sm border-b border-solid border-b-[#ededed]' : 'bg-transparent'}`}>
       <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
         <Image
           src="/logo.png"
