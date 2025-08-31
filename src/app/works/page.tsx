@@ -106,8 +106,7 @@ export default async function WorksPage() {
               <p className="text-[#141414] tracking-light text-[32px] font-bold leading-tight min-w-72">Works</p>
             </div>
             <p className="text-[#141414] text-base font-normal leading-normal pb-3 pt-1 px-4">
-              Welcome to my works showcase, where I share insights and tips on enhancing business efficiency. Explore articles on various topics, from time management to process
-              optimization, all aimed at helping you achieve greater productivity and success.
+            サポート実績。ここでは、オンライン経理やオンライン業務サポートの実績を共有しています。経理のサポートや業務サポートとしての時間管理・連絡代行など、サポート実績を見てください。いずれも、クライアント様の生産性向上と成功をサポートします。
             </p>
             
             {/* All Articles */}

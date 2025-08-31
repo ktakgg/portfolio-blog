@@ -79,7 +79,7 @@ export default function ContactPage() {
           <div className="flex min-w-72 flex-col gap-3">
             <p className="text-[#141414] tracking-light text-[32px] font-bold leading-tight">Contact Us</p>
             <p className="text-neutral-500 text-sm font-normal leading-normal">
-              Get in touch with us to discuss how we can help boost your business efficiency. We'd love to hear from you!
+            ビジネスや業務効率化のオンラインサポートについて、ぜひご相談ください。ご連絡をお待ちしております！
             </p>
           </div>
         </div>

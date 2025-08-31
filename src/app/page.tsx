@@ -328,10 +328,10 @@ export default function HomePage() {
                       className="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]"
                     >
                       ToDoCoWorks
-                       <span className="block">コア業務に集中できる環境を、オンラインで。</span>
+                       <span className="block"></span>
                     </h1>
                     <h2 className="text-white text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
-                    経営者・個人事業主の皆様が、本来の業務にもっと時間を注げるように。煩雑になりがちな経理や秘書業務をオンラインでまるごとサポートします。必要な時に、必要な分だけ。貴社のビジネスを黒子として支えるパートナーです。
+                    オンライン経理・業務サポート
                     </h2>
                   </div>
                   <Link

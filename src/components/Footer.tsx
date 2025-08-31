@@ -58,12 +58,12 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link href="/contact" className="text-gray-600 hover:text-primary-600 transition-colors">
-                  Contact Us
+                  お問い合わせフォームはこちら
                 </Link>
               </li>
               <li>
                 <a href="mailto:ktakgg@gmail.com" className="text-gray-600 hover:text-primary-600 transition-colors">
-                  ktakgg@gmail.com
+                  メールで連絡する
                 </a>
               </li>
             </ul>

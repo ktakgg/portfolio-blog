@@ -7,13 +7,13 @@ import Footer from '@/components/Footer'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Efficiency Boost - Portfolio & Blog',
-  description: 'ビジネス効率化のためのポートフォリオとブログサイト',
-  keywords: ['効率化', 'ビジネス', 'ポートフォリオ', 'ブログ'],
+  title: 'ToDoCoWorks - 業務効率化のためのオンラインサポート',
+  description: '業務効率化のためのオンラインサポート',
+  keywords: ['オンライン業務', '業務サポート', 'オンライン経理', 'オンライン秘書'],
   authors: [{ name: 'Efficiency Boost' }],
   openGraph: {
-    title: 'Efficiency Boost - Portfolio & Blog',
-    description: 'ビジネス効率化のためのポートフォリオとブログサイト',
+    title: 'ToDoCoWorks - 業務効率化のためのオンラインサポート',
+    description: '業務効率化のためのオンラインサポート',
     type: 'website',
     locale: 'ja_JP',
   },
