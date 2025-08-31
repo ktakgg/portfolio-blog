@@ -353,7 +353,7 @@ export default function HomePage() {
 
             {/* Services Section */}
             <div className="animate-on-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out">
-              <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Our Services</h2>
+              <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">サービス内容</h2>
               <div className="flex flex-col gap-10 px-4 py-10 @container">
               <div className="flex flex-col gap-4">
                 <h1
@@ -365,7 +365,7 @@ export default function HomePage() {
                 経営者・個人事業主の皆様が、本来の業務にもっと時間を注げるように。煩雑になりがちな経理や秘書業務をオンラインでまるごとサポートします。必要な時に、必要な分だけ。貴社のビジネスを黒子として支えるパートナーです。
                 </p>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 p-0">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-0">
                 <div className="flex flex-1 gap-3 rounded-lg border border-[#dbdbdb] bg-neutral-50 p-4 flex-col">
                   <div className="text-[#141414]" data-icon="Clock" data-size="24px" data-weight="regular">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
@@ -375,17 +375,6 @@ export default function HomePage() {
                   <div className="flex flex-col gap-1">
                     <h2 className="text-[#141414] text-base font-bold leading-tight">オンライン経理サポート</h2>
                     <p className="text-neutral-500 text-sm font-normal leading-normal">記帳代行から月次レポート作成まで、正確かつスピーディーに対応。面倒な経理業務から解放します。</p>
-                  </div>
-                </div>
-                <div className="flex flex-1 gap-3 rounded-lg border border-[#dbdbdb] bg-neutral-50 p-4 flex-col">
-                  <div className="text-[#141414]" data-icon="PresentationChart" data-size="24px" data-weight="regular">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                      <path d="M216,40H136V24a8,8,0,0,0-16,0V40H40A16,16,0,0,0,24,56V176a16,16,0,0,0,16,16H79.36L57.75,219a8,8,0,0,0,12.5,10l29.59-37h56.32l29.59,37a8,8,0,1,0,12.5-10l-21.61-27H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,136H40V56H216V176ZM104,120v24a8,8,0,0,1-16,0V120a8,8,0,0,1,16,0Zm32-16v40a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm32-16v56a8,8,0,0,1-16,0V88a8,8,0,0,1,16,0Z"></path>
-                    </svg>
-                  </div>
-                  <div className="flex flex-col gap-1">
-                    <h2 className="text-[#141414] text-base font-bold leading-tight">オンライン秘書サポート</h2>
-                    <p className="text-neutral-500 text-sm font-normal leading-normal">スケジュール調整、請求書作成、連絡代行など、日々の細かなタスクを巻き取り、あなたの業務を円滑に進めます。</p>
                   </div>
                 </div>
                 <div className="flex flex-1 gap-3 rounded-lg border border-[#dbdbdb] bg-neutral-50 p-4 flex-col">
