@@ -403,32 +403,29 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Success Stories */}
+            {/* こんなお悩みありませんか？ Section */}
             <div className="animate-on-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out">
-              <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Success Stories</h2>
-              <div className="overflow-x-auto [-ms-scrollbar-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              <div className="flex items-stretch p-4 gap-3 min-w-max">
-                <div className="flex h-full flex-col gap-4 rounded-lg min-w-60 w-60">
-                  <div
-                    className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex flex-col"
-                    style={{backgroundImage: 'url("https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")'}}
-                  ></div>
-                  <div>
-                    <p className="text-[#141414] text-base font-medium leading-normal">Sarah's Business Transformation</p>
-                    <p className="text-neutral-500 text-sm font-normal leading-normal">Sarah, a freelance writer, increased her output by 40% using our time management tools.</p>
-                  </div>
-                </div>
-                <div className="flex h-full flex-1 flex-col gap-4 rounded-lg min-w-60">
-                  <div
-                    className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex flex-col"
-                    style={{backgroundImage: 'url("https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80")'}}
-                  ></div>
-                  <div>
-                    <p className="text-[#141414] text-base font-medium leading-normal">Mark's Productivity Boost</p>
-                    <p className="text-neutral-500 text-sm font-normal leading-normal">Mark, a consultant, saw client satisfaction increase by 25% with our CRM solutions.</p>
-                  </div>
-                </div>
-              </div>
+              <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">こんなお悩みありませんか？</h2>
+              <div className="px-4 py-5">
+                <ul className="space-y-4 text-neutral-500">
+                  <li className="flex items-start">
+                    <svg className="w-6 h-6 text-blue-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span>請求書作成や経費精算に追われて、本業の時間が足りない…</span>
+                  </li>
+                  <li className="flex items-start">
+                    <svg className="w-6 h-6 text-blue-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span>人を雇うほどの業務量ではないが、誰かにサポートしてほしい…</span>
+                  </li>
+                  <li className="flex items-start">
+                    <svg className="w-6 h-6 text-blue-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span>日々のスケジュール管理やメール対応が煩わしい…</span>
+                  </li>
+                  <li className="flex items-start">
+                    <svg className="w-6 h-6 text-blue-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span>信頼して任せられる経理・秘書担当を探している…</span>
+                  </li>
+                </ul>
+                <p className="mt-6 text-center text-lg font-semibold text-[#141414]">そのお悩み、すべて解決します。</p>
               </div>
             </div>
 
