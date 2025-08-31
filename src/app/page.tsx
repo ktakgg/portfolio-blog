@@ -395,8 +395,8 @@ export default function HomePage() {
                     </svg>
                   </div>
                   <div className="flex flex-col gap-1">
-                    <h2 className="text-[#141414] text-base font-bold leading-tight">Client Relationship Management</h2>
-                    <p className="text-neutral-500 text-sm font-normal leading-normal">Build and maintain strong relationships with your clients through effective communication and support.</p>
+                    <h2 className="text-[#141414] text-base font-bold leading-tight">オンライン秘書サポート</h2>
+                    <p className="text-neutral-500 text-sm font-normal leading-normal">スケジュール調整、請求書作成、連絡代行など、日々の細かなタスクを巻き取り、あなたの業務を円滑に進めます。</p>
                   </div>
                 </div>
               </div>
