@@ -9,29 +9,52 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname()
 
-  // Hide-then-show sticky header on scroll down with 0.3s delay
+  // Hide header while scrolling down; reveal after scroll stop or when scrolling up
   const [showHeader, setShowHeader] = useState(true)
+  const [animateReveal, setAnimateReveal] = useState(false)
   const lastScrollY = useRef(0)
-  const showTimer = useRef<number | null>(null)
+  const scrollStopTimer = useRef<number | null>(null)
+  const THRESHOLD = 8
 
   useEffect(() => {
+    let raf = 0
     const handleScroll = () => {
-      const y = window.scrollY || 0
-      const isDown = y > lastScrollY.current
-      if (isDown) {
-        setShowHeader(false)
-        if (showTimer.current) window.clearTimeout(showTimer.current)
-        showTimer.current = window.setTimeout(() => setShowHeader(true), 300)
-      } else {
-        setShowHeader(true)
-      }
-      lastScrollY.current = y
+      if (raf) return
+      raf = window.requestAnimationFrame(() => {
+        const y = window.scrollY || 0
+        const delta = y - lastScrollY.current
+
+        // Downward scroll beyond threshold -> hide immediately
+        if (delta > THRESHOLD) {
+          setShowHeader(false)
+        }
+
+        // Upward scroll beyond threshold -> show immediately with animation
+        if (delta < -THRESHOLD) {
+          setShowHeader(true)
+          setAnimateReveal(true)
+          window.setTimeout(() => setAnimateReveal(false), 300)
+        }
+
+        lastScrollY.current = y
+
+        // Reveal after user stops scrolling for 0.3s
+        if (scrollStopTimer.current) window.clearTimeout(scrollStopTimer.current)
+        scrollStopTimer.current = window.setTimeout(() => {
+          setShowHeader(true)
+          setAnimateReveal(true)
+          window.setTimeout(() => setAnimateReveal(false), 300)
+        }, 300)
+
+        raf = 0
+      })
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => {
       window.removeEventListener('scroll', handleScroll)
-      if (showTimer.current) window.clearTimeout(showTimer.current)
+      if (scrollStopTimer.current) window.clearTimeout(scrollStopTimer.current)
+      if (raf) window.cancelAnimationFrame(raf)
     }
   }, [])
 
@@ -48,7 +71,7 @@ export default function Header() {
   }
 
   return (
-    <header className={`sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#ededed] px-4 md:px-10 py-3 bg-neutral-50 relative transition-transform duration-300 will-change-transform ${showHeader ? 'translate-y-0' : '-translate-y-full'}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#ededed] px-4 md:px-10 py-3 bg-neutral-50 transition-transform duration-300 transform-gpu will-change-transform ${showHeader ? 'translate-y-0' : '-translate-y-full'} ${animateReveal ? '' : ''}`}>
       <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
         <Image
           src="/logo.png"
