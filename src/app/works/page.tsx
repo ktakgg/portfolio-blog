@@ -106,7 +106,7 @@ export default async function WorksPage() {
               <p className="text-[#141414] tracking-light text-[32px] font-bold leading-tight min-w-72">Works</p>
             </div>
             <p className="text-[#141414] text-base font-normal leading-normal pb-3 pt-1 px-4">
-            サポート実績ページへようこそ。
+            サポート実績ページへようこそ。<br />
             ここでは、オンライン経理やオンライン業務サポート実績を共有しています。いずれも、クライアント様の生産性向上と成功をサポートします。
             </p>
             
