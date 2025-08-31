@@ -190,7 +190,7 @@ export default function HomePage() {
 
             {/* Latest Blog Posts (Works) */}
             <div className="animate-on-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out">
-              <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Works</h2>
+              <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Blog</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4">
                 {(featuredPosts || []).slice(0, 2).map((post: any, index: number) => {
                   const slug =
@@ -214,7 +214,7 @@ export default function HomePage() {
                   return (
                     <Link
                       key={index}
-                      href={`/works/${slug}`}
+                      href={`/blog/${slug}`}
                       className="flex flex-col gap-3 pb-3 hover:transform hover:scale-105 transition-transform duration-200"
                     >
                       <div
@@ -235,8 +235,8 @@ export default function HomePage() {
               </div>
               <div className="mt-6">
                 <div className="flex justify-center">
-                  <Link href="/works" className="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors">
-                    View All Works →
+                  <Link href="/blog" className="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors">
+                    View All Blog →
                   </Link>
                 </div>
               </div>
