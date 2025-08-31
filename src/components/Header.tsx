@@ -14,7 +14,10 @@ export default function Header() {
   const [animateReveal, setAnimateReveal] = useState(false)
   const lastScrollY = useRef(0)
   const scrollStopTimer = useRef<number | null>(null)
-  const THRESHOLD = 8
+  const THRESHOLD = 2
+  const downAccum = useRef(0)
+  const lastToggleY = useRef(0)
+  const showRef = useRef(true)
 
   useEffect(() => {
     let raf = 0
@@ -24,7 +27,16 @@ export default function Header() {
         const y = window.scrollY || 0
         const delta = y - lastScrollY.current
 
-        // Downward scroll beyond threshold -> hide immediately
+        // Always show near the top to avoid flicker
+        if (y < 16) {
+          setShowHeader(true)
+          lastToggleY.current = y
+          lastScrollY.current = y
+          raf = 0
+          return
+        }
+
+        // Hide on downward scroll beyond small threshold
         if (delta > THRESHOLD) {
           setShowHeader(false)
         }
@@ -38,12 +50,15 @@ export default function Header() {
 
         lastScrollY.current = y
 
-        // Reveal after user stops scrolling for 0.3s
+        // Reveal after user stops scrolling for 0.3s (only if currently hidden)
         if (scrollStopTimer.current) window.clearTimeout(scrollStopTimer.current)
         scrollStopTimer.current = window.setTimeout(() => {
-          setShowHeader(true)
-          setAnimateReveal(true)
-          window.setTimeout(() => setAnimateReveal(false), 300)
+          if (!showRef.current) {
+            setShowHeader(true)
+            setAnimateReveal(true)
+            lastToggleY.current = window.scrollY || 0
+            window.setTimeout(() => setAnimateReveal(false), 300)
+          }
         }, 300)
 
         raf = 0
@@ -57,6 +72,11 @@ export default function Header() {
       if (raf) window.cancelAnimationFrame(raf)
     }
   }, [])
+
+  // Keep a live ref of current visibility to avoid stale state in timers
+  useEffect(() => {
+    showRef.current = showHeader
+  }, [showHeader])
 
   const isActive = (path: string) => {
     if (path === '/' && pathname === '/') return true
