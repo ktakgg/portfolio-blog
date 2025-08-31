@@ -186,6 +186,8 @@ export default function HomePage() {
               </div>
             </div>
 
+            <div className="mt-6 pt-4 border-t border-gray-200"></div>
+
             {/* Latest Blog Posts (Works) */}
             <div className="animate-on-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out">
               <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Works</h2>
@@ -231,7 +233,7 @@ export default function HomePage() {
                   )
                 })}
               </div>
-              <div className="mt-6 pt-4 border-t border-gray-200">
+              <div className="mt-6">
                 <div className="flex justify-center">
                   <Link href="/works" className="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors">
                     View All Works →
