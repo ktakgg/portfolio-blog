@@ -294,7 +294,7 @@ export default function HomePage() {
               <div className="flex flex-col gap-10 px-4 py-10 @container">
               <div className="flex flex-col gap-4">
                 <h2
-                  className="text-[#141414] tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px]"
+                  className="text-[#141414] tracking-light text-[22px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px]"
                 >
                   コア業務に集中できる環境を、オンラインで。
                 </h2>
@@ -387,7 +387,7 @@ export default function HomePage() {
               <div className="flex flex-col justify-end gap-6 px-4 py-10 @[480px]:gap-8 @[480px]:px-10 @[480px]:py-20">
                 <div className="flex flex-col gap-2 text-center">
                   <h2
-                    className="text-[#141414] tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px] mx-auto"
+                    className="text-[#141414] tracking-light text-[22px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px] mx-auto"
                   >
                     業務を効率化をサポートします。
                   </h2>
