@@ -87,17 +87,17 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-4">
           {/* Contact Form */}
           <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <h2 className="text-xl font-bold text-[#141414] mb-6">Send us a message</h2>
+            <h2 className="text-xl font-bold text-[#141414] mb-6">メッセージを送信</h2>
             
             {submitStatus === 'success' && (
               <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-                <p className="text-green-800 text-sm">Thank you for your message! We'll get back to you soon.</p>
+                <p className="text-green-800 text-sm">ご連絡ありがとうございます！折り返しご連絡いたします。</p>
               </div>
             )}
             
             {submitStatus === 'error' && (
               <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-                <p className="text-red-800 text-sm">Something went wrong. Please try again later.</p>
+                <p className="text-red-800 text-sm">問題が発生しました。後ほど再度お試しください。</p>
               </div>
             )}
 
@@ -179,7 +179,7 @@ export default function ContactPage() {
           {/* Contact Information */}
           <div className="space-y-6">
             <div className="bg-white rounded-lg border border-gray-200 p-6">
-              <h3 className="text-lg font-bold text-[#141414] mb-4">Get in Touch</h3>
+              <h3 className="text-lg font-bold text-[#141414] mb-4">お問い合わせ先</h3>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
                   <div className="bg-blue-100 p-2 rounded-lg">
@@ -220,15 +220,15 @@ export default function ContactPage() {
             </div>
 
             <div className="bg-white rounded-lg border border-gray-200 p-6">
-              <h3 className="text-lg font-bold text-[#141414] mb-4">Business Hours</h3>
+              <h3 className="text-lg font-bold text-[#141414] mb-4">営業時間</h3>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-neutral-500">Monday - Friday</span>
-                  <span className="text-[#141414] font-medium">9:00 AM - 6:00 PM</span>
+                  <span className="text-[#141414] font-medium">9:00 AM - 4:00 PM</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-neutral-500">Saturday</span>
-                  <span className="text-[#141414] font-medium">10:00 AM - 4:00 PM</span>
+                  <span className="text-[#141414] font-medium">9:00 AM - 0:00 PM</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-neutral-500">Sunday</span>
@@ -238,10 +238,9 @@ export default function ContactPage() {
             </div>
 
             <div className="bg-blue-50 rounded-lg border border-blue-200 p-6">
-              <h3 className="text-lg font-bold text-[#141414] mb-2">Quick Response</h3>
+              <h3 className="text-lg font-bold text-[#141414] mb-2">迅速な対応</h3>
               <p className="text-neutral-600 text-sm">
-                We typically respond to all inquiries within 24 hours during business days. 
-                For urgent matters, please call us directly.
+                通常、営業日中の問い合わせには24時間以内にご返信いたします。お急ぎの場合は直接お電話ください。
               </p>
             </div>
           </div>
