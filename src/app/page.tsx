@@ -262,58 +262,7 @@ export default function HomePage() {
   return (
     <div className="px-4 md:px-40 flex flex-1 justify-center py-5 overflow-x-hidden">
       <div className="layout-content-container flex flex-col max-w-[960px] flex-1 min-w-0">
-            {/* News Section */}
-            <div className="animate-on-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out">
-              <div className="mb-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="bg-blue-500 text-white p-2 rounded-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
-                      <path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40ZM40,56H216V88H40ZM40,200V104H216v96Z"></path>
-                    </svg>
-                  </div>
-                  <h2 className="text-[#141414] text-xl font-bold leading-tight">Updates</h2>
-                  <div className="ml-auto">
-                    <span className="bg-blue-500 text-white text-xs font-semibold px-2 py-1 rounded-full">NEW</span>
-                  </div>
-                </div>
-                
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {newsItems.map((item, index) => (
-                    <Link key={index} href={item.link || '/works'} className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-200 block">
-                      <div className="flex gap-4">
-                        {item.type === 'blog' && item.featuredImage ? (
-                          <div 
-                            className="w-16 h-16 bg-center bg-no-repeat bg-cover rounded-lg flex-shrink-0"
-                            style={{backgroundImage: `url("${item.featuredImage}")`}}
-                          ></div>
-                        ) : (
-                          <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                            {item.type === 'blog' ? (
-                              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256" className="text-blue-600">
-                                <path d="M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM192,192H64V64H192Z"></path>
-                              </svg>
-                            ) : (
-                              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256" className="text-green-600">
-                                <path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40ZM40,56H216V88H40ZM40,200V104H216v96Z"></path>
-                              </svg>
-                            )}
-                          </div>
-                        )}
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-start justify-between mb-2">
-                            <h3 className="text-sm font-semibold text-gray-900 line-clamp-2 group-hover:text-blue-600 transition-colors">{item.title}</h3>
-                            <div className={`w-2 h-2 bg-${item.color}-500 rounded-full mt-1 flex-shrink-0 ml-2`}></div>
-                          </div>
-                          <p className="text-xs text-gray-600 line-clamp-2">{item.description}</p>
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-                
-                {/* Removed "View All Works" link from here and moved to Works section */}
-              </div>
-            </div>
+            {/* News Section Removed */}
 
             {/* Hero Section */}
             <div className="animate-on-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out">
