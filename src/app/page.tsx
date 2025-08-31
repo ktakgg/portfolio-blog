@@ -1,222 +1,50 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
-import { getFeaturedPosts, getAllPosts } from '@/lib/sanity-queries'
 
 export default function HomePage() {
-  const [newsItems, setNewsItems] = useState<any[]>([])
   const [featuredPosts, setFeaturedPosts] = useState<any[]>([])
   const observerRef = useRef<IntersectionObserver | null>(null)
 
   useEffect(() => {
-    // ニュースデータを取得（Worksページと同じフォールバックデータを使用）
-    const fetchNewsData = async () => {
+    // HomeのWorksはサーバーAPI経由で取得（/works と同じソース・最新2件）
+    const fetchLatestWorks = async () => {
       try {
-        console.log('Fetching posts for Latest News section...')
-        const posts = await getAllPosts()
-        console.log('News posts fetched:', posts)
-        
-        if (posts && posts.length > 0) {
-          console.log('Using real posts data for news')
-          const recentPosts = posts.slice(0, 2) // 最新2件を取得
-          
-          const newsData = recentPosts.map((post: any, index: number) => {
-            const colors = ['blue', 'green', 'purple', 'orange']
-            const color = colors[index % colors.length]
-            
-            return {
-              type: 'blog',
-              title: post.title,
-              description: `Published on ${new Date(post.publishedAt).toLocaleDateString('en-US', { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-              })} - ${post.excerpt || 'Read the latest insights and tips'}`,
-              color: color,
-              date: new Date(post.publishedAt),
-              link: `/works/${post.slug.current}`,
-              featuredImage: post.featuredImage || post.mainImage
-            }
-          })
-          
-          setNewsItems(newsData)
-        } else {
-          console.log('No posts found, using fallback data for news')
-          // Worksページと同じフォールバックデータを使用
-          const fallbackPosts = [
-            {
-              _id: '1',
-              title: 'Streamlining Your Workflow: A Guide to Efficiency',
-              slug: { current: 'streamlining-workflow-guide-efficiency' },
-              excerpt: 'Learn how to optimize your daily tasks and projects for maximum productivity.',
-              publishedAt: '2024-01-15',
-              category: 'Productivity',
-              featuredImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA_H-4gozJlEeyGCivUv2M_kuqww_etwdm4rA5y0u1yk8p01yzZlJs81AbHTZW3Bam4virlG6rlZkCRpd26h0skdWu89ogwtsGHSxGf7mbgpikaeXV70QWOfmKKDg536T4O9Aiu_rlxiSZ8ReDenm84WEDPP2K-ZQKb-3LGjEVCtjVAa9ZyI2J1eh_CJxXZO05RBjQvc_skAMGOH84iHv1PXRJ3r44ykKQ5p1bPDV1iUlgHQ8nj2hOrHw7XIedjIcvMiLKiMTIyGQw'
-            },
-            {
-              _id: '2',
-              title: 'The Power of Prioritization: Mastering Time Management',
-              slug: { current: 'power-prioritization-mastering-time-management' },
-              excerpt: 'Discover effective strategies for prioritizing tasks and managing your time efficiently.',
-              publishedAt: '2024-01-10',
-              category: 'Time Management',
-              featuredImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA1Ojr92JMeK68_GLBrjyCwVW_HyhGdt8ZhHEwRZf7s5eBaaXvyRA5HbjA_xZOm2FpGRjk-0Kih-GSycovEIeROhAgUqykh68mA-owg5zmRCJ7uHLoUOh1bsjxUfYvdj0AcIy1KaY8z5dgw659x5jPy7qJ-5Zn9vRf5STxTF0Te48bhKlFOuWLP1noU4X0OTx4W6sh2d2wJBdHwheOyTuUH_pc9uBGgGTD7ClCeNdacSDflkzEHuo8y5lljcX-GPYG3cum5GOCW2bo'
-            }
-          ]
-          
-          const newsData = fallbackPosts.map((post: any, index: number) => {
-            const colors = ['blue', 'green']
-            const color = colors[index % colors.length]
-            
-            return {
-              type: 'blog',
-              title: post.title,
-              description: `Published on ${new Date(post.publishedAt).toLocaleDateString('en-US', { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-              })} - ${post.excerpt || 'Read the latest insights and tips'}`,
-              color: color,
-              date: new Date(post.publishedAt),
-              link: `/works/${post.slug.current}`,
-              featuredImage: post.featuredImage
-            }
-          })
-          
-          setNewsItems(newsData)
-        }
+        const res = await fetch('/api/latest-works', { cache: 'no-store' })
+        if (!res.ok) throw new Error(`Failed to fetch latest works: ${res.status}`)
+        const items = await res.json()
+        setFeaturedPosts(Array.isArray(items) ? items : [])
       } catch (error) {
-        console.error('Error fetching news data:', error)
-        // エラー時もWorksページと同じフォールバックデータを使用
+        console.error('Error fetching latest works via API:', error)
+        // /works と同じフォールバックの先頭2件
         const fallbackPosts = [
           {
-            _id: '1',
+            id: '1',
             title: 'Streamlining Your Workflow: A Guide to Efficiency',
-            slug: { current: 'streamlining-workflow-guide-efficiency' },
-            excerpt: 'Learn how to optimize your daily tasks and projects for maximum productivity.',
+            slug: 'streamlining-workflow-guide-efficiency',
+            excerpt:
+              'Learn how to optimize your daily tasks and projects for maximum productivity.',
+            featuredImage:
+              'https://lh3.googleusercontent.com/aida-public/AB6AXuA_H-4gozJlEeyGCivUv2M_kuqww_etwdm4rA5y0u1yk8p01yzZlJs81AbHTZW3Bam4virlG6rlZkCRpd26h0skdWu89ogwtsGHSxGf7mbgpikaeXV70QWOfmKKDg536T4O9Aiu_rlxiSZ8ReDenm84WEDPP2K-ZQKb-3LGjEVCtjVAa9ZyI2J1eh_CJxXZO05RBjQvc_skAMGOH84iHv1PXRJ3r44ykKQ5p1bPDV1iUlgHQ8nj2hOrHw7XIedjIcvMiLKiMTIyGQw',
             publishedAt: '2024-01-15',
-            category: 'Productivity',
-            featuredImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA_H-4gozJlEeyGCivUv2M_kuqww_etwdm4rA5y0u1yk8p01yzZlJs81AbHTZW3Bam4virlG6rlZkCRpd26h0skdWu89ogwtsGHSxGf7mbgpikaeXV70QWOfmKKDg536T4O9Aiu_rlxiSZ8ReDenm84WEDPP2K-ZQKb-3LGjEVCtjVAa9ZyI2J1eh_CJxXZO05RBjQvc_skAMGOH84iHv1PXRJ3r44ykKQ5p1bPDV1iUlgHQ8nj2hOrHw7XIedjIcvMiLKiMTIyGQw'
           },
           {
-            _id: '2',
+            id: '2',
             title: 'The Power of Prioritization: Mastering Time Management',
-            slug: { current: 'power-prioritization-mastering-time-management' },
-            excerpt: 'Discover effective strategies for prioritizing tasks and managing your time efficiently.',
+            slug: 'power-prioritization-mastering-time-management',
+            excerpt:
+              'Discover effective strategies for prioritizing tasks and managing your time efficiently.',
+            featuredImage:
+              'https://lh3.googleusercontent.com/aida-public/AB6AXuA1Ojr92JMeK68_GLBrjyCwVW_HyhGdt8ZhHEwRZf7s5eBaaXvyRA5HbjA_xZOm2FpGRjk-0Kih-GSycovEIeROhAgUqykh68mA-owg5zmRCJ7uHLoUOh1bsjxUfYvdj0AcIy1KaY8z5dgw659x5jPy7qJ-5Zn9vRf5STxTF0Te48bhKlFOuWLP1noU4X0OTx4W6sh2d2wJBdHwheOyTuUH_pc9uBGgGTD7ClCeNdacSDflkzEHuo8y5lljcX-GPYG3cum5GOCW2bo',
             publishedAt: '2024-01-10',
-            category: 'Time Management',
-            featuredImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA1Ojr92JMeK68_GLBrjyCwVW_HyhGdt8ZhHEwRZf7s5eBaaXvyRA5HbjA_xZOm2FpGRjk-0Kih-GSycovEIeROhAgUqykh68mA-owg5zmRCJ7uHLoUOh1bsjxUfYvdj0AcIy1KaY8z5dgw659x5jPy7qJ-5Zn9vRf5STxTF0Te48bhKlFOuWLP1noU4X0OTx4W6sh2d2wJBdHwheOyTuUH_pc9uBGgGTD7ClCeNdacSDflkzEHuo8y5lljcX-GPYG3cum5GOCW2bo'
-          }
-        ]
-        
-        const newsData = fallbackPosts.map((post: any, index: number) => {
-          const colors = ['blue', 'green']
-          const color = colors[index % colors.length]
-          
-          return {
-            type: 'blog',
-            title: post.title,
-            description: `Published on ${new Date(post.publishedAt).toLocaleDateString('en-US', { 
-              year: 'numeric', 
-              month: 'long', 
-              day: 'numeric' 
-            })} - ${post.excerpt || 'Read the latest insights and tips'}`,
-            color: color,
-            date: new Date(post.publishedAt),
-            link: `/works/${post.slug.current}`,
-            featuredImage: post.featuredImage
-          }
-        })
-        
-        setNewsItems(newsData)
-      }
-    }
-
-    fetchNewsData()
-
-    // ブログ記事データを取得（Worksページと同じフォールバックデータを使用）
-    const fetchBlogPosts = async () => {
-      try {
-        console.log('Fetching posts for Works section...')
-        const posts = await getAllPosts()
-        console.log('Posts fetched:', posts)
-        
-        if (posts && posts.length > 0) {
-          console.log('Using real posts data')
-          setFeaturedPosts(posts.slice(0, 3)) // 最新3件を取得
-        } else {
-          console.log('No posts found, using fallback data')
-          // Worksページと同じフォールバックデータを使用
-          const fallbackPosts = [
-            {
-              _id: '1',
-              title: 'Streamlining Your Workflow: A Guide to Efficiency',
-              slug: { current: 'streamlining-workflow-guide-efficiency' },
-              excerpt: 'Learn how to optimize your daily tasks and projects for maximum productivity.',
-              publishedAt: '2024-01-15',
-              category: 'Productivity',
-              featuredImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA_H-4gozJlEeyGCivUv2M_kuqww_etwdm4rA5y0u1yk8p01yzZlJs81AbHTZW3Bam4virlG6rlZkCRpd26h0skdWu89ogwtsGHSxGf7mbgpikaeXV70QWOfmKKDg536T4O9Aiu_rlxiSZ8ReDenm84WEDPP2K-ZQKb-3LGjEVCtjVAa9ZyI2J1eh_CJxXZO05RBjQvc_skAMGOH84iHv1PXRJ3r44ykKQ5p1bPDV1iUlgHQ8nj2hOrHw7XIedjIcvMiLKiMTIyGQw'
-            },
-            {
-              _id: '2',
-              title: 'The Power of Prioritization: Mastering Time Management',
-              slug: { current: 'power-prioritization-mastering-time-management' },
-              excerpt: 'Discover effective strategies for prioritizing tasks and managing your time efficiently.',
-              publishedAt: '2024-01-10',
-              category: 'Time Management',
-              featuredImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA1Ojr92JMeK68_GLBrjyCwVW_HyhGdt8ZhHEwRZf7s5eBaaXvyRA5HbjA_xZOm2FpGRjk-0Kih-GSycovEIeROhAgUqykh68mA-owg5zmRCJ7uHLoUOh1bsjxUfYvdj0AcIy1KaY8z5dgw659x5jPy7qJ-5Zn9vRf5STxTF0Te48bhKlFOuWLP1noU4X0OTx4W6sh2d2wJBdHwheOyTuUH_pc9uBGgGTD7ClCeNdacSDflkzEHuo8y5lljcX-GPYG3cum5GOCW2bo'
-            },
-            {
-              _id: '3',
-              title: 'Automating for Success: Tools and Techniques',
-              slug: { current: 'automating-success-tools-techniques' },
-              excerpt: 'Explore automation tools and techniques that can save you time and reduce manual effort.',
-              publishedAt: '2024-01-05',
-              category: 'Automation',
-              featuredImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCiZMnD4udaDTALUhwd8apwgXrth2d5X-fFWA7msyRl73QU8kMiiRzo-OlKxkdQuKD4I06CtuaM8_CWj_kpasFc8hWBbA4Nytnryqg095RYIFBWfddZr3UyBVuvEz1ZEDDxjxYmYDIxbeMCEy2QIhxWOlOsDkrtLEF__Wl25S4X4wpavXVFjoNuEn7Yfr14auufhwOAwfafchJYo3OCxhb_Tcvsi4V6grAXER8UGJSU84NFm07DO6gaR1pi5ip91NfOXCRD9T__B2c'
-            }
-          ]
-          setFeaturedPosts(fallbackPosts)
-        }
-      } catch (error) {
-        console.error('Error fetching blog posts:', error)
-        // エラー時もWorksページと同じフォールバックデータを使用
-        const fallbackPosts = [
-          {
-            _id: '1',
-            title: 'Streamlining Your Workflow: A Guide to Efficiency',
-            slug: { current: 'streamlining-workflow-guide-efficiency' },
-            excerpt: 'Learn how to optimize your daily tasks and projects for maximum productivity.',
-            publishedAt: '2024-01-15',
-            category: 'Productivity',
-            featuredImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA_H-4gozJlEeyGCivUv2M_kuqww_etwdm4rA5y0u1yk8p01yzZlJs81AbHTZW3Bam4virlG6rlZkCRpd26h0skdWu89ogwtsGHSxGf7mbgpikaeXV70QWOfmKKDg536T4O9Aiu_rlxiSZ8ReDenm84WEDPP2K-ZQKb-3LGjEVCtjVAa9ZyI2J1eh_CJxXZO05RBjQvc_skAMGOH84iHv1PXRJ3r44ykKQ5p1bPDV1iUlgHQ8nj2hOrHw7XIedjIcvMiLKiMTIyGQw'
           },
-          {
-            _id: '2',
-            title: 'The Power of Prioritization: Mastering Time Management',
-            slug: { current: 'power-prioritization-mastering-time-management' },
-            excerpt: 'Discover effective strategies for prioritizing tasks and managing your time efficiently.',
-            publishedAt: '2024-01-10',
-            category: 'Time Management',
-            featuredImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA1Ojr92JMeK68_GLBrjyCwVW_HyhGdt8ZhHEwRZf7s5eBaaXvyRA5HbjA_xZOm2FpGRjk-0Kih-GSycovEIeROhAgUqykh68mA-owg5zmRCJ7uHLoUOh1bsjxUfYvdj0AcIy1KaY8z5dgw659x5jPy7qJ-5Zn9vRf5STxTF0Te48bhKlFOuWLP1noU4X0OTx4W6sh2d2wJBdHwheOyTuUH_pc9uBGgGTD7ClCeNdacSDflkzEHuo8y5lljcX-GPYG3cum5GOCW2bo'
-          },
-          {
-            _id: '3',
-            title: 'Automating for Success: Tools and Techniques',
-            slug: { current: 'automating-success-tools-techniques' },
-            excerpt: 'Explore automation tools and techniques that can save you time and reduce manual effort.',
-            publishedAt: '2024-01-05',
-            category: 'Automation',
-            featuredImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCiZMnD4udaDTALUhwd8apwgXrth2d5X-fFWA7msyRl73QU8kMiiRzo-OlKxkdQuKD4I06CtuaM8_CWj_kpasFc8hWBbA4Nytnryqg095RYIFBWfddZr3UyBVuvEz1ZEDDxjxYmYDIxbeMCEy2QIhxWOlOsDkrtLEF__Wl25S4X4wpavXVFjoNuEn7Yfr14auufhwOAwfafchJYo3OCxhb_Tcvsi4V6grAXER8UGJSU84NFm07DO6gaR1pi5ip91NfOXCRD9T__B2c'
-          }
         ]
         setFeaturedPosts(fallbackPosts)
       }
     }
 
-    fetchBlogPosts()
+    fetchLatestWorks()
 
     // スクロールアニメーションの設定（パフォーマンス最適化）
     if (typeof window !== 'undefined' && 'IntersectionObserver' in window) {
@@ -226,7 +54,6 @@ export default function HomePage() {
             if (entry.isIntersecting) {
               entry.target.classList.remove('opacity-0', 'translate-y-8')
               entry.target.classList.add('opacity-100', 'translate-y-0')
-              // 一度アニメーションしたら監視を停止してパフォーマンス向上
               if (observerRef.current) {
                 observerRef.current.unobserve(entry.target)
               }
@@ -236,12 +63,10 @@ export default function HomePage() {
         {
           threshold: 0.1,
           rootMargin: '0px 0px -50px 0px',
-          // パフォーマンス向上のためのオプション
-          root: null
+          root: null,
         }
       )
 
-      // アニメーション対象の要素を監視（遅延実行でパフォーマンス向上）
       setTimeout(() => {
         const animateElements = document.querySelectorAll('.animate-on-scroll')
         animateElements.forEach((el) => {
@@ -355,22 +180,50 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Latest Blog Posts */}
+            {/* Latest Blog Posts (Works) */}
             <div className="animate-on-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out">
               <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Works</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4">
-                {featuredPosts.slice(0, 2).map((post, index) => (
-                  <Link key={index} href={`/works/${post.slug?.current || post.slug}`} className="flex flex-col gap-3 pb-3 hover:transform hover:scale-105 transition-transform duration-200">
-                    <div
-                      className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg"
-                      style={{backgroundImage: `url("${post.featuredImage || post.mainImage || 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2339&q=80'}")`}}
-                    ></div>
-                    <div>
-                      <p className="text-[#141414] text-base font-medium leading-normal hover:text-blue-600 transition-colors">{post.title}</p>
-                      <p className="text-neutral-500 text-sm font-normal leading-normal">{post.excerpt}</p>
-                    </div>
-                  </Link>
-                ))}
+                {(featuredPosts || []).slice(0, 2).map((post: any, index: number) => {
+                  const slug =
+                    typeof post.slug === 'string'
+                      ? post.slug
+                      : post.slug?.current || post.slug
+                  const image =
+                    post.featuredImage ||
+                    post.mainImage ||
+                    'https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2339&q=80'
+                  const excerpt =
+                    post.excerpt ||
+                    (post.publishedAt
+                      ? `Published on ${new Date(post.publishedAt).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric',
+                        })}`
+                      : '')
+
+                  return (
+                    <Link
+                      key={index}
+                      href={`/works/${slug}`}
+                      className="flex flex-col gap-3 pb-3 hover:transform hover:scale-105 transition-transform duration-200"
+                    >
+                      <div
+                        className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg"
+                        style={{ backgroundImage: `url("${image}")` }}
+                      ></div>
+                      <div>
+                        <p className="text-[#141414] text-base font-medium leading-normal hover:text-blue-600 transition-colors">
+                          {post.title}
+                        </p>
+                        <p className="text-neutral-500 text-sm font-normal leading-normal">
+                          {excerpt}
+                        </p>
+                      </div>
+                    </Link>
+                  )
+                })}
               </div>
               <div className="mt-6 pt-4 border-t border-gray-200">
                 <div className="flex justify-center">
