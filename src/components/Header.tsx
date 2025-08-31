@@ -42,7 +42,7 @@ export default function Header() {
   }
 
   return (
-    <header className={`sticky top-0 left-0 right-0 z-50 flex items-center justify-between whitespace-nowrap px-4 md:px-10 py-3 transition-[background-color,box-shadow,backdrop-filter] duration-300 ${scrolled ? 'bg-white/80 shadow-md backdrop-blur-sm border-b border-solid border-b-[#ededed]' : 'bg-white/40 backdrop-blur-sm'}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between whitespace-nowrap px-4 md:px-10 py-3 transition-[background-color,box-shadow,backdrop-filter] duration-300 ${scrolled ? 'bg-white/80 shadow-md backdrop-blur-sm border-b border-solid border-b-[#ededed]' : 'bg-white/40 backdrop-blur-sm'}`}>
       <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
         <Image
           src="/logo.png"
