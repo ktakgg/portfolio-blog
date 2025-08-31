@@ -30,7 +30,7 @@ export default function RootLayout({
         <div className="relative flex size-full min-h-screen flex-col bg-neutral-50 group/design-root overflow-x-hidden">
           <div className="layout-container flex h-full grow flex-col">
             <Header />
-            <main className="flex-1">
+            <main className="flex-1 pt-16">
               {children}
             </main>
             <Footer />

@@ -9,24 +9,53 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname()
 
-  // Simplified scroll-to-hide/show header logic
+  // Header scroll behavior: hide on scroll down, show on scroll up with delay
   const [showHeader, setShowHeader] = useState(true)
   const lastScrollY = useRef(0)
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const isScrollingDown = useRef(false)
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY
-      // Show header if scrolling up, hide if scrolling down
-      if (currentScrollY > lastScrollY.current && currentScrollY > 50) {
-        setShowHeader(false)
-      } else {
-        setShowHeader(true)
+      
+      // Clear any existing timeout
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+        timeoutRef.current = null
       }
+      
+      // Determine scroll direction
+      const scrollingDown = currentScrollY > lastScrollY.current
+      
+      if (currentScrollY > 100) { // Only trigger after scrolling past 100px
+        if (scrollingDown && !isScrollingDown.current) {
+          // Started scrolling down - hide header immediately
+          isScrollingDown.current = true
+          setShowHeader(false)
+        } else if (!scrollingDown && isScrollingDown.current) {
+          // Started scrolling up - show header after 300ms delay
+          isScrollingDown.current = false
+          timeoutRef.current = setTimeout(() => {
+            setShowHeader(true)
+          }, 300)
+        }
+      } else {
+        // At top of page - always show header
+        setShowHeader(true)
+        isScrollingDown.current = false
+      }
+      
       lastScrollY.current = currentScrollY
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
+    }
   }, [])
 
   const isActive = (path: string) => {
