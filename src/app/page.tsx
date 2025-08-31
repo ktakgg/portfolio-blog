@@ -359,10 +359,10 @@ export default function HomePage() {
                 <h1
                   className="text-[#141414] tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px]"
                 >
-                  We offer a range of services designed to optimize your workflow
+                  コア業務に集中できる環境を、オンラインで。
                 </h1>
                 <p className="text-[#141414] text-base font-normal leading-normal max-w-[720px]">
-                  and help you achieve your business goals.
+                経営者・個人事業主の皆様が、本来の業務にもっと時間を注げるように。煩雑になりがちな経理や秘書業務をオンラインでまるごとサポートします。必要な時に、必要な分だけ。貴社のビジネスを黒子として支えるパートナーです。
                 </p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 p-0">
@@ -373,8 +373,8 @@ export default function HomePage() {
                     </svg>
                   </div>
                   <div className="flex flex-col gap-1">
-                    <h2 className="text-[#141414] text-base font-bold leading-tight">Time Management</h2>
-                    <p className="text-neutral-500 text-sm font-normal leading-normal">Efficiently manage your time and prioritize tasks to maximize productivity.</p>
+                    <h2 className="text-[#141414] text-base font-bold leading-tight">オンライン経理サポート</h2>
+                    <p className="text-neutral-500 text-sm font-normal leading-normal">記帳代行から月次レポート作成まで、正確かつスピーディーに対応。面倒な経理業務から解放します。</p>
                   </div>
                 </div>
                 <div className="flex flex-1 gap-3 rounded-lg border border-[#dbdbdb] bg-neutral-50 p-4 flex-col">
@@ -384,8 +384,8 @@ export default function HomePage() {
                     </svg>
                   </div>
                   <div className="flex flex-col gap-1">
-                    <h2 className="text-[#141414] text-base font-bold leading-tight">Performance Analysis</h2>
-                    <p className="text-neutral-500 text-sm font-normal leading-normal">Gain insights into your business performance with detailed analytics and reporting.</p>
+                    <h2 className="text-[#141414] text-base font-bold leading-tight">オンライン秘書サポート</h2>
+                    <p className="text-neutral-500 text-sm font-normal leading-normal">スケジュール調整、請求書作成、連絡代行など、日々の細かなタスクを巻き取り、あなたの業務を円滑に進めます。</p>
                   </div>
                 </div>
                 <div className="flex flex-1 gap-3 rounded-lg border border-[#dbdbdb] bg-neutral-50 p-4 flex-col">
