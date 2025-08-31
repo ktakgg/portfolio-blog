@@ -177,6 +177,12 @@ export default function HomePage() {
                   </li>
                 </ul>
                 <p className="mt-6 text-center text-lg font-semibold text-[22px] text-[#141414]">そのお悩み、すべて解決します。</p>
+                <div className="flex flex-col items-center gap-4 mt-4">
+                  <p className="text-[#141414] text-base font-normal leading-normal">まずはご相談ください。</p>
+                  <Link href="/contact" className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#535353] text-neutral-50 text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]">
+                    <span className="truncate">もっと詳しく</span>
+                  </Link>
+                </div>
               </div>
             </div>
 
@@ -234,26 +240,6 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* CTA Section */}
-            <div className="animate-on-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out">
-              <div className="@container">
-              <div className="flex flex-col justify-end gap-6 px-4 py-10 @[480px]:gap-8 @[480px]:px-10 @[480px]:py-20">
-                <div className="flex flex-col gap-2 text-center">
-                  <h2
-                    className="text-[#141414] tracking-light text-[22px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px] mx-auto"
-                  >
-                    業務の効率化をサポートします。
-                  </h2>
-                  <p className="text-[#141414] text-base font-normal leading-normal max-w-[720px] mx-auto">まずはご相談ください。</p>
-                </div>
-                <div className="flex flex-1 justify-center">
-                  <Link href="/contact" className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#535353] text-neutral-50 text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] mx-auto">
-                    <span className="truncate">もっと詳しく</span>
-                  </Link>
-                </div>
-              </div>
-              </div>
-            </div>
       </div>
     </div>
   )
