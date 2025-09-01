@@ -60,6 +60,9 @@ export default function Header() {
           <Link className={getLinkClassName('/')} href="/">
             {isActive('/') ? <span className="truncate">Home</span> : 'Home'}
           </Link>
+          <Link className={getLinkClassName('/works')} href="/works">
+            {isActive('/works') ? <span className="truncate">Works</span> : 'Works'}
+          </Link>
           <Link className={getLinkClassName('/blog')} href="/blog">
             {isActive('/blog') ? <span className="truncate">Blog</span> : 'Blog'}
           </Link>
@@ -90,6 +93,13 @@ export default function Header() {
               onClick={() => setIsMenuOpen(false)}
             >
               Home
+            </Link>
+            <Link 
+              href="/works" 
+              className={`${isActive('/works') ? 'text-blue-600 font-bold' : 'text-[#141414]'} text-sm font-medium leading-normal`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Works
             </Link>
             <Link 
               href="/blog" 

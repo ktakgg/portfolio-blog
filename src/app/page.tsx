@@ -176,11 +176,28 @@ export default function HomePage() {
                     <span>信頼して任せられる経理・秘書担当を探している…</span>
                   </li>
                 </ul>
-                <p className="mt-6 text-center text-lg font-semibold text-[22px] text-[#141414]">そのお悩み、すべて解決します。</p>
+                <p className="mt-6 text-center text-[22px] font-bold text-[#141414]">そのお悩み、すべて解決します。</p>
                 <div className="flex flex-col items-center gap-4 mt-4">
                   <p className="text-[#141414] text-base font-normal leading-normal">まずはご相談ください。</p>
                   <Link href="/contact" className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#535353] text-neutral-50 text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]">
-                    <span className="truncate">もっと詳しく</span>
+                    <span className="truncate">お問い合わせ</span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 pt-4 border-t border-gray-200"></div>
+
+            {/* Works Section (between Services and Blog) */}
+            <div className="animate-on-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out">
+              <h2 className="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Works</h2>
+              <div className="px-4 py-2">
+                <p className="text-[#141414] text-base leading-normal">
+                  サポート実績の概要をご紹介しています。詳細は下記よりご覧ください。
+                </p>
+                <div className="mt-4 flex">
+                  <Link href="/works" className="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors">
+                    View Works →
                   </Link>
                 </div>
               </div>
