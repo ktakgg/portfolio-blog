@@ -195,7 +195,7 @@ export default function HomePage() {
                 <p className="text-[#141414] text-base leading-normal">
                   サポート実績の概要をご紹介しています。詳細は下記よりご覧ください。
                 </p>
-                <div className="mt-4 flex">
+                <div className="mt-4 flex justify-end">
                   <Link href="/works" className="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors">
                     View Works →
                   </Link>
@@ -251,7 +251,7 @@ export default function HomePage() {
                 })}
               </div>
               <div className="mt-6">
-                <div className="flex justify-center">
+                <div className="flex justify-end px-4">
                   <Link href="/blog" className="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors">
                     View All Blog →
                   </Link>
