@@ -52,7 +52,7 @@ export default function Header() {
           className="h-7 w-auto"
           priority
         />
-        <h2 className="text-[#141414] text-lg font-bold leading-tight tracking-[-0.015em]">todocoworks</h2>
+        <h2 className="text-[#141414] text-lg font-bold leading-tight tracking-[-0.015em]">ToDoCoWorks</h2>
       </Link>
       
       <div className="flex flex-1 justify-end gap-8">

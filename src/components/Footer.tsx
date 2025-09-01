@@ -16,7 +16,7 @@ export default function Footer() {
                 height={28}
                 className="h-7 w-auto"
               />
-              <span className="text-xl font-bold text-gray-900">todocoworks</span>
+              <span className="text-xl font-bold text-gray-900">ToDoCoWorks</span>
             </div>
             <p className="text-gray-600 mb-4 max-w-md">
               ビジネス効率化のためのソリューションを提供し、個人事業主や企業の生産性向上をサポートします。
@@ -87,7 +87,7 @@ export default function Footer() {
 
         <div className="border-t border-gray-200 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-600 text-sm">
-            © 2024 todocoworks. All rights reserved.
+            © 2024 ToDoCoWorks. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <Link href="/privacy" className="text-gray-600 hover:text-primary-600 text-sm transition-colors">
