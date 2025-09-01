@@ -36,9 +36,12 @@ export default function Header() {
   }
 
   const getLinkClassName = (path: string) => {
+    // hover underline animation (scaleX from right→left)
+    const hoverLine =
+      "relative pb-[5px] after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-full after:bg-[#ff701e] after:origin-right after:scale-x-0 after:transition-transform after:duration-300 hover:after:origin-left hover:after:scale-x-100";
     return isActive(path)
-      ? "text-blue-600 text-sm font-bold leading-normal"
-      : "text-[#141414] text-sm font-medium leading-normal hover:text-blue-600 transition-colors"
+      ? `text-blue-600 text-sm font-bold leading-normal ${hoverLine}`
+      : `text-[#141414] text-sm font-medium leading-normal hover:text-blue-600 transition-colors ${hoverLine}`
   }
 
   return (
