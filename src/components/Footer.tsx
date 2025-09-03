@@ -77,7 +77,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="mailto:ktakgg@gmail.com" className="text-gray-600 hover:text-primary-600 transition-colors">
+                <a href="mailto:todocoworks@gmail.com" className="text-gray-600 hover:text-primary-600 transition-colors">
                   メールで連絡する
                 </a>
               </li>

@@ -43,7 +43,7 @@ export default function ContactPage() {
         const body = encodeURIComponent(
           `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
         )
-        const mailtoUrl = `mailto:ktakgg@gmail.com?subject=${subject}&body=${body}`
+        const mailtoUrl = `mailto:todocoworks@gmail.com?subject=${subject}&body=${body}`
         
         window.open(mailtoUrl, '_blank')
         setSubmitStatus('success')
@@ -57,7 +57,7 @@ export default function ContactPage() {
         from_email: formData.email,
         subject: formData.subject,
         message: formData.message,
-        to_email: 'ktakgg@gmail.com'
+        to_email: 'todocoworks@gmail.com'
       }
       
       await emailjs.send(serviceId, templateId, templateParams, publicKey)
@@ -189,7 +189,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h4 className="font-medium text-[#141414]">Email</h4>
-                    <p className="text-neutral-500 text-sm">ktakgg@gmail.com</p>
+                    <p className="text-neutral-500 text-sm">todocoworks@gmail.com</p>
                   </div>
                 </div>
 
