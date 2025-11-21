@@ -1,5 +1,8 @@
+'use client'
+
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 interface BlogPreviewProps {
     posts: any[]
@@ -10,10 +13,24 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
         <div className="py-24 sm:py-32 bg-slate-50">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="mx-auto max-w-2xl text-center">
-                    <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl font-heading">Latest Updates</h2>
-                    <p className="mt-2 text-lg leading-8 text-slate-600">
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5 }}
+                        className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl font-heading"
+                    >
+                        Latest Updates
+                    </motion.h2>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.1 }}
+                        className="mt-2 text-lg leading-8 text-slate-600"
+                    >
                         最新の活動や知見を発信しています。
-                    </p>
+                    </motion.p>
                 </div>
                 <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
                     {(posts || []).slice(0, 2).map((post: any, index: number) => {
@@ -39,7 +56,14 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
                                 : '')
 
                         return (
-                            <article key={index} className="flex flex-col items-start justify-between glass-card rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group">
+                            <motion.article
+                                key={index}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
+                                className="flex flex-col items-start justify-between glass-card rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group"
+                            >
                                 <div className="relative w-full">
                                     <div
                                         className="aspect-[16/9] w-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
@@ -59,19 +83,25 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
                                         </p>
                                     </div>
                                 </div>
-                            </article>
+                            </motion.article>
                         )
                     })}
                 </div>
 
-                <div className="mt-12 text-center">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.4 }}
+                    className="mt-12 text-center"
+                >
                     <Link
                         href="/blog"
                         className="inline-flex items-center gap-2 text-sm font-semibold leading-6 text-indigo-600 hover:text-indigo-500 transition-colors"
                     >
                         View All Posts <ArrowRight className="h-4 w-4" />
                     </Link>
-                </div>
+                </motion.div>
             </div>
         </div>
     )

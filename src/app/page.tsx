@@ -6,12 +6,9 @@ import Services from '@/components/home/Services'
 import PainPoints from '@/components/home/PainPoints'
 import WorksLink from '@/components/home/WorksLink'
 import BlogPreview from '@/components/home/BlogPreview'
-import { useScrollAnimation } from '@/hooks/useScrollAnimation'
 
 export default function HomePage() {
   const [featuredPosts, setFeaturedPosts] = useState<any[]>([])
-
-  useScrollAnimation()
 
   useEffect(() => {
     // HomeのWorksはサーバーAPI経由で取得（/works と同じソース・最新2件）
