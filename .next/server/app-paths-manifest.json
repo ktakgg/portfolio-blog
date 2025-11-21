@@ -1,1 +1,10 @@
-{}
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/latest-works/route": "app/api/latest-works/route.js",
+  "/page": "app/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/works/page": "app/works/page.js",
+  "/blog/page": "app/blog/page.js",
+  "/works/[slug]/page": "app/works/[slug]/page.js",
+  "/blog/[slug]/page": "app/blog/[slug]/page.js"
+}
