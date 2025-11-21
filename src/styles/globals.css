@@ -4,47 +4,47 @@
 
 @layer base {
   :root {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
   }
 
   body {
-    @apply bg-background text-white antialiased selection:bg-primary selection:text-white;
+    @apply bg-background text-slate-900 antialiased selection:bg-slate-200 selection:text-black;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
 @layer utilities {
   .glass {
-    @apply bg-white/5 backdrop-blur-lg border border-white/10;
+    @apply bg-white/80 backdrop-blur-md border border-slate-200/50 shadow-sm;
   }
 
   .glass-dark {
-    @apply bg-black/20 backdrop-blur-lg border border-white/5;
+    @apply bg-slate-900/5 backdrop-blur-md border border-slate-900/10;
   }
 
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent;
+    @apply text-slate-900;
   }
 
   .glass-card {
-    @apply bg-white/5 backdrop-blur-lg border border-white/10 shadow-lg;
+    @apply bg-white/60 backdrop-blur-md border border-white/40 shadow-sm hover:shadow-md transition-all duration-300;
   }
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-background;
+  @apply bg-transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-muted rounded-full;
+  @apply bg-slate-200 rounded-full;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-primary;
+  @apply bg-slate-300;
 }

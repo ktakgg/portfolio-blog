@@ -8,25 +8,25 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: '#030712', // Very dark blue/black
-        surface: '#0f172a', // Slightly lighter
+        background: '#ffffff', // Pure white
+        surface: '#f8fafc', // Slate 50 (very light gray)
         primary: {
-          DEFAULT: '#6366f1', // Indigo 500
+          DEFAULT: '#0f172a', // Slate 900 (Black/Dark Blue)
           foreground: '#ffffff',
         },
         secondary: {
-          DEFAULT: '#ec4899', // Pink 500
+          DEFAULT: '#64748b', // Slate 500
           foreground: '#ffffff',
         },
         accent: {
-          DEFAULT: '#14b8a6', // Teal 500
+          DEFAULT: '#0f172a', // Slate 900
           foreground: '#ffffff',
         },
         muted: {
-          DEFAULT: '#334155', // Slate 700
-          foreground: '#94a3b8', // Slate 400
+          DEFAULT: '#f1f5f9', // Slate 100
+          foreground: '#64748b', // Slate 500
         },
-        border: '#1e293b',
+        border: '#e2e8f0', // Slate 200
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
@@ -65,7 +65,7 @@ module.exports = {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'hero-glow': 'conic-gradient(from 90deg at 50% 50%, #00000000 50%, #6366f1 50%), radial-gradient(rgba(200,200,200,0.1) 0%, transparent 80%)',
+        'hero-glow': 'radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 50%)',
       },
     },
   },

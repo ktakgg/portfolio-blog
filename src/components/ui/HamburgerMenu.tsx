@@ -28,7 +28,7 @@ export default function HamburgerMenu() {
         <>
             <button
                 onClick={() => setIsOpen(true)}
-                className="fixed top-6 right-6 z-50 p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition-colors"
+                className="fixed top-6 right-6 z-50 p-3 rounded-full bg-white/80 backdrop-blur-md border border-slate-200 text-slate-900 hover:bg-white transition-colors shadow-sm"
                 aria-label="Open Menu"
             >
                 <Menu className="w-6 h-6" />
@@ -40,11 +40,11 @@ export default function HamburgerMenu() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-50 bg-background/95 backdrop-blur-xl flex flex-col items-center justify-center"
+                        className="fixed inset-0 z-50 bg-white/95 backdrop-blur-xl flex flex-col items-center justify-center"
                     >
                         <button
                             onClick={() => setIsOpen(false)}
-                            className="absolute top-6 right-6 p-3 rounded-full bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-colors"
+                            className="absolute top-6 right-6 p-3 rounded-full bg-slate-100 border border-slate-200 text-slate-900 hover:bg-slate-200 transition-colors"
                             aria-label="Close Menu"
                         >
                             <X className="w-6 h-6" />
@@ -62,7 +62,7 @@ export default function HamburgerMenu() {
                                     <Link
                                         href={item.href}
                                         onClick={() => setIsOpen(false)}
-                                        className="text-4xl md:text-6xl font-heading font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50 hover:to-primary transition-all duration-300"
+                                        className="text-4xl md:text-6xl font-heading font-bold text-slate-900 hover:text-slate-500 transition-all duration-300"
                                     >
                                         {item.title}
                                     </Link>

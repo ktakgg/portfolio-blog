@@ -20,12 +20,11 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-6 md:px-12 py-6 transition-all duration-500 ${scrolled ? 'bg-background/50 backdrop-blur-md border-b border-white/5' : 'bg-transparent'
+      className={`fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-6 md:px-12 py-6 transition-all duration-500 ${scrolled ? 'bg-white/80 backdrop-blur-md border-b border-slate-200/50 shadow-sm' : 'bg-transparent'
         }`}
     >
       <Link href="/" className="relative z-50 flex items-center gap-3 group">
         <div className="relative">
-          <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           <Image
             src="/logo.png"
             alt="ToDoCoWorks logo"
@@ -35,7 +34,7 @@ export default function Header() {
             priority
           />
         </div>
-        <span className="text-xl font-heading font-bold text-white tracking-tight group-hover:text-primary transition-colors duration-300">
+        <span className="text-xl font-heading font-bold text-slate-900 tracking-tight group-hover:text-slate-600 transition-colors duration-300">
           ToDoCoWorks
         </span>
       </Link>
@@ -49,7 +48,7 @@ export default function Header() {
             <Link
               key={path}
               href={path}
-              className={`text-sm font-medium transition-colors duration-300 ${isActive ? 'text-primary' : 'text-slate-400 hover:text-white'
+              className={`text-sm font-medium transition-colors duration-300 ${isActive ? 'text-slate-900 font-semibold' : 'text-slate-500 hover:text-slate-900'
                 }`}
             >
               {label}
