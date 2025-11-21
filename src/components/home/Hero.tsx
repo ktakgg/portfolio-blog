@@ -50,10 +50,10 @@ export default function Hero() {
                     className="mt-12 flex items-center justify-center gap-x-6"
                 >
                     <Link
-                        href="#contact"
+                        href="/contact"
                         className="group relative inline-flex items-center justify-center rounded-full bg-slate-900 px-8 py-4 text-base font-semibold text-white transition-all hover:bg-slate-800 hover:scale-105 shadow-lg hover:shadow-xl"
                     >
-                        お問い合わせ
+                        無料相談はこちら
                         <div className="absolute inset-0 -z-10 rounded-full bg-white/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     </Link>
                     <Link
