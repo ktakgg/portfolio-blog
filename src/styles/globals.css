@@ -4,41 +4,65 @@
 
 @layer base {
   :root {
-    --background: 255 255 255;
-    --foreground: 15 23 42;
+    .text-gradient {
+      @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent;
+    }
   }
 
-  html {
-    scroll-behavior: smooth;
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
   }
 
-  body {
-    @apply bg-slate-50 text-slate-900 antialiased;
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-heading font-bold tracking-tight;
-  }
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted rounded-full;
   }
 
-  .glass-card {
-    @apply bg-white/70 backdrop-blur-lg border border-white/20 shadow-lg;
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary;
   }
 
-  .mesh-gradient {
-    background-color: #ffffff;
-    background-image: radial-gradient(at 40% 20%, hsla(228, 100%, 74%, 0.1) 0px, transparent 50%),
-      radial-gradient(at 80% 0%, hsla(189, 100%, 56%, 0.1) 0px, transparent 50%),
-      radial-gradient(at 0% 50%, hsla(340, 100%, 76%, 0.1) 0px, transparent 50%);
+  @layer base {
+    :root {
+      --background: 255 255 255;
+      --foreground: 15 23 42;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      @apply bg-slate-50 text-slate-900 antialiased;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      @apply font-heading font-bold tracking-tight;
+    }
   }
-}
+
+  @layer utilities {
+    .text-balance {
+      text-wrap: balance;
+    }
+
+    .glass-card {
+      @apply bg-white/70 backdrop-blur-lg border border-white/20 shadow-lg;
+    }
+
+    .mesh-gradient {
+      background-color: #ffffff;
+      background-image: radial-gradient(at 40% 20%, hsla(228, 100%, 74%, 0.1) 0px, transparent 50%),
+        radial-gradient(at 80% 0%, hsla(189, 100%, 56%, 0.1) 0px, transparent 50%),
+        radial-gradient(at 0% 50%, hsla(340, 100%, 76%, 0.1) 0px, transparent 50%);
+    }
+  }

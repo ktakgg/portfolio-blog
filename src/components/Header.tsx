@@ -2,125 +2,63 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
+import HamburgerMenu from './ui/HamburgerMenu'
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname()
-
-  // Sticky header: toggle background/shadow when page is scrolled
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    let ticking = false
     const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          setScrolled(window.scrollY > 10)
-          ticking = false
-        })
-        ticking = true
-      }
+      setScrolled(window.scrollY > 10)
     }
-    // initialize state on mount
-    onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const isActive = (path: string) => {
-    if (path === '/' && pathname === '/') return true
-    if (path !== '/' && pathname.startsWith(path)) return true
-    return false
-  }
-
-  const getLinkClassName = (path: string) => {
-    // hover underline animation (scaleX from right→left)
-    const hoverLine =
-      "relative pb-[5px] after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-full after:bg-blue-600 after:origin-right after:scale-x-0 after:transition-transform after:duration-300 hover:after:origin-left hover:after:scale-x-100";
-    return isActive(path)
-      ? `text-blue-600 text-sm font-bold leading-normal ${hoverLine}`
-      : `text-[#141414] text-sm font-medium leading-normal hover:text-blue-600 transition-colors ${hoverLine}`
-  }
-
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between whitespace-nowrap px-4 md:px-10 py-3 transition-[background-color,box-shadow,backdrop-filter] duration-300 ${scrolled ? 'bg-white/80 shadow-md backdrop-blur-sm border-b border-solid border-b-[#ededed]' : 'bg-white/40 backdrop-blur-sm'}`}>
-      <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-        <Image
-          src="/logo.png"
-          alt="ToDoCoWorks logo"
-          width={120}
-          height={40}
-          className="h-7 w-auto"
-          priority
-        />
-        <h2 className="text-[#141414] text-lg font-bold leading-tight tracking-[-0.015em]">ToDoCoWorks</h2>
-      </Link>
-      
-      <div className="flex flex-1 justify-end gap-8">
-        <div className="hidden md:flex items-center gap-9">
-          <Link className={getLinkClassName('/')} href="/">
-            {isActive('/') ? <span className="truncate">Home</span> : 'Home'}
-          </Link>
-          <Link className={getLinkClassName('/works')} href="/works">
-            {isActive('/works') ? <span className="truncate">Works</span> : 'Works'}
-          </Link>
-          <Link className={getLinkClassName('/blog')} href="/blog">
-            {isActive('/blog') ? <span className="truncate">Blog</span> : 'Blog'}
-          </Link>
-          <Link className={getLinkClassName('/contact')} href="/contact">
-            {isActive('/contact') ? <span className="truncate">Contact</span> : 'Contact'}
-          </Link>
+    <header
+      className={`fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-6 md:px-12 py-6 transition-all duration-500 ${scrolled ? 'bg-background/50 backdrop-blur-md border-b border-white/5' : 'bg-transparent'
+        }`}
+    >
+      <Link href="/" className="relative z-50 flex items-center gap-3 group">
+        <div className="relative">
+          <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <Image
+            src="/logo.png"
+            alt="ToDoCoWorks logo"
+            width={120}
+            height={40}
+            className="h-8 w-auto relative"
+            priority
+          />
         </div>
-        
-        {/* Mobile menu button */}
-        <button
-          className="md:hidden p-3 -mr-3 z-50 relative bg-neutral-50 rounded-lg hover:bg-gray-100 transition-colors"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          <svg className="w-6 h-6 text-[#141414]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
+        <span className="text-xl font-heading font-bold text-white tracking-tight group-hover:text-primary transition-colors duration-300">
+          ToDoCoWorks
+        </span>
+      </Link>
+
+      {/* Desktop Navigation - Optional, keeping it minimal or hidden since we have the hamburger */}
+      <div className="hidden md:flex items-center gap-8 mr-16">
+        {['/', '/works', '/blog', '/contact'].map((path) => {
+          const label = path === '/' ? 'Home' : path.slice(1).charAt(0).toUpperCase() + path.slice(1).slice(1);
+          const isActive = pathname === path;
+          return (
+            <Link
+              key={path}
+              href={path}
+              className={`text-sm font-medium transition-colors duration-300 ${isActive ? 'text-primary' : 'text-slate-400 hover:text-white'
+                }`}
+            >
+              {label}
+            </Link>
+          )
+        })}
       </div>
 
-      {/* Mobile Navigation */}
-      {isMenuOpen && (
-        <div className="absolute top-full left-0 right-0 md:hidden py-4 border-t bg-neutral-50 z-50 shadow-lg">
-          <nav className="flex flex-col space-y-4 px-10">
-            <Link 
-              href="/" 
-              className={`${isActive('/') ? 'text-blue-600 font-bold' : 'text-[#141414]'} text-sm font-medium leading-normal`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Home
-            </Link>
-            <Link 
-              href="/works" 
-              className={`${isActive('/works') ? 'text-blue-600 font-bold' : 'text-[#141414]'} text-sm font-medium leading-normal`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Works
-            </Link>
-            <Link 
-              href="/blog" 
-              className={`${isActive('/blog') ? 'text-blue-600 font-bold' : 'text-[#141414]'} text-sm font-medium leading-normal`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Blog
-            </Link>
-            <Link 
-              href="/contact" 
-              className={`${isActive('/contact') ? 'text-blue-600 font-bold' : 'text-[#141414]'} text-sm font-medium leading-normal`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Contact
-            </Link>
-          </nav>
-        </div>
-      )}
+      <HamburgerMenu />
     </header>
   )
 }

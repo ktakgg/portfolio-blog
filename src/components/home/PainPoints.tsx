@@ -13,16 +13,17 @@ export default function PainPoints() {
     ]
 
     return (
-        <div className="bg-slate-900 py-24 sm:py-32 relative overflow-hidden">
+        <div className="relative py-24 sm:py-32 overflow-hidden">
             {/* Background Accents */}
-            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+            <div className="absolute inset-0 z-0">
+                <div className="absolute inset-0 bg-gradient-to-b from-background via-surface to-background" />
                 <motion.div
-                    className="absolute top-[-10%] right-[-5%] w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl"
+                    className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px]"
                     animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
                     transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
                 />
                 <motion.div
-                    className="absolute bottom-[-10%] left-[-5%] w-96 h-96 bg-teal-500/10 rounded-full blur-3xl"
+                    className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[100px]"
                     animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
                     transition={{
                         duration: 10,
@@ -40,7 +41,7 @@ export default function PainPoints() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
-                        className="text-base font-semibold leading-7 text-indigo-400"
+                        className="text-sm font-semibold tracking-widest text-indigo-400 uppercase"
                     >
                         Pain Points
                     </motion.h2>
@@ -64,10 +65,10 @@ export default function PainPoints() {
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                                className="relative pl-16"
+                                className="relative pl-16 group"
                             >
-                                <dt className="text-base font-semibold leading-7 text-white">
-                                    <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-500/20 ring-1 ring-indigo-500/50">
+                                <dt className="text-lg font-medium leading-7 text-slate-300 group-hover:text-white transition-colors">
+                                    <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-500/10 ring-1 ring-indigo-500/30 group-hover:bg-indigo-500/20 group-hover:ring-indigo-500/50 transition-all">
                                         <CheckCircle2
                                             className="h-6 w-6 text-indigo-400"
                                             aria-hidden="true"
@@ -92,7 +93,7 @@ export default function PainPoints() {
                     </p>
                     <Link
                         href="/contact"
-                        className="rounded-full bg-white px-8 py-3.5 text-sm font-semibold text-slate-900 shadow-sm hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+                        className="rounded-full bg-white px-8 py-3.5 text-sm font-semibold text-black shadow-sm hover:bg-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition-all duration-300 hover:scale-105"
                     >
                         まずはご相談ください
                     </Link>
