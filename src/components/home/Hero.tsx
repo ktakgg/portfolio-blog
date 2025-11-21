@@ -1,25 +1,32 @@
+import Link from 'next/link'
+
 export default function Hero() {
     return (
-        <div className="animate-on-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out">
-            <div className="@container">
-                <div className="@[480px]:p-4">
-                    <div
-                        className="flex min-h-[384px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-lg items-start justify-end px-4 pb-10 @[480px]:px-10"
-                        style={{
-                            backgroundImage:
-                                'linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%), url("/home_new.png")',
-                        }}
+        <div className="relative overflow-hidden bg-slate-50 pt-16 pb-32 lg:pt-32 lg:pb-48">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none">
+                <div className="absolute top-20 left-10 w-72 h-72 bg-indigo-400/20 rounded-full blur-3xl animate-float" />
+                <div className="absolute bottom-20 right-10 w-96 h-96 bg-teal-400/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+            </div>
+
+            <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+                <h1 className="mx-auto max-w-4xl font-heading text-5xl font-bold tracking-tight text-slate-900 sm:text-7xl">
+                    ToDoCoWorks
+                    <span className="block text-indigo-600 mt-2">Online Business Support</span>
+                </h1>
+                <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600">
+                    経営者・個人事業主の皆様が、本来の業務にもっと時間を注げるように。<br className="hidden sm:block" />
+                    経理や秘書業務をオンラインでまるごとサポートします。
+                </p>
+                <div className="mt-10 flex items-center justify-center gap-x-6">
+                    <Link
+                        href="/contact"
+                        className="rounded-full bg-indigo-600 px-8 py-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
                     >
-                        <div className="flex flex-col gap-2 text-left">
-                            <h1 className="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
-                                ToDoCoWorks
-                                <span className="block"></span>
-                            </h1>
-                            <h2 className="text-white text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
-                                オンライン経理・業務サポート
-                            </h2>
-                        </div>
-                    </div>
+                        お問い合わせ
+                    </Link>
+                    <Link href="/works" className="text-sm font-semibold leading-6 text-slate-900 hover:text-indigo-600 transition-colors">
+                        実績を見る <span aria-hidden="true">→</span>
+                    </Link>
                 </div>
             </div>
         </div>

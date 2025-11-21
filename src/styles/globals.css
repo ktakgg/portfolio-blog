@@ -2,125 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
-/* スマートフォンでのスクロール最適化 */
-html {
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-}
-
-body {
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior: contain;
-}
-
-/* iOS Safariでのスクロール問題対策 */
-* {
-  -webkit-overflow-scrolling: touch;
-}
-
-/* アニメーション最適化 */
-.animate-on-scroll {
-  will-change: opacity, transform;
-}
-
-/* パフォーマンス向上のためのGPU加速 */
-.transition-all,
-.transition-transform,
-.transition-colors,
-.transition-shadow {
-  transform: translateZ(0);
-  backface-visibility: hidden;
-}
-
-/* スクロールアニメーション用のCSSクラス */
-.animate-fade-in-up {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
-}
-
-/* アニメーション用のキーフレーム */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(32px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* スムーズなスクロール */
-html {
-  scroll-behavior: smooth;
-}
-
-/* アニメーション要素の初期状態 */
-.animate-on-scroll {
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Noto+Sans:wght@400;500;700;900&display=swap');
-
 @layer base {
+  :root {
+    --background: 255 255 255;
+    --foreground: 15 23 42;
+  }
+
   html {
-    font-family: 'Inter', 'Noto Sans', system-ui, sans-serif;
-  }
-}
-
-@layer components {
-  .btn-primary {
-    @apply bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
-  }
-  
-  .btn-secondary {
-    @apply bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-lg transition-colors duration-200;
-  }
-  
-  .card {
-    @apply bg-white rounded-lg shadow-md overflow-hidden;
-  }
-  
-  .container-custom {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    scroll-behavior: smooth;
   }
 
-  /* Container queries support */
-  @container (min-width: 480px) {
-    .container-responsive {
-      @apply p-4;
-    }
+  body {
+    @apply bg-slate-50 text-slate-900 antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading font-bold tracking-tight;
   }
 }
 
 @layer utilities {
-  /* Custom scrollbar hiding */
-  .hide-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;
+  .text-balance {
+    text-wrap: balance;
   }
 
-  /* Custom tracking for text */
-  .tracking-light {
-    letter-spacing: -0.015em;
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-lg border border-white/20 shadow-lg;
   }
 
-  /* Line clamp utilities */
-  .line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  
-  .line-clamp-3 {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+  .mesh-gradient {
+    background-color: #ffffff;
+    background-image: radial-gradient(at 40% 20%, hsla(228, 100%, 74%, 0.1) 0px, transparent 50%),
+      radial-gradient(at 80% 0%, hsla(189, 100%, 56%, 0.1) 0px, transparent 50%),
+      radial-gradient(at 0% 50%, hsla(340, 100%, 76%, 0.1) 0px, transparent 50%);
   }
 }

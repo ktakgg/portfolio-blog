@@ -55,20 +55,12 @@ export default function HomePage() {
   }, [])
 
   return (
-    <div className="px-4 md:px-40 flex flex-1 justify-center py-5 overflow-x-hidden">
-      <div className="layout-content-container flex flex-col max-w-[960px] flex-1 min-w-0">
-        <Hero />
-        <Services />
-        <PainPoints />
-
-        <div className="mt-6 pt-4 border-t border-gray-200"></div>
-
-        <WorksLink />
-
-        <div className="mt-6 pt-4 border-t border-gray-200"></div>
-
-        <BlogPreview posts={featuredPosts} />
-      </div>
+    <div className="flex flex-col min-h-screen">
+      <Hero />
+      <Services />
+      <PainPoints />
+      <WorksLink />
+      <BlogPreview posts={featuredPosts} />
     </div>
   )
 }
