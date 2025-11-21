@@ -4,65 +4,47 @@
 
 @layer base {
   :root {
-    .text-gradient {
-      @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent;
-    }
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
   }
 
-  /* Custom Scrollbar */
-  ::-webkit-scrollbar {
-    width: 10px;
+  body {
+    @apply bg-background text-white antialiased selection:bg-primary selection:text-white;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/5 backdrop-blur-lg border border-white/10;
   }
 
-  ::-webkit-scrollbar-track {
-    @apply bg-background;
+  .glass-dark {
+    @apply bg-black/20 backdrop-blur-lg border border-white/5;
   }
 
-  ::-webkit-scrollbar-thumb {
-    @apply bg-muted rounded-full;
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent;
   }
 
-  ::-webkit-scrollbar-thumb:hover {
-    @apply bg-primary;
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-lg border border-white/10 shadow-lg;
   }
+}
 
-  @layer base {
-    :root {
-      --background: 255 255 255;
-      --foreground: 15 23 42;
-    }
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
 
-    html {
-      scroll-behavior: smooth;
-    }
+::-webkit-scrollbar-track {
+  @apply bg-background;
+}
 
-    body {
-      @apply bg-slate-50 text-slate-900 antialiased;
-    }
+::-webkit-scrollbar-thumb {
+  @apply bg-muted rounded-full;
+}
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      @apply font-heading font-bold tracking-tight;
-    }
-  }
-
-  @layer utilities {
-    .text-balance {
-      text-wrap: balance;
-    }
-
-    .glass-card {
-      @apply bg-white/70 backdrop-blur-lg border border-white/20 shadow-lg;
-    }
-
-    .mesh-gradient {
-      background-color: #ffffff;
-      background-image: radial-gradient(at 40% 20%, hsla(228, 100%, 74%, 0.1) 0px, transparent 50%),
-        radial-gradient(at 80% 0%, hsla(189, 100%, 56%, 0.1) 0px, transparent 50%),
-        radial-gradient(at 0% 50%, hsla(340, 100%, 76%, 0.1) 0px, transparent 50%);
-    }
-  }
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary;
+}
