@@ -8,9 +8,9 @@ import { Menu, X } from 'lucide-react'
 
 const menuItems = [
     { title: 'Home', href: '/' },
-    { title: 'Services', href: '#services' },
-    { title: 'About', href: '#about' },
-    { title: 'Contact', href: '#contact' },
+    { title: 'Works', href: '/works' },
+    { title: 'Blog', href: '/blog' },
+    { title: 'Contact', href: '/contact' },
 ]
 
 export default function HamburgerMenu() {
