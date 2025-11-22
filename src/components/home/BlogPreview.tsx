@@ -62,7 +62,7 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
-                                className="min-w-[85vw] sm:min-w-[400px] snap-center lg:min-w-0 flex flex-col items-start justify-between glass-card rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group"
+                                className="relative min-w-[85vw] sm:min-w-[400px] snap-center lg:min-w-0 flex flex-col items-start justify-between glass-card rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group"
                             >
                                 <div className="relative w-full">
                                     <div
@@ -73,16 +73,16 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
                                 <div className="max-w-xl p-8">
                                     <div className="group relative">
                                         <h3 className="mt-3 text-lg font-semibold leading-6 text-slate-900 group-hover:text-indigo-600 transition-colors font-heading">
-                                            <Link href={`/blog/${slug}`}>
-                                                <span className="absolute inset-0" />
-                                                {post.title}
-                                            </Link>
+                                            {post.title}
                                         </h3>
                                         <p className="mt-5 line-clamp-3 text-sm leading-6 text-slate-600">
                                             {excerpt}
                                         </p>
                                     </div>
                                 </div>
+                                <Link href={`/blog/${slug}`} className="absolute inset-0">
+                                    <span className="sr-only">View post: {post.title}</span>
+                                </Link>
                             </motion.article>
                         )
                     })}
