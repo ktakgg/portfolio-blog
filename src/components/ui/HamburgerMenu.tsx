@@ -51,7 +51,7 @@ export default function HamburgerMenu() {
                         >
                             <button
                                 onClick={() => setIsOpen(false)}
-                                className="absolute top-6 right-6 p-3 rounded-full bg-slate-100 border border-slate-200 text-slate-900 hover:bg-slate-200 transition-colors"
+                                className="absolute top-6 right-6 md:right-12 p-3 rounded-full bg-slate-100 border border-slate-200 text-slate-900 hover:bg-slate-200 transition-colors"
                                 aria-label="Close Menu"
                             >
                                 <X className="w-6 h-6" />
