@@ -39,7 +39,7 @@ export default function PainPoints() {
                         </p>
 
                         <Link
-                            href="#contact"
+                            href="/contact"
                             className="inline-flex items-center gap-2 text-slate-900 font-semibold border-b-2 border-slate-900 pb-1 hover:text-slate-600 hover:border-slate-600 transition-all duration-300"
                         >
                             無料相談はこちら
