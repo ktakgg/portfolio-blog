@@ -57,7 +57,7 @@ export default function Hero() {
                         <div className="absolute inset-0 -z-10 rounded-full bg-white/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     </Link>
                     <Link
-                        href="#works"
+                        href="/works"
                         className="text-base font-semibold leading-6 text-slate-900 hover:text-slate-600 transition-colors flex items-center gap-2 group"
                     >
                         実績を見る
