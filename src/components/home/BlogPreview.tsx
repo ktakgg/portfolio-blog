@@ -32,7 +32,7 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
                         最新の活動や知見を発信しています。
                     </motion.p>
                 </div>
-                <div className="mx-auto mt-16 flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:gap-y-20 lg:overflow-visible lg:pb-0 lg:mx-0 lg:max-w-none scrollbar-hide">
+                <div className="mx-auto mt-16 flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:gap-y-20 lg:overflow-visible lg:pb-0 lg:mx-auto lg:max-w-4xl scrollbar-hide">
                     {(posts || []).slice(0, 2).map((post: any, index: number) => {
                         const slug =
                             typeof post.slug === 'string'
@@ -62,7 +62,7 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
-                                className="relative min-w-[85vw] sm:min-w-[400px] snap-center lg:min-w-0 flex flex-col items-start justify-between glass-card rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group"
+                                className="relative min-w-[65vw] sm:min-w-[300px] snap-center lg:min-w-0 flex flex-col items-start justify-between glass-card rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group"
                             >
                                 <div className="relative w-full">
                                     <div

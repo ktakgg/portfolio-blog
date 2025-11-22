@@ -111,7 +111,7 @@ export default async function BlogPage() {
             </p>
 
             {/* All Articles */}
-            <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 p-4">
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-4 p-4">
               {allPosts.map((post, index) => (
                 <div key={post._id} className="relative flex flex-col gap-3 pb-3 group hover:transform hover:scale-105 transition-all duration-300 ease-out">
                   <div
