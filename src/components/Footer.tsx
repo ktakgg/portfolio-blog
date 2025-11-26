@@ -18,7 +18,7 @@ export default function Footer() {
               />
               <span className="text-xl font-bold text-gray-900">ToDoCoWorks</span>
             </div>
-            <p className="text-gray-600 mb-4 max-w-md">
+            <p className="text-gray-600 mb-4 max-w-md text-sm">
               ビジネス効率化のためのソリューションを提供し、個人事業主や企業の生産性向上をサポートします。
             </p>
             <div className="flex space-x-4">
@@ -42,20 +42,20 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-semibold text-gray-900 mb-4">Quick Links</h3>
+            <h3 className="font-semibold text-gray-900 mb-4 text-sm">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-gray-600 hover:text-primary-600 transition-colors">
+                <Link href="/" className="text-gray-600 hover:text-primary-600 transition-colors text-sm">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/works" className="text-gray-600 hover:text-primary-600 transition-colors">
+                <Link href="/works" className="text-gray-600 hover:text-primary-600 transition-colors text-sm">
                   Works
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="text-gray-600 hover:text-primary-600 transition-colors">
+                <Link href="/blog" className="text-gray-600 hover:text-primary-600 transition-colors text-sm">
                   Blog
                 </Link>
               </li>
@@ -64,15 +64,15 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="font-semibold text-gray-900 mb-4">Contact</h3>
+            <h3 className="font-semibold text-gray-900 mb-4 text-sm">Contact</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/contact" className="text-gray-600 hover:text-primary-600 transition-colors">
+                <Link href="/contact" className="text-gray-600 hover:text-primary-600 transition-colors text-sm">
                   お問い合わせフォームはこちら
                 </Link>
               </li>
               <li>
-                <a href="mailto:todocoworks@gmail.com" className="text-gray-600 hover:text-primary-600 transition-colors">
+                <a href="mailto:todocoworks@gmail.com" className="text-gray-600 hover:text-primary-600 transition-colors text-sm">
                   メールで連絡する
                 </a>
               </li>
