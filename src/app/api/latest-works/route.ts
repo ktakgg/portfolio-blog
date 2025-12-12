@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
 import { getAllPosts } from '@/lib/sanity-queries'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET() {
   try {
     const posts = await getAllPosts()

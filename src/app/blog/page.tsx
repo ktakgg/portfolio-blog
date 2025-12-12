@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import { getAllPosts, BlogPost } from '@/lib/sanity-queries'
 
+export const revalidate = 0 // 常に最新のデータを取得
+
 export default async function BlogPage() {
   // Sanityからデータを取得
   let sanityAllPosts: BlogPost[] = []
