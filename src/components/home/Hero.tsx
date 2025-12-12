@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
-import { ArrowRight } from 'lucide-react'
 
 export default function Hero() {
     const ref = useRef(null)

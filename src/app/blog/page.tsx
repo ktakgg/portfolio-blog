@@ -1,17 +1,16 @@
 import Link from 'next/link'
-import { getAllPosts, getFeaturedPosts, BlogPost } from '@/lib/sanity-queries'
+import { getAllPosts, BlogPost } from '@/lib/sanity-queries'
 
 export default async function BlogPage() {
   // Sanityからデータを取得
-  let sanityFeaturedPosts: BlogPost[] = []
   let sanityAllPosts: BlogPost[] = []
 
   try {
-    sanityFeaturedPosts = await getFeaturedPosts()
     sanityAllPosts = await getAllPosts()
   } catch (error) {
     console.error('Failed to fetch posts from Sanity:', error)
   }
+
 
   // フォールバックデータ（Sanityにデータがない、または接続に失敗した場合）
   const fallbackPosts: BlogPost[] = [
@@ -78,19 +77,11 @@ export default async function BlogPage() {
   ]
 
   // 有効なデータがある場合のみSanityのデータを使い、なければフォールバックデータを使う
-  const validFeaturedPosts = (sanityFeaturedPosts || []).filter(Boolean)
   const validAllPosts = (sanityAllPosts || []).filter(Boolean)
 
-  const featuredPosts = validFeaturedPosts.length > 0 ? validFeaturedPosts : fallbackPosts.slice(0, 3)
-  const allPosts = validAllPosts.length > 0 ? validAllPosts : fallbackPosts.slice(3)
+  const allPosts = validAllPosts.length > 0 ? validAllPosts : fallbackPosts
 
   // ブログ記事画像のマッピング
-  const featuredImages = [
-    'https://lh3.googleusercontent.com/aida-public/AB6AXuA_H-4gozJlEeyGCivUv2M_kuqww_etwdm4rA5y0u1yk8p01yzZlJs81AbHTZW3Bam4virlG6rlZkCRpd26h0skdWu89ogwtsGHSxGf7mbgpikaeXV70QWOfmKKDg536T4O9Aiu_rlxiSZ8ReDenm84WEDPP2K-ZQKb-3LGjEVCtjVAa9ZyI2J1eh_CJxXZO05RBjQvc_skAMGOH84iHv1PXRJ3r44ykKQ5p1bPDV1iUlgHQ8nj2hOrHw7XIedjIcvMiLKiMTIyGQw',
-    'https://lh3.googleusercontent.com/aida-public/AB6AXuA1Ojr92JMeK68_GLBrjyCwVW_HyhGdt8ZhHEwRZf7s5eBaaXvyRA5HbjA_xZOm2FpGRjk-0Kih-GSycovEIeROhAgUqykh68mA-owg5zmRCJ7uHLoUOh1bsjxUfYvdj0AcIy1KaY8z5dgw659x5jPy7qJ-5Zn9vRf5STxTF0Te48bhKlFOuWLP1noU4X0OTx4W6sh2d2wJBdHwheOyTuUH_pc9uBGgGTD7ClCeNdacSDflkzEHuo8y5lljcX-GPYG3cum5GOCW2bo',
-    'https://lh3.googleusercontent.com/aida-public/AB6AXuCiZMnD4udaDTALUhwd8apwgXrth2d5X-fFWA7msyRl73QU8kMiiRzo-OlKxkdQuKD4I06CtuaM8_CWj_kpasFc8hWBbA4Nytnryqg095RYIFBWfddZr3UyBVuvEz1ZEDDxjxYmYDIxbeMCEy2QIhxWOlOsDkrtLEF__Wl25S4X4wpavXVFjoNuEn7Yfr14auufhwOAwfafchJYo3OCxhb_Tcvsi4V6grAXER8UGJSU84NFm07DO6gaR1pi5ip91NfOXCRD9T__B2c',
-  ]
-
   const allPostImages = [
     'https://lh3.googleusercontent.com/aida-public/AB6AXuD2_d7UbWp-VUqNkLEcr-9xCfKl1AHkqViJjN0xGsdF9JI1AguVSGj13NKR7C5q3pGHAQPHFAcc1cgu-OqUiu3dqDMjk3Gv7CRttp0lofGTTjh3em5wbJ-9OXGhVfR3sWgcW1_CZ-kpuCU8dIf9ApKhzHv1galiSKDyj3nJ6rSahGOTNJf095_UDdRxIGxyLJVOYNoxUxw7px6iqrz6pY2KxSy_cBO7fjWDiYIrRq5MzOCpbtUzDiBLXwBlmrJ2wVkmcF0MBNDm4Ls',
     'https://lh3.googleusercontent.com/aida-public/AB6AXuCsLDNiy75tCNu3a5EN2N9YKPiO5RaGgtd2WDIYW8V9LKW5V337CixdsHB1Gt68ZnERQu2ncYiJPNVtwzTyGIWGpKqHDJG1jqipbpnASFd7w9R4nh9DKxf1-MBjghm_9_XJ9WEIiA70UmrwONbKom5DhB9tCCoZ4OUpKOPmT1U4NMgHy-SrVstjnkoFqkgKAcd-aIZxqztzqsXWlC19MTmpUhnWVYodf4lPrtmrR3IMFUmpmQpHFW_nbhBNypo3KCgPpfjZrTCZu-w',
