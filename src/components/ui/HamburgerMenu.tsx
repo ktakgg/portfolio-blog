@@ -35,7 +35,7 @@ export default function HamburgerMenu() {
         <>
             <motion.button
                 onClick={() => setIsOpen(!isOpen)}
-                className="fixed z-[110] top-[26px] right-6 md:right-12 p-3 rounded-full bg-white/80 backdrop-blur-md border border-slate-200 text-slate-900 hover:bg-white transition-colors shadow-sm"
+                className="fixed z-[110] top-6 right-6 md:right-12 p-3 rounded-full bg-white/80 backdrop-blur-md border border-slate-200 text-slate-900 hover:bg-white transition-colors shadow-sm"
                 aria-label={isOpen ? "Close Menu" : "Open Menu"}
                 animate={isOpen ? "open" : "closed"}
             >
