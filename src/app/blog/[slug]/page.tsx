@@ -26,7 +26,7 @@ export default async function BlogPostPage({ params }: Props) {
   }
 
   return (
-    <div className="bg-white py-20">
+    <div className="bg-white pt-32 pb-20">
       <div className="container-custom max-w-4xl mx-auto px-4 md:px-8">
         <main className="w-full">
           <article>

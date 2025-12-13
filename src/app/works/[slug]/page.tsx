@@ -31,7 +31,7 @@ export default async function BlogPostPage({ params }: Props) {
   }
 
   return (
-    <div className="bg-white py-20">
+    <div className="bg-white pt-32 pb-20">
       <div className="container-custom max-w-4xl mx-auto px-4 md:px-8">
         {/* メインコンテンツ */}
         <main className="w-full">
@@ -44,12 +44,12 @@ export default async function BlogPostPage({ params }: Props) {
                 <span className="mx-2">•</span>
                 <span>{post.category}</span>
               </div>
-              
+
               {/* アイキャッチ画像 */}
               {post.featuredImage && (
                 <div className="mb-8">
-                  <img 
-                    src={post.featuredImage} 
+                  <img
+                    src={post.featuredImage}
                     alt={post.title}
                     className="w-full h-64 lg:h-96 object-cover rounded-lg shadow-lg"
                   />

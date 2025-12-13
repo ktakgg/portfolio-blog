@@ -25,32 +25,32 @@ export default function ContactPage() {
     e.preventDefault()
     setIsSubmitting(true)
     setSubmitStatus('idle')
-    
+
     try {
       // EmailJSの設定値を取得
       const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
       const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
       const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
-      
+
       // 環境変数が設定されていない場合はフォールバック処理
-      if (!serviceId || !templateId || !publicKey || 
-          serviceId === 'your_service_id' || 
-          templateId === 'your_template_id' || 
-          publicKey === 'your_public_key') {
-        
+      if (!serviceId || !templateId || !publicKey ||
+        serviceId === 'your_service_id' ||
+        templateId === 'your_template_id' ||
+        publicKey === 'your_public_key') {
+
         // EmailJSが設定されていない場合は、mailtoリンクを開く
         const subject = encodeURIComponent(formData.subject)
         const body = encodeURIComponent(
           `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
         )
         const mailtoUrl = `mailto:todocoworks@gmail.com?subject=${subject}&body=${body}`
-        
+
         window.open(mailtoUrl, '_blank')
         setSubmitStatus('success')
         setFormData({ name: '', email: '', subject: '', message: '' })
         return
       }
-      
+
       // EmailJSでメール送信
       const templateParams = {
         from_name: formData.name,
@@ -59,11 +59,11 @@ export default function ContactPage() {
         message: formData.message,
         to_email: 'todocoworks@gmail.com'
       }
-      
+
       await emailjs.send(serviceId, templateId, templateParams, publicKey)
       setSubmitStatus('success')
       setFormData({ name: '', email: '', subject: '', message: '' })
-      
+
     } catch (error) {
       console.error('Email sending failed:', error)
       setSubmitStatus('error')
@@ -73,13 +73,13 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="px-4 md:px-40 flex flex-1 justify-center py-5">
+    <div className="px-4 md:px-40 flex flex-1 justify-center pt-24 pb-12">
       <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
         <div className="flex flex-wrap justify-between gap-3 p-4">
           <div className="flex min-w-72 flex-col gap-3">
             <p className="text-[#141414] tracking-light text-[32px] font-bold leading-tight">お問い合わせ</p>
             <p className="text-neutral-500 text-sm font-normal leading-normal">
-            経理や業務効率化のオンラインサポートについて、ぜひご相談ください。ご連絡をお待ちしております！
+              経理や業務効率化のオンラインサポートについて、ぜひご相談ください。ご連絡をお待ちしております！
             </p>
           </div>
         </div>
@@ -88,13 +88,13 @@ export default function ContactPage() {
           {/* Contact Form */}
           <div className="bg-white rounded-lg border border-gray-200 p-6">
             <h2 className="text-xl font-bold text-[#141414] mb-6">メッセージを送信</h2>
-            
+
             {submitStatus === 'success' && (
               <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
                 <p className="text-green-800 text-sm">ご連絡ありがとうございます！折り返しご連絡いたします。</p>
               </div>
             )}
-            
+
             {submitStatus === 'error' && (
               <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
                 <p className="text-red-800 text-sm">問題が発生しました。後ほど再度お試しください。</p>
