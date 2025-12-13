@@ -8,6 +8,10 @@
     --foreground: 222.2 84% 4.9%;
   }
 
+  html {
+    scrollbar-gutter: stable;
+  }
+
   body {
     @apply bg-background text-slate-900 antialiased selection:bg-slate-200 selection:text-black;
     font-feature-settings: "rlig" 1, "calt" 1;
