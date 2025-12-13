@@ -20,7 +20,7 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-6 md:px-12 py-6 transition-all duration-500 ${scrolled ? 'bg-white/80 backdrop-blur-md border-b border-slate-200/50 shadow-sm' : 'bg-transparent'
+      className={`fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-6 md:px-12 py-6 transition-all duration-500 ${scrolled ? 'bg-white/60 backdrop-blur-md border-b border-slate-200/50 shadow-sm' : 'bg-transparent'
         }`}
     >
       <Link href="/" className="relative z-50 flex items-center gap-3 group">
