@@ -48,10 +48,11 @@ export default function Header() {
             <Link
               key={path}
               href={path}
-              className={`text-sm font-medium transition-colors duration-300 ${isActive ? 'text-slate-900 font-semibold' : 'text-slate-500 hover:text-slate-900'
+              className={`text-sm font-medium transition-colors duration-300 relative group ${isActive ? 'text-slate-900 font-semibold' : 'text-slate-500 hover:text-slate-900'
                 }`}
             >
               {label}
+              <span className="absolute -bottom-1 left-1/2 w-0 h-[1px] bg-slate-400 group-hover:w-full transition-all duration-300 -translate-x-1/2" />
             </Link>
           )
         })}

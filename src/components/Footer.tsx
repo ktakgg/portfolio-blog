@@ -45,18 +45,21 @@ export default function Footer() {
             <h3 className="font-semibold text-gray-900 mb-4 text-sm">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-gray-600 hover:text-primary-600 transition-colors text-sm">
+                <Link href="/" className="text-gray-600 hover:text-primary-600 transition-colors text-sm relative group">
                   Home
+                  <span className="absolute -bottom-1 left-1/2 w-0 h-[1px] bg-gray-400 group-hover:w-full transition-all duration-300 -translate-x-1/2" />
                 </Link>
               </li>
               <li>
-                <Link href="/works" className="text-gray-600 hover:text-primary-600 transition-colors text-sm">
+                <Link href="/works" className="text-gray-600 hover:text-primary-600 transition-colors text-sm relative group">
                   Works
+                  <span className="absolute -bottom-1 left-1/2 w-0 h-[1px] bg-gray-400 group-hover:w-full transition-all duration-300 -translate-x-1/2" />
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="text-gray-600 hover:text-primary-600 transition-colors text-sm">
+                <Link href="/blog" className="text-gray-600 hover:text-primary-600 transition-colors text-sm relative group">
                   Blog
+                  <span className="absolute -bottom-1 left-1/2 w-0 h-[1px] bg-gray-400 group-hover:w-full transition-all duration-300 -translate-x-1/2" />
                 </Link>
               </li>
             </ul>
@@ -67,13 +70,15 @@ export default function Footer() {
             <h3 className="font-semibold text-gray-900 mb-4 text-sm">Contact</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/contact" className="text-gray-600 hover:text-primary-600 transition-colors text-sm">
+                <Link href="/contact" className="text-gray-600 hover:text-primary-600 transition-colors text-sm relative group">
                   お問い合わせフォームはこちら
+                  <span className="absolute -bottom-1 left-1/2 w-0 h-[1px] bg-gray-400 group-hover:w-full transition-all duration-300 -translate-x-1/2" />
                 </Link>
               </li>
               <li>
-                <a href="mailto:todocoworks@gmail.com" className="text-gray-600 hover:text-primary-600 transition-colors text-sm">
+                <a href="mailto:todocoworks@gmail.com" className="text-gray-600 hover:text-primary-600 transition-colors text-sm relative group">
                   メールで連絡する
+                  <span className="absolute -bottom-1 left-1/2 w-0 h-[1px] bg-gray-400 group-hover:w-full transition-all duration-300 -translate-x-1/2" />
                 </a>
               </li>
             </ul>
@@ -85,11 +90,13 @@ export default function Footer() {
             © 2024 ToDoCoWorks. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link href="/privacy" className="text-gray-600 hover:text-primary-600 text-sm transition-colors">
+            <Link href="/privacy" className="text-gray-600 hover:text-primary-600 text-sm transition-colors relative group">
               Privacy Policy
+              <span className="absolute -bottom-1 left-1/2 w-0 h-[1px] bg-gray-400 group-hover:w-full transition-all duration-300 -translate-x-1/2" />
             </Link>
-            <Link href="/terms" className="text-gray-600 hover:text-primary-600 text-sm transition-colors">
+            <Link href="/terms" className="text-gray-600 hover:text-primary-600 text-sm transition-colors relative group">
               Terms of Service
+              <span className="absolute -bottom-1 left-1/2 w-0 h-[1px] bg-gray-400 group-hover:w-full transition-all duration-300 -translate-x-1/2" />
             </Link>
           </div>
         </div>
