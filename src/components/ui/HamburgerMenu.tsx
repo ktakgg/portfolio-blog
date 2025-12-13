@@ -29,11 +29,13 @@ export default function HamburgerMenu() {
         }
     }, [isOpen])
 
-    return (
+    if (!mounted) return null
+
+    return createPortal(
         <>
             <motion.button
                 onClick={() => setIsOpen(!isOpen)}
-                className="relative z-[101] p-3 rounded-full bg-white/80 backdrop-blur-md border border-slate-200 text-slate-900 hover:bg-white transition-colors shadow-sm"
+                className="fixed z-[110] top-[26px] right-6 md:right-12 p-3 rounded-full bg-white/80 backdrop-blur-md border border-slate-200 text-slate-900 hover:bg-white transition-colors shadow-sm"
                 aria-label={isOpen ? "Close Menu" : "Open Menu"}
                 animate={isOpen ? "open" : "closed"}
             >
@@ -44,7 +46,7 @@ export default function HamburgerMenu() {
                         strokeLinecap="round"
                         variants={{
                             closed: { d: "M4 6h16", rotate: 0, translateY: 0 },
-                            open: { d: "M4 6h16", rotate: 45, translateY: 6 } // Top line moves down and rotates
+                            open: { d: "M4 6h16", rotate: 45, translateY: 6 }
                         }}
                         transition={{ duration: 0.3 }}
                     />
@@ -65,48 +67,44 @@ export default function HamburgerMenu() {
                         strokeLinecap="round"
                         variants={{
                             closed: { d: "M4 18h16", rotate: 0, translateY: 0 },
-                            open: { d: "M4 18h16", rotate: -45, translateY: -6 } // Bottom line moves up and rotates
+                            open: { d: "M4 18h16", rotate: -45, translateY: -6 }
                         }}
                         transition={{ duration: 0.3 }}
                     />
                 </svg>
             </motion.button>
 
-            {mounted && createPortal(
-                <AnimatePresence>
-                    {isOpen && (
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            className="fixed inset-0 z-[100] bg-white/95 backdrop-blur-xl flex flex-col items-center justify-center"
-                        >
-                            {/* Close button removed as the main button now handles toggling */}
-
-                            <nav className="flex flex-col items-center gap-8">
-                                {menuItems.map((item, index) => (
-                                    <motion.div
-                                        key={item.href}
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: 20 }}
-                                        transition={{ delay: index * 0.1 + 0.2 }}
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[100] bg-white/40 backdrop-blur-xl flex flex-col items-center justify-center"
+                    >
+                        <nav className="flex flex-col items-center gap-8">
+                            {menuItems.map((item, index) => (
+                                <motion.div
+                                    key={item.href}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: 20 }}
+                                    transition={{ delay: index * 0.1 + 0.2 }}
+                                >
+                                    <Link
+                                        href={item.href}
+                                        onClick={() => setIsOpen(false)}
+                                        className="text-4xl md:text-6xl font-heading font-bold text-slate-900 hover:text-slate-500 transition-all duration-300"
                                     >
-                                        <Link
-                                            href={item.href}
-                                            onClick={() => setIsOpen(false)}
-                                            className="text-4xl md:text-6xl font-heading font-bold text-slate-900 hover:text-slate-500 transition-all duration-300"
-                                        >
-                                            {item.title}
-                                        </Link>
-                                    </motion.div>
-                                ))}
-                            </nav>
-                        </motion.div>
-                    )}
-                </AnimatePresence>,
-                document.body
-            )}
-        </>
+                                        {item.title}
+                                    </Link>
+                                </motion.div>
+                            ))}
+                        </nav>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </>,
+        document.body
     )
 }
