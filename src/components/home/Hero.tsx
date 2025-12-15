@@ -38,8 +38,8 @@ export default function Hero() {
                     transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
                     className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-slate-500"
                 >
-                    経営者・個人事業主の皆様が、本来の業務にもっと時間を注げるように。<br className="hidden sm:block" />
-                    経理や秘書業務をオンラインでまるごとサポートします。
+                    経営者の皆様が、安心して本業に向き合えるように。<br className="hidden sm:block" />
+                    秘書業務から経理の仕組み化まで、事業の足元を支える堅実な後方支援。
                 </motion.p>
 
                 <motion.div
