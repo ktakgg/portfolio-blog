@@ -34,7 +34,7 @@ const services = [
                 <ul className="list-disc list-inside space-y-1 text-sm text-slate-500 pl-2">
                     <li>経理・事務処理の業務フロー設計</li>
                     <li>業務マニュアルの作成・更新</li>
-                    <li>証憑（領収書・請求書）のデジタル管理・保存ルールの策定</li>
+                    <li>証憑のデジタル管理・保存ルールの策定</li>
                     <li>補助金申請の事務サポート</li>
                 </ul>
             </div>
@@ -74,8 +74,7 @@ export default function Services() {
                         Services
                     </h2>
                     <p className="text-slate-600 max-w-2xl mx-auto text-lg">
-                        あなたのビジネスを加速させる、<br className="hidden md:block" />
-                        プロフェッショナルなオンラインサポート。
+                        <br className="hidden md:block" />
                     </p>
                 </motion.div>
 
