@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react'
 import Hero from '@/components/home/Hero'
 import Services from '@/components/home/Services'
-import PainPoints from '@/components/home/PainPoints'
 import WorksLink from '@/components/home/WorksLink'
 import BlogPreview from '@/components/home/BlogPreview'
 
@@ -55,7 +54,6 @@ export default function HomePage() {
     <div className="flex flex-col min-h-screen">
       <Hero />
       <Services />
-      <PainPoints />
       <WorksLink />
       <BlogPreview posts={featuredPosts} />
     </div>
