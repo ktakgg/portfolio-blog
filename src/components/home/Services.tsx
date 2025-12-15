@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import NextImage from 'next/image'
 import Accordion from '@/components/ui/Accordion'
 import { SiSlack, SiTrello, SiZoom, SiGooglemeet, SiDiscord } from 'react-icons/si'
 
@@ -104,17 +105,15 @@ export default function Services() {
                         {/* Slack */}
                         <SiSlack className="h-8 w-auto text-[#4A154B]" />
 
-                        {/* Chatwork (Kubell/Chatwork new logo approximation) */}
-                        <svg className="h-8 w-auto" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            {/* Top Left (Red) */}
-                            <path d="M11.5 11.5 C11.5 11.5 2.5 11.5 2.5 6.5 C2.5 1.5 11.5 1.5 11.5 6.5 V11.5 Z" fill="#FF5252" />
-                            {/* Bottom Left (Red) */}
-                            <path d="M11.5 12.5 C11.5 12.5 11.5 21.5 6.5 21.5 C1.5 21.5 1.5 12.5 6.5 12.5 H11.5 Z" fill="#FF5252" />
-                            {/* Bottom Right (Red) */}
-                            <path d="M12.5 12.5 C12.5 12.5 21.5 12.5 21.5 17.5 C21.5 22.5 12.5 22.5 12.5 17.5 V12.5 Z" fill="#FF5252" />
-                            {/* Top Right (Dark Navy) */}
-                            <path d="M12.5 11.5 C12.5 11.5 12.5 2.5 17.5 2.5 C22.5 2.5 22.5 11.5 17.5 11.5 H12.5 Z" fill="#2C3E50" />
-                        </svg>
+                        {/* Chatwork */}
+                        <div className="relative h-8 w-8">
+                            <NextImage
+                                src="/images/logos/chatwork.png"
+                                alt="Chatwork"
+                                fill
+                                className="object-contain p-[2px]"
+                            />
+                        </div>
 
                         {/* Trello */}
                         <SiTrello className="h-8 w-auto text-[#0079BF]" />
